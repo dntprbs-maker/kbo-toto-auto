@@ -1,0 +1,532 @@
+import React, { useState, useEffect, useRef } from 'react';
+import './MainDashboard.css';
+
+const MainDashboard = () => {
+  const [activeTab, setActiveTab] = useState('dashboard');
+  const [betFilterType, setBetFilterType] = useState('unanimous');
+  
+  const yyyy_mm = new Date().toISOString().slice(0, 7);
+  const parts = yyyy_mm.split('-');
+  const lastDay = new Date(parts[0], parts[1], 0).getDate();
+  
+  const [startDate, setStartDate] = useState(yyyy_mm + '-01');
+  const [endDate, setEndDate] = useState(yyyy_mm + '-' + String(lastDay).padStart(2, '0'));
+  const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchDB = async () => {
+      try {
+        const [games, preds, bets] = await Promise.all([
+          fetch('/api/admin/games').then(r => r.json()),
+          fetch('/api/admin/predictions').then(r => r.json()),
+          fetch('/api/admin/bets').then(r => r.json())
+        ]);
+        
+        // 날짜별 그룹화
+        const groups = {};
+        
+        if (Array.isArray(games)) {
+          games.forEach(g => {
+            if (!groups[g.date]) groups[g.date] = { date: g.date, games: [], unanimousBet: null, allFiveBets: [], singleBets: [] };
+            const p = Array.isArray(preds) ? preds.find(x => x.date === g.date && x.awayTeam === g.awayTeam && x.homeTeam === g.homeTeam) : null;
+            const ai1 = p ? (p['반짝이'] || p.ai1 || p.predictedWinner || '-') : '-';
+            const ai2 = p ? (p['별이'] || p.ai2 || p.predictedWinner || '-') : '-';
+            const ai3 = p ? (p['초롱이'] || p.ai3 || p.predictedWinner || '-') : '-';
+            groups[g.date].games.push({
+              matchup: `${g.awayTeam} vs ${g.homeTeam}`,
+              ai1,
+              ai2,
+              ai3,
+              pick: p ? p.predictedWinner : '-',
+              result: g.winner || null
+            });
+          });
+        }
+        
+        if (Array.isArray(bets)) {
+          bets.forEach(b => {
+            if (!groups[b.date]) groups[b.date] = { date: b.date, games: [], unanimousBet: null, allFiveBets: [], singleBets: [] };
+            b.betResult = b.status || 'pending';
+            
+            // Parse customGames from picks if available
+            const details = (b.picks && b.picks.length > 0) ? b.picks[0].matchup : '';
+            if (details) {
+              let pickStr = details;
+              if (details.includes('|')) pickStr = details.split('|')[1].trim();
+              else if (details.includes('(') && details.includes('vs')) {
+                const match = details.match(/\((.*?)\)/);
+                if (match) pickStr = match[1].trim();
+              }
+
+              const pickTokens = pickStr.split('·').map(s => s.trim().replace('(취소)', '').replace('승', '').replace('패', ''));
+              const originalTokens = pickStr.split('·').map(s => s.trim().replace('(취소)', ''));
+              
+              const dayGames = groups[b.date].games;
+              const customGames = [];
+              const pickLabels = [];
+              
+              if (b.type === 'single') {
+                const matchText = details.split('(')[0];
+                const g = dayGames.find(g => matchText.includes(g.awayTeam) && matchText.includes(g.homeTeam));
+                if (g) {
+                  customGames.push(g);
+                  pickLabels.push(originalTokens[0]);
+                }
+              } else {
+                pickTokens.forEach((teamName, idx) => {
+                  const g = dayGames.find(g => g.awayTeam.includes(teamName) || g.homeTeam.includes(teamName));
+                  if (g && !customGames.includes(g)) {
+                    customGames.push(g);
+                    pickLabels.push(originalTokens[idx]);
+                  }
+                });
+              }
+              
+              if (customGames.length > 0) {
+                b.customGames = customGames;
+                b.pickLabels = pickLabels;
+              }
+            }
+
+            if (b.type === 'unanimous') groups[b.date].unanimousBet = b;
+            else if (b.type === 'allfive') groups[b.date].allFiveBets.push(b);
+            else if (b.type === 'single') groups[b.date].singleBets.push(b);
+          });
+        }
+
+        setData(Object.values(groups).sort((a,b) => a.date.localeCompare(b.date)));
+      } catch (error) {
+        console.error('Fetch error:', error);
+      }
+      setLoading(false);
+    };
+    fetchDB();
+  }, []);
+
+  const canvasRef = useRef(null);
+
+  // 유틸리티 함수
+  const isUnanimous = (g) => g.ai1 === g.ai2 && g.ai2 === g.ai3 && g.ai1 !== '-';
+  const getUnanimousGames = (day) => day.games.filter(g => isUnanimous(g));
+  const calcBetStatus = (games, item) => {
+    if (item.betResult === 'hit' || item.betResult === 'miss' || item.betResult === 'cancel') return item.betResult;
+    if (games.some(g => g.result === null)) return 'pending';
+    return games.every(g => g.pick === g.result) ? 'hit' : 'miss';
+  };
+  const getProfit = (bet) => {
+    if (!bet || bet.betResult === 'pending' || bet.betResult === 'cancel') return null;
+    if (bet.betResult === 'hit') return Math.round(bet.amount * bet.odds - bet.amount);
+    return -bet.amount;
+  };
+  const fmt = (v, unit = '원') => {
+    if (v === null) return '-';
+    return (v >= 0 ? '+' : '') + v.toLocaleString() + unit;
+  };
+
+  // 필터링된 데이터
+  const filteredData = data.filter(d => (!startDate || d.date >= startDate) && (!endDate || d.date <= endDate));
+
+  // 차트 그리기 로직
+  useEffect(() => {
+    if (activeTab !== 'dashboard') return;
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    
+    const ctx = canvas.getContext('2d');
+    canvas.width = canvas.offsetWidth * window.devicePixelRatio;
+    canvas.height = 160 * window.devicePixelRatio;
+    ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
+    const W = canvas.offsetWidth, H = 160;
+    ctx.clearRect(0,0,W,H);
+    
+    const minTime = new Date(startDate || data[0]?.date || Date.now()).getTime();
+    const maxTime = new Date(endDate || new Date().toISOString().split('T')[0]).getTime();
+    const timeRange = maxTime - minTime || 86400000;
+
+    const daysWithResults = filteredData.filter(d => {
+      return (d.unanimousBet && d.unanimousBet.betResult !== 'pending') ||
+             (d.allFiveBets && d.allFiveBets.some(b => b.betResult !== 'pending')) ||
+             (d.singleBets && d.singleBets.some(b => b.betResult !== 'pending'));
+    });
+
+    if (!daysWithResults.length) {
+      ctx.fillStyle = '#6b7280'; ctx.font = '13px Noto Sans KR'; ctx.textAlign = 'center';
+      ctx.fillText('해당 기간에 결과 데이터가 없습니다', W/2, H/2); 
+      
+      ctx.font = '9px Noto Sans KR';
+      const numLabels = 5;
+      const pad = {l:52, r:16, t:16, b:28};
+      const cW = W - pad.l - pad.r;
+      const toX = t => pad.l + ((t - minTime) / timeRange) * cW;
+      for (let i=0; i<=numLabels; i++) {
+        const t = minTime + (timeRange * (i/numLabels));
+        const d = new Date(t);
+        ctx.fillText(`${d.getMonth()+1}/${d.getDate()}`, toX(t), H-pad.b+14);
+      }
+      return;
+    }
+    
+    const pts = daysWithResults.map(d => { 
+      let dailyProfit = (getProfit(d.unanimousBet)||0);
+      if (d.allFiveBets) dailyProfit += d.allFiveBets.reduce((s,b)=>s+(getProfit(b)||0), 0);
+      if (d.singleBets) dailyProfit += d.singleBets.reduce((s,b)=>s+(getProfit(b)||0), 0);
+      return { time: new Date(d.date).getTime(), y: dailyProfit, dateStr: d.date }; 
+    });
+
+    const pad = {l:52, r:16, t:16, b:38};
+    const cW = W - pad.l - pad.r, cH = H - pad.t - pad.b;
+    
+    const maxY = Math.max(...pts.map(p=>p.y), 2000);
+    const minY = Math.min(...pts.map(p=>p.y), -2000);
+    const rY = maxY - minY || 1;
+    const toY = v => pad.t + (1 - (v - minY) / rY) * cH;
+    const toX = t => pad.l + ((t - minTime) / timeRange) * cW;
+
+    ctx.strokeStyle = 'rgba(255,255,255,0.08)'; ctx.lineWidth = 1; ctx.setLineDash([4,4]);
+    ctx.beginPath(); ctx.moveTo(pad.l, toY(0)); ctx.lineTo(W - pad.r, toY(0)); ctx.stroke(); ctx.setLineDash([]);
+    
+    const daysDiff = Math.max(timeRange / 86400000, 1);
+    const barW = Math.max((cW / daysDiff) * 0.4, 4);
+
+    ctx.textAlign = 'center'; ctx.font = '9px Noto Sans KR';
+
+    pts.forEach((p) => { 
+      const isPos = p.y > 0;
+      const isZero = p.y === 0;
+      const barColor = isPos ? '#3b82f6' : (isZero ? '#6b7280' : '#ef476f');
+      
+      ctx.fillStyle = barColor;
+      const x = toX(p.time);
+      const yZero = toY(0);
+      const yVal = toY(p.y);
+      const rectY = p.y >= 0 ? yVal : yZero;
+      const rectH = Math.abs(yZero - yVal);
+      ctx.fillRect(x - barW/2, rectY, barW, Math.max(rectH, 1));
+
+      ctx.fillStyle = '#9ca3af';
+      const d = new Date(p.time);
+      ctx.fillText(`${d.getMonth()+1}/${d.getDate()}`, x, H-pad.b+14);
+
+      ctx.fillStyle = barColor;
+      const amtStr = p.y > 0 ? `+${p.y.toLocaleString()}` : p.y.toLocaleString();
+      ctx.fillText(amtStr, x, H-pad.b+26);
+    });
+    
+    ctx.fillStyle = '#6b7280'; ctx.font = '10px Noto Sans KR'; ctx.textAlign = 'right';
+    [maxY,0,minY].forEach(v => ctx.fillText(v.toLocaleString(), pad.l-4, toY(v)+4));
+
+  }, [filteredData, activeTab, startDate, endDate]);
+
+  const handleResetFilters = () => {
+    setStartDate('');
+    setEndDate('');
+  };
+
+  // 대시보드 요약 지표 계산
+  const uBets = filteredData.map(d=>d.unanimousBet).filter(b=>b && b.betResult!=='pending' && b.betResult!=='cancel');
+  const a5Bets = filteredData.flatMap(d=>d.allFiveBets||[]).filter(b=>b.betResult!=='pending' && b.betResult!=='cancel');
+  const sBets = filteredData.flatMap(d=>d.singleBets||[]).filter(b=>b.betResult!=='pending' && b.betResult!=='cancel');
+  const allBets = [...uBets, ...a5Bets, ...sBets];
+  
+  const totalBet = allBets.reduce((s,b)=>s+b.amount,0);
+  const totalProfit = allBets.reduce((s,b)=>s+(getProfit(b)||0),0);
+  const totalDays = filteredData.filter(d=>d.games.some(g=>g.result!==null)).length;
+
+  const renderBetStats = (bets, label, cls) => {
+    const done = bets.filter(b=>b.betResult!=='pending' && b.betResult!=='cancel');
+    const hits = done.filter(b=>b.betResult==='hit');
+    const profit = done.reduce((s,b)=>s+(getProfit(b)||0),0);
+    const rate = done.length ? (hits.length/done.length*100).toFixed(0) : 0;
+    
+    return (
+      <div className={`bet-type-card ${cls}`}>
+        <div className="bet-type-title">{label}</div>
+        <div className="bet-stat"><span className="bet-stat-label">진행 횟수</span><span className="bet-stat-val">{done.length}회</span></div>
+        <div className="bet-stat"><span className="bet-stat-label">적중</span><span className={`bet-stat-val ${hits.length>0?'pos':''}`}>{hits.length}회</span></div>
+        <div className="bet-stat"><span className="bet-stat-label">적중률</span><span className={`bet-stat-val ${rate>=50?'pos':'neg'}`}>{rate}%</span></div>
+        <div className="bet-stat"><span className="bet-stat-label">누적 손익</span><span className={`bet-stat-val ${profit>=0?'pos':'neg'}`}>{fmt(profit)}</span></div>
+      </div>
+    );
+  };
+
+  const renderUnanimousList = () => {
+    return [...filteredData].reverse().map((d, i) => {
+      const item = d.unanimousBet;
+      if (!item) return null;
+      const games = item.customGames || getUnanimousGames(d);
+      if (games.length === 0) return null;
+      
+      const status = calcBetStatus(games, item);
+      return (
+        <div key={`u-${i}`} className="day-card" style={{marginBottom: 14}}>
+          <div className="day-header bet-day-header-pc" style={{flexDirection: 'column', alignItems: 'stretch', gap: 4}}>
+            <div className="bet-card-header-row1">
+              <span className="day-date">📅 {d.date}</span>
+            </div>
+            <div className="bet-card-summary-row">
+              <span className="bet-header-summary" style={{marginLeft: 0}}>
+                {games.length}경기 / 배당 <strong>{item.odds||'-'}배</strong> / 베팅 {item.amount.toLocaleString()}원
+                {status==='hit' ? <span> / <strong style={{color:'var(--green)'}}>📈 +{Math.round(item.amount*item.odds).toLocaleString()}원</strong></span> : 
+                 status === 'cancel' ? '' : 
+                 item.odds ? <span> / <span style={{color:'#6b9fce'}}>예상 {Math.round(item.amount*item.odds).toLocaleString()}원</span></span> : ''}
+              </span>
+            </div>
+          </div>
+          <div className="day-body">
+            <div className="game-list-header">
+              <span className="col-match">매치업</span>
+              <span className="col-pick">최종픽</span>
+              <span className="col-result">결과</span>
+            </div>
+            {games.map((g, j) => {
+              let rs = 'pending';
+              if (g.result === '취소') rs = 'cancel';
+              else if (g.result) rs = g.result === g.pick ? 'hit' : 'miss';
+              return (
+                <div key={j} className="game-row">
+                  <span className="game-matchup">{g.matchup}</span>
+                  <span className="col-pick-cell"><span className="pick-chip">{g.pick}</span></span>
+                  <span className={`col-result-cell game-result ${rs}`}>{g.result||'대기'}</span>
+                </div>
+              );
+            })}
+            {status !== 'hit' && status !== 'cancel' && (
+              <div style={{display:'flex', justifyContent:'flex-end', marginTop: 8, paddingTop: 8, borderTop:'1px solid var(--border)'}}>
+                <span className={status==='pending'?'neu':'neg'} style={{fontWeight: 900, fontSize: 13}}>
+                  {status==='pending' ? '-' : fmt(-item.amount)}
+                </span>
+              </div>
+            )}
+          </div>
+        </div>
+      );
+    });
+  };
+
+  const renderAllFiveList = () => {
+    return [...filteredData].reverse().map((d, i) => {
+      const bets = d.allFiveBets || [];
+      if (!bets.length) return null;
+
+      return bets.map((item, bi) => {
+        const displayGames = item.customGames || d.games;
+        const status = calcBetStatus(displayGames, item);
+        const labels = item.pickLabels || displayGames.map(g=>g.pick);
+        
+        return (
+          <div key={`a5-${i}-${bi}`} className="day-card" style={{marginBottom: 14}}>
+            <div className="day-header bet-day-header-pc" style={{flexDirection: 'column', alignItems: 'stretch', gap: 4}}>
+              <div className="bet-card-header-row1">
+                <span className="day-date">📅 {d.date} <span style={{fontSize: 10, fontWeight: 700, color: '#5ba8ff', background: 'rgba(91,168,255,0.10)', borderRadius: 6, padding: '2px 8px'}}>{item.label||'조합'+(bi+1)}</span></span>
+              </div>
+              <div className="bet-card-summary-row">
+                <span className="bet-header-summary" style={{marginLeft: 0}}>
+                  {displayGames.length}경기 / 배당 <strong>{item.odds||'-'}배</strong> / 베팅 {item.amount.toLocaleString()}원
+                  {status==='hit' ? <span> / <strong style={{color:'var(--green)'}}>📈 +{Math.round(item.amount*item.odds).toLocaleString()}원</strong></span> : 
+                   status === 'cancel' ? '' :
+                   item.odds ? <span> / <span style={{color:'#6b9fce'}}>예상 {Math.round(item.amount*item.odds).toLocaleString()}원</span></span> : ''}
+                </span>
+              </div>
+            </div>
+            <div className="day-body">
+              <div className="game-list-header">
+                <span className="col-match">매치업</span>
+                <span className="col-pick">최종픽</span>
+                <span className="col-result">결과</span>
+              </div>
+              {displayGames.map((g, gi) => {
+                let rs = 'pending';
+                if (g.result === '취소') rs = 'cancel';
+                else if (g.result) rs = g.result === g.pick ? 'hit' : 'miss';
+                return (
+                  <div key={gi} className="game-row">
+                    <span className="game-matchup">{g.matchup}</span>
+                    <span className="col-pick-cell"><span className="pick-chip">{labels[gi] || g.pick}</span></span>
+                    <span className={`col-result-cell game-result ${rs}`}>{g.result||'대기'}</span>
+                  </div>
+                );
+              })}
+              {status !== 'hit' && status !== 'cancel' && (
+                <div style={{display:'flex', justifyContent:'flex-end', marginTop: 8, paddingTop: 8, borderTop:'1px solid var(--border)'}}>
+                  <span className={status==='pending'?'neu':'neg'} style={{fontWeight: 900, fontSize: 13}}>
+                    {status==='pending' ? '-' : fmt(-item.amount)}
+                  </span>
+                </div>
+              )}
+            </div>
+          </div>
+        );
+      });
+    });
+  };
+
+  const renderSingleList = () => {
+    return [...filteredData].reverse().map((d, i) => {
+      const bets = d.singleBets || [];
+      if (!bets.length) return null;
+
+      return (
+        <div key={`s-${i}`} className="day-card" style={{marginBottom: 14}}>
+          <div className="day-header bet-day-header-pc" style={{flexDirection: 'column', alignItems: 'stretch', gap: 4}}>
+            <div className="day-header"><span className="day-date">📅 {d.date}</span></div>
+          </div>
+          <div className="day-body">
+            <div className="game-list-header">
+              <span className="col-match">매치업 / 픽</span>
+              <span className="col-pick">배당</span>
+              <span className="col-result">결과</span>
+            </div>
+            {bets.map((b, bi) => {
+              let rs = 'pending';
+              if (b.result === '취소') rs = 'cancel';
+              else if (b.result) rs = b.result === b.pick ? 'hit' : 'miss';
+              const status = b.betResult !== 'pending' && b.betResult !== 'cancel' ? b.betResult : rs;
+              return (
+                <React.Fragment key={bi}>
+                  <div className="game-row">
+                    <span className="game-matchup">{b.matchup} <span className="pick-chip">{b.pick}</span></span>
+                    <span className="col-pick-cell" style={{color:'var(--gold2)', fontWeight: 700}}>{b.odds}배</span>
+                    <span className={`col-result-cell game-result ${rs}`}>{b.result||'대기'}</span>
+                  </div>
+                  {status !== 'cancel' && (
+                    <div style={{display: 'flex', justifyContent: 'space-between', padding: '2px 20px 6px', fontSize: 11, borderBottom: '1px solid rgba(255,255,255,0.04)'}}>
+                      <span style={{color: 'var(--gray)'}}>베팅 {b.amount.toLocaleString()}원</span>
+                      <span className={status==='hit'?'pos':status==='pending'?'neu':'neg'} style={{fontWeight: 700}}>
+                        {status==='hit' ? `+${Math.round(b.amount*b.odds - b.amount).toLocaleString()}원` : 
+                         status==='pending' ? `예상 +${Math.round(b.amount*b.odds - b.amount).toLocaleString()}원` : 
+                         `-${b.amount.toLocaleString()}원`}
+                      </span>
+                    </div>
+                  )}
+                </React.Fragment>
+              );
+            })}
+          </div>
+        </div>
+      );
+    });
+  };
+
+  return (
+    <div className="main-dashboard">
+      <header>
+        <div className="header-inner">
+          <div className="logo">⚾ KBO<em>TOTO</em></div>
+          <div className="header-sub">2026 한국 프로야구 투자 기록부</div>
+        </div>
+      </header>
+
+      <div className="sticky-ui-group">
+        <div className="tabs">
+          <div className={`tab ${activeTab === 'dashboard' ? 'active' : ''}`} onClick={() => setActiveTab('dashboard')}>📊 대시보드</div>
+          <div className={`tab ${activeTab === 'records' ? 'active' : ''}`} onClick={() => setActiveTab('records')}>📋 경기기록</div>
+          <div className={`tab ${activeTab === 'betting' ? 'active' : ''}`} onClick={() => setActiveTab('betting')}>🎯 베팅내역</div>
+        </div>
+
+        <div className="common-filter-area">
+            <input type="date" value={startDate} onChange={e => setStartDate(e.target.value)} className="date-input" />
+            <span style={{color: 'var(--gray)'}}>~</span>
+            <input type="date" value={endDate} onChange={e => setEndDate(e.target.value)} className="date-input" />
+            <button onClick={handleResetFilters} className="btn-reset">초기화</button>
+        </div>
+
+        {activeTab === 'betting' && (
+          <div className="bet-filter-wrap sticky-bet-filter">
+            <div className={`btn-filter unanimous ${betFilterType === 'unanimous' ? 'active' : ''}`} onClick={() => setBetFilterType('unanimous')}>🎯 만장일치</div>
+            <div className={`btn-filter allfive ${betFilterType === 'allfive' ? 'active' : ''}`} onClick={() => setBetFilterType('allfive')}>⚡ 도전경기</div>
+            <div className={`btn-filter single ${betFilterType === 'single' ? 'active' : ''}`} onClick={() => setBetFilterType('single')}>1️⃣ 단독베팅</div>
+          </div>
+        )}
+      </div>
+
+      <main>
+        {/* 1. 대시보드 탭 */}
+        <div className={`panel ${activeTab === 'dashboard' ? 'active' : ''}`} id="tab-dashboard">
+          <div className="sec" style={{marginTop: 0}}>🎯 베팅 전략 성과</div>
+          <div className="bet-compare">
+            {renderBetStats(filteredData.map(d=>d.unanimousBet).filter(Boolean), '🎯 만장일치', 'unanimous')}
+            {renderBetStats(filteredData.flatMap(d=>d.allFiveBets||[]), '⚡ 도전경기', 'allfive')}
+            {renderBetStats(filteredData.flatMap(d=>d.singleBets||[]), '1️⃣ 단독베팅', 'single')}
+          </div>
+          
+          <div className="sec">📆 종합 투자 현황</div>
+          <div className="kpi-grid">
+            <div className="kpi-card"><div className="kpi-label">💰 총 투자 금액</div><div className="kpi-val gold">{totalBet.toLocaleString()}원</div></div>
+            <div className="kpi-card"><div className="kpi-label">📅 경기 진행일수</div><div className="kpi-val gold">{totalDays}일</div></div>
+            <div className="kpi-card"><div className="kpi-label">📈 누적 손익 금액</div><div className={`kpi-val ${totalProfit>=0?'green':'red'}`}>{fmt(totalProfit)}</div></div>
+            <div className="kpi-card"><div className="kpi-label">💹 수익률</div><div className={`kpi-val ${totalProfit>=0?'green':'red'}`}>{totalBet>0?(totalProfit/totalBet*100).toFixed(1):0}%</div></div>
+          </div>
+          
+          <div className="sec">📈 손익 그래프</div>
+          <div className="chart-wrap">
+            <canvas ref={canvasRef} height="160"></canvas>
+          </div>
+        </div>
+
+        {/* 2. 경기기록 탭 */}
+        <div className={`panel ${activeTab === 'records' ? 'active' : ''}`} id="tab-records">
+          {[...filteredData].reverse().map((d, i) => (
+            <div key={i} className="day-card">
+              <div className="day-header"><span className="day-date">📅 {d.date}</span></div>
+              <div className="table-scroll-wrap">
+                <table className="games-table">
+                  <thead>
+                    <tr>
+                      <th className="col-match">매치업</th>
+                      <th className="col-ai1">반짝이</th>
+                      <th className="col-ai2">별이</th>
+                      <th className="col-ai3">초롱이</th>
+                      <th className="col-pick">최종픽</th>
+                      <th className="col-result">결과</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {d.games.map((g, j) => {
+                      const unani = isUnanimous(g);
+                      let rs = 'pending';
+                      if (g.result === '취소') rs = 'cancel';
+                      else if (g.result) rs = g.result === g.pick ? 'hit' : 'miss';
+                      return (
+                        <tr key={j}>
+                          <td className="col-match">{g.matchup}{unani && <span className="unani-dot"></span>}</td>
+                          <td className="col-ai1">{g.ai1}</td><td className="col-ai2">{g.ai2}</td><td className="col-ai3">{g.ai3}</td>
+                          <td className="col-pick">{g.pick}</td>
+                          <td className={`col-result td-result-${rs}`}>{g.result||'대기'}</td>
+                        </tr>
+                      );
+                    })}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          ))}
+          {filteredData.length === 0 && <div className="empty">📝 기간 내 기록 데이터 없음</div>}
+        </div>
+
+        {/* 3. 베팅내역 탭 */}
+        <div className={`panel ${activeTab === 'betting' ? 'active' : ''}`} id="tab-betting">
+          <div className="bet-lists-container">
+            <div className={`bet-content-panel ${betFilterType === 'unanimous' ? 'active' : ''}`} id="panel-unanimous">
+              <div className="bet-pc-header">🎯 만장일치 내역</div>
+              {renderUnanimousList()}
+              {renderUnanimousList().every(el => el === null) && <div className="empty">📝 기간 내 만장일치 베팅 내역이 없습니다.</div>}
+            </div>
+            <div className={`bet-content-panel ${betFilterType === 'allfive' ? 'active' : ''}`} id="panel-allfive">
+              <div className="bet-pc-header">⚡ 도전경기 내역</div>
+              {renderAllFiveList()}
+              {renderAllFiveList().every(el => el === null) && <div className="empty">📝 기간 내 도전경기 베팅 내역이 없습니다.</div>}
+            </div>
+            <div className={`bet-content-panel ${betFilterType === 'single' ? 'active' : ''}`} id="panel-single">
+              <div className="bet-pc-header">1️⃣ 단독베팅 내역</div>
+              {renderSingleList()}
+              {renderSingleList().every(el => el === null) && <div className="empty">📝 기간 내 단독베팅 내역이 없습니다.</div>}
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+  );
+};
+
+export default MainDashboard;

@@ -1,0 +1,644 @@
+import React, { useState, useEffect, useRef } from 'react';
+import './MobileDashboard.css';
+
+const MobileDashboard = () => {
+
+  const [activeTab, setActiveTab] = useState('dashboard');
+  const [betSubTab, setBetSubTab] = useState('unanimous');
+  const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const canvasRef = useRef(null);
+
+  // 날짜 필터 — 현재 달 기본
+  const yyyy_mm = new Date().toISOString().slice(0, 7);
+  const parts = yyyy_mm.split('-');
+  const lastDay = new Date(parts[0], parts[1], 0).getDate();
+  const [startDate, setStartDate] = useState(yyyy_mm + '-01');
+  const [endDate, setEndDate] = useState(yyyy_mm + '-' + String(lastDay).padStart(2, '0'));
+  const [showFilter, setShowFilter] = useState(false);
+
+  // ── 데이터 패치 ──────────────────────────────────────────
+  useEffect(() => {
+    const fetchDB = async () => {
+      try {
+        const [games, preds, bets] = await Promise.all([
+          fetch('/api/admin/games').then(r => r.json()),
+          fetch('/api/admin/predictions').then(r => r.json()),
+          fetch('/api/admin/bets').then(r => r.json())
+        ]);
+        
+        const groups = {};
+        if (Array.isArray(games)) {
+          games.forEach(g => {
+            if (!groups[g.date]) groups[g.date] = { date: g.date, games: [], unanimousBet: null, allFiveBets: [], singleBets: [] };
+            const p = Array.isArray(preds) ? preds.find(x => x.date === g.date && x.awayTeam === g.awayTeam && x.homeTeam === g.homeTeam) : null;
+            const ai1 = p ? (p['반짝이'] || p.ai1 || '-') : '-';
+            const ai2 = p ? (p['별이'] || p.ai2 || '-') : '-';
+            const ai3 = p ? (p['초롱이'] || p.ai3 || '-') : '-';
+            groups[g.date].games.push({
+              matchup: `${g.awayTeam} vs ${g.homeTeam}`,
+              awayTeam: g.awayTeam,
+              homeTeam: g.homeTeam,
+              ai1,
+              ai2,
+              ai3,
+              pick: p ? p.predictedWinner : '-',
+              result: g.result || g.winner || null,
+            });
+          });
+        }
+
+        if (Array.isArray(preds)) {
+          preds.forEach(p => {
+            if (!groups[p.date]) groups[p.date] = { date: p.date, games: [], unanimousBet: null, allFiveBets: [], singleBets: [] };
+            const existingGame = groups[p.date].games.find(g => g.awayTeam === p.awayTeam && g.homeTeam === p.homeTeam);
+            if (!existingGame) {
+              const ai1 = p['반짝이'] || p.ai1 || '-';
+              const ai2 = p['별이'] || p.ai2 || '-';
+              const ai3 = p['초롱이'] || p.ai3 || '-';
+              groups[p.date].games.push({
+                matchup: `${p.awayTeam} vs ${p.homeTeam}`,
+                awayTeam: p.awayTeam,
+                homeTeam: p.homeTeam,
+                ai1,
+                ai2,
+                ai3,
+                pick: p.predictedWinner || '-',
+                result: null
+              });
+            }
+          });
+        }
+
+        if (Array.isArray(bets)) {
+          bets.forEach(b => {
+            if (!groups[b.date]) groups[b.date] = { date: b.date, games: [], unanimousBet: null, allFiveBets: [], singleBets: [] };
+            b.betResult = b.status || 'pending';
+
+            // [신규 포맷] picks = [{ matchup, pick }] 구조화 배열이면 직접 사용
+            if (b.picks && b.picks.length > 0 && b.picks[0] && b.picks[0].pick) {
+              const dayGames = groups[b.date].games;
+              const customGames = [];
+              const pickLabels = [];
+              b.picks.forEach(item => {
+                const mt = item.matchup || '';
+                const g = dayGames.find(g => mt.includes(g.awayTeam) && mt.includes(g.homeTeam));
+                if (g && !customGames.includes(g)) {
+                  customGames.push(g);
+                  pickLabels.push(item.pick);
+                }
+              });
+              if (customGames.length > 0) {
+                b.customGames = customGames;
+                b.pickLabels = pickLabels;
+              }
+            }
+
+            // [구버전 호환] 옛날 문자열 포맷 처리
+            const details = (!b.customGames && b.picks && b.picks.length > 0) ? b.picks[0].matchup : '';
+            if (details) {
+              let pickStr = details;
+              if (details.includes('|')) pickStr = details.split('|')[1].trim();
+              else if (details.includes('(') && details.includes('vs')) {
+                const match = details.match(/\((.*?)\)/);
+                if (match) pickStr = match[1].trim();
+              }
+
+              const pickTokens = pickStr.split('·').map(s => s.trim().replace('(취소)', '').replace('승', '').replace('패', ''));
+              const originalTokens = pickStr.split('·').map(s => s.trim().replace('(취소)', ''));
+              
+              const dayGames = groups[b.date].games;
+              const customGames = [];
+              const pickLabels = [];
+              
+              if (b.type === 'single') {
+                const matchText = details.split('(')[0];
+                const g = dayGames.find(g => matchText.includes(g.awayTeam) && matchText.includes(g.homeTeam));
+                if (g) {
+                  customGames.push(g);
+                  pickLabels.push(originalTokens[0]);
+                }
+              } else {
+                pickTokens.forEach((teamName, idx) => {
+                  const g = dayGames.find(g => teamName.includes(g.awayTeam) || teamName.includes(g.homeTeam) || g.awayTeam.includes(teamName) || g.homeTeam.includes(teamName));
+                  if (g && !customGames.includes(g)) {
+                    customGames.push(g);
+                    pickLabels.push(originalTokens[idx]);
+                  }
+                });
+              }
+              
+              if (customGames.length > 0) {
+                b.customGames = customGames;
+                b.pickLabels = pickLabels;
+              }
+            }
+
+            // Update betResult dynamically based on game results if it's currently pending
+            if (b.betResult === 'pending' && b.customGames && b.customGames.length > 0) {
+              if (b.customGames.some(g => g.result === null)) {
+                b.betResult = 'pending';
+              } else if (b.customGames.some(g => g.result === '취소')) {
+                b.betResult = 'cancel';
+              } else {
+                b.betResult = b.customGames.every((g, idx) => g.result === b.pickLabels[idx]) ? 'hit' : 'miss';
+              }
+            }
+
+            if (b.type === 'unanimous') groups[b.date].unanimousBet = b;
+            else if (b.type === 'allfive') groups[b.date].allFiveBets.push(b);
+            else if (b.type === 'single') groups[b.date].singleBets.push(b);
+          });
+        }
+        
+        setData(Object.values(groups).sort((a,b) => a.date.localeCompare(b.date)));
+      } catch (e) { console.error(e); }
+      setLoading(false);
+    };
+    fetchDB();
+  }, []);
+
+  // ── 유틸 ────────────────────────────────────────────────
+  const filteredData = data.filter(d =>
+    (!startDate || d.date >= startDate) && (!endDate || d.date <= endDate)
+  );
+  const today = new Date().toISOString().split('T')[0];
+
+  const getProfit = (bet) => {
+    if (!bet || bet.betResult === 'pending' || bet.betResult === 'cancel') return null;
+    if (bet.betResult === 'hit') return Math.round(bet.amount * bet.odds - bet.amount);
+    return -bet.amount;
+  };
+  const fmt = (v) => {
+    if (v === null || v === undefined) return '-';
+    return (v >= 0 ? '+' : '') + v.toLocaleString() + '원';
+  };
+
+  // ── KPI 계산 ─────────────────────────────────────────────
+  const allBets = filteredData.map(d => d.unanimousBet).filter(b => b && b.betResult !== 'pending' && b.betResult !== 'cancel');
+  const totalBet = allBets.reduce((s, b) => s + (b?.amount || 0), 0);
+  const totalProfit = allBets.reduce((s, b) => s + (getProfit(b) || 0), 0);
+  const hits = allBets.filter(b => b?.betResult === 'hit').length;
+  const winRate = allBets.length ? ((hits / allBets.length) * 100).toFixed(0) : 0;
+  const totalDays = filteredData.filter(d => d.games.some(g => g.result !== null)).length;
+
+  // ── 손익 차트 ───────────────────────────────────────────
+  useEffect(() => {
+    if (activeTab !== 'dashboard') return;
+    const canvas = canvasRef.current;
+    if (!canvas || !filteredData.length) return;
+    const ctx = canvas.getContext('2d');
+    canvas.width = canvas.offsetWidth * window.devicePixelRatio;
+    canvas.height = 140 * window.devicePixelRatio;
+    ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
+    const W = canvas.offsetWidth, H = 140;
+    ctx.clearRect(0, 0, W, H);
+
+    const pts = filteredData
+      .map(d => ({ time: new Date(d.date).getTime(), y: getProfit(d.unanimousBet) || 0, date: d.date }))
+      .filter(p => p.y !== 0 || filteredData.some(d => d.unanimousBet?.betResult !== 'pending'));
+    if (!pts.length) return;
+
+    const pad = { l: 50, r: 12, t: 12, b: 36 };
+    const cW = W - pad.l - pad.r, cH = H - pad.t - pad.b;
+    const minTime = Math.min(...pts.map(p => p.time));
+    const maxTime = Math.max(...pts.map(p => p.time));
+    const timeRange = maxTime - minTime || 86400000;
+    const maxY = Math.max(...pts.map(p => p.y), 2000);
+    const minY = Math.min(...pts.map(p => p.y), -2000);
+    const rY = maxY - minY || 1;
+    const toY = v => pad.t + (1 - (v - minY) / rY) * cH;
+    const toX = t => pad.l + ((t - minTime) / timeRange) * cW;
+    const barW = Math.max((cW / Math.max(pts.length, 1)) * 0.5, 6);
+
+    // Zero line
+    ctx.strokeStyle = 'rgba(255,255,255,0.1)'; ctx.lineWidth = 1; ctx.setLineDash([3, 3]);
+    ctx.beginPath(); ctx.moveTo(pad.l, toY(0)); ctx.lineTo(W - pad.r, toY(0)); ctx.stroke(); ctx.setLineDash([]);
+
+    pts.forEach(p => {
+      const color = p.y > 0 ? '#06d6a0' : p.y < 0 ? '#ef476f' : '#6b7280';
+      ctx.fillStyle = color;
+      const x = toX(p.time), yZ = toY(0), yV = toY(p.y);
+      ctx.fillRect(x - barW / 2, Math.min(yZ, yV), barW, Math.max(Math.abs(yZ - yV), 2));
+      ctx.fillStyle = '#9ca3af'; ctx.font = '9px sans-serif'; ctx.textAlign = 'center';
+      const d = new Date(p.time);
+      ctx.fillText(`${d.getMonth() + 1}/${d.getDate()}`, x, H - pad.b + 12);
+      ctx.fillStyle = color;
+      ctx.fillText(p.y > 0 ? `+${p.y.toLocaleString()}` : p.y.toLocaleString(), x, H - pad.b + 24);
+    });
+    ctx.fillStyle = '#6b7280'; ctx.font = '10px sans-serif'; ctx.textAlign = 'right';
+    [maxY, 0, minY].forEach(v => ctx.fillText(v.toLocaleString(), pad.l - 4, toY(v) + 4));
+  }, [filteredData, activeTab]);
+
+  // ── 탭 컨텐츠 렌더러 ──────────────────────────────────────
+
+  /* 1. 대시보드 탭 */
+  const renderDashboard = () => (
+    <div className="mob-section">
+      {/* KPI 카드 2x2 */}
+      <div className="mob-kpi-grid">
+        <div className="mob-kpi-card">
+          <div className="mob-kpi-label">💰 총 투자금액</div>
+          <div className="mob-kpi-val gold">{totalBet.toLocaleString()}원</div>
+        </div>
+        <div className="mob-kpi-card">
+          <div className="mob-kpi-label">📅 진행일수</div>
+          <div className="mob-kpi-val gold">{totalDays}일</div>
+        </div>
+        <div className="mob-kpi-card">
+          <div className="mob-kpi-label">📈 누적 손익</div>
+          <div className={`mob-kpi-val ${totalProfit >= 0 ? 'green' : 'red'}`}>{fmt(totalProfit)}</div>
+        </div>
+        <div className="mob-kpi-card">
+          <div className="mob-kpi-label">🎯 적중률</div>
+          <div className={`mob-kpi-val ${winRate >= 50 ? 'green' : 'red'}`}>{winRate}%</div>
+        </div>
+      </div>
+
+      {/* 손익 차트 */}
+      <div className="mob-section-title">📈 일별 손익 현황</div>
+      <div className="mob-chart-wrap">
+        <canvas ref={canvasRef} height="140" />
+      </div>
+
+      {/* 베팅 전략 성과 미니 카드 */}
+      <div className="mob-section-title">🎯 베팅 전략 성과</div>
+      <div className="mob-bet-stat-card">
+        <div className="mob-bet-row">
+          <span className="mob-bet-label">🎯 만장일치</span>
+          <span className="mob-bet-val gold">{allBets.length}회</span>
+          <span className={`mob-bet-val ${totalProfit >= 0 ? 'green' : 'red'}`}>{fmt(totalProfit)}</span>
+        </div>
+        <div className="mob-bet-row">
+          <span className="mob-bet-label">적중 / 전체</span>
+          <span className="mob-bet-val">{hits} / {allBets.length}</span>
+          <span className={`mob-bet-val ${winRate >= 50 ? 'green' : 'red'}`}>{winRate}%</span>
+        </div>
+      </div>
+    </div>
+  );
+
+  /* 2. 경기기록 탭 */
+  const renderRecords = () => (
+    <div className="mob-section">
+      {[...filteredData].reverse().map((d, i) => (
+        <div key={i} className="mob-day-card">
+          <div className="mob-day-header">
+            <span className="mob-day-date">📅 {d.date}</span>
+          </div>
+          <div className="mob-game-list" style={{overflowX: 'auto', margin: '0 -15px', padding: '0 15px'}}>
+            <table className="games-table">
+              <thead>
+                <tr>
+                  <th className="col-match">매치업</th>
+                  <th className="col-ai1">반짝이</th>
+                  <th className="col-ai2">별이</th>
+                  <th className="col-ai3">초롱이</th>
+                  <th className="col-pick">최종픽</th>
+                  <th className="col-result">결과</th>
+                </tr>
+              </thead>
+              <tbody>
+                {d.games.map((g, j) => {
+                  const unani = g.ai1 !== '-' && g.ai1 === g.ai2 && g.ai2 === g.ai3;
+                  let rs = 'pending';
+                  if (g.result === '취소') rs = 'cancel';
+                  else if (g.result) rs = g.pick === g.result ? 'hit' : 'miss';
+                  return (
+                    <tr key={j}>
+                      <td className="col-match">
+                        {g.matchup.split(' vs ')[0]} <span style={{color: 'var(--gray)', fontSize:'9px', margin: '0 2px'}}>vs</span> {g.matchup.split(' vs ')[1]}
+                        {unani && <span className="unani-dot"></span>}
+                      </td>
+                      <td className="col-ai1">{g.ai1}</td>
+                      <td className="col-ai2">{g.ai2}</td>
+                      <td className="col-ai3">{g.ai3}</td>
+                      <td className="col-pick">{g.pick}</td>
+                      <td className={`col-result td-result-${rs}`}>{g.result || '대기'}</td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      ))}
+      {filteredData.length === 0 && !loading && (
+        <div className="mob-empty">📝 해당 기간에 기록이 없습니다</div>
+      )}
+    </div>
+  );
+
+  /* 3. 베팅내역 탭 */
+  const renderBetting = () => {
+    const bets = filteredData.map(d => d.unanimousBet).filter(Boolean);
+    return (
+      <div className="mob-section">
+        <div className="mob-sub-tabs">
+          {[['unanimous','🎯 만장일치'],['allfive','⚡ 도전경기'],['single','1️⃣ 단독']].map(([k,l]) => (
+            <button key={k} className={`mob-sub-tab ${betSubTab === k ? 'active' : ''}`} onClick={() => setBetSubTab(k)}>{l}</button>
+          ))}
+        </div>
+
+        {betSubTab === 'unanimous' && (
+          <>
+            {[...filteredData].reverse().map((d, i) => {
+              const bet = d.unanimousBet;
+              if (!bet) return null;
+              const status = bet.betResult;
+              const profit = getProfit(bet);
+              const displayGames = bet.customGames || d.games;
+              return (
+                <div key={i} className="mob-day-card">
+                  <div className="mob-day-header">
+                    <span className="mob-day-date">📅 {d.date} <span className={`status-badge ${status}`}>{status === 'hit' ? '적중' : status === 'miss' ? '미적중' : status === 'cancel' ? '취소' : '대기'}</span></span>
+                  </div>
+                  <div className="mob-bet-detail">
+                    <div className="mob-bet-summary">
+                      <span className="highlight">{displayGames.length}경기</span> / 배당 <span className="highlight">{bet.odds}배</span> / 베팅 <span className="highlight">{(bet.amount||0).toLocaleString()}원</span> / 
+                      <span className={`profit ${status}`}>
+                        {profit !== null ? (profit > 0 ? '📈 +'+profit.toLocaleString()+'원' : profit < 0 ? '📉 '+profit.toLocaleString()+'원' : '0원') : '-'}
+                      </span>
+                    </div>
+                    <div className="mob-game-header-row">
+                      <div className="mob-gh-matchup">매치업</div>
+                      <div className="mob-gh-pick">최종픽</div>
+                      <div className="mob-gh-result">결과</div>
+                    </div>
+                    <div className="mob-game-list">
+                      {displayGames.map((g, j) => {
+                        const rs = g.result === null ? 'pending' : g.pick === g.result ? 'hit' : 'miss';
+                        const unani = g.ai1 !== '-' && g.ai1 === g.ai2 && g.ai2 === g.ai3;
+                        return (
+                          <div key={j} className="mob-game-row">
+                            <span className="mob-g-matchup">{g.matchup}{unani && <span className="unani-dot"></span>}</span>
+                            <span className="mob-g-pick"><span className="mob-pick-chip">{g.pick}</span></span>
+                            <span className={`mob-g-result ${rs}`}>{g.result || '대기'}</span>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+            {bets.length === 0 && <div className="mob-empty">📝 해당 기간에 만장일치 베팅 내역이 없습니다</div>}
+          </>
+        )}
+
+        {betSubTab === 'allfive' && (
+          <>
+            {[...filteredData].reverse().map((d, i) => {
+              const bets = d.allFiveBets || [];
+              if (!bets.length) return null;
+              return bets.map((bet, bi) => {
+                const status = bet.betResult;
+                const profit = getProfit(bet);
+                const displayGames = bet.customGames || d.games;
+                const labels = bet.pickLabels || displayGames.map(g => g.pick);
+                return (
+                  <div key={`a5-${i}-${bi}`} className="mob-day-card">
+                    <div className="mob-day-header">
+                      <span className="mob-day-date">📅 {d.date} <span className={`status-badge ${status}`}>{status === 'hit' ? '적중' : status === 'miss' ? '미적중' : status === 'cancel' ? '취소' : '대기'}</span></span>
+                      <span style={{marginLeft:6, fontSize:10, padding:'2px 6px', background:'rgba(91,168,255,0.1)', color:'#5ba8ff', borderRadius:4}}>{'조합'+(bi+1)}</span>
+                    </div>
+                    <div className="mob-bet-detail">
+                      <div className="mob-bet-summary">
+                        <span className="highlight">{displayGames.length}경기</span> / 배당 <span className="highlight">{bet.odds}배</span> / 베팅 <span className="highlight">{(bet.amount||0).toLocaleString()}원</span> / 
+                        <span className={`profit ${status}`}>
+                          {profit !== null ? (profit > 0 ? '📈 +'+profit.toLocaleString()+'원' : profit < 0 ? '📉 '+profit.toLocaleString()+'원' : '0원') : '-'}
+                        </span>
+                      </div>
+                      <div className="mob-game-header-row">
+                        <div className="mob-gh-matchup">매치업</div>
+                        <div className="mob-gh-pick">최종픽</div>
+                        <div className="mob-gh-result">결과</div>
+                      </div>
+                      <div className="mob-game-list">
+                        {displayGames.map((g, j) => {
+                          const pickLabel = labels[j] || g.pick;
+                          const rs = g.result === null ? 'pending' : pickLabel === g.result ? 'hit' : 'miss';
+                          return (
+                            <div key={j} className="mob-game-row">
+                              <span className="mob-g-matchup">{g.matchup}</span>
+                              <span className="mob-g-pick"><span className="mob-pick-chip">{pickLabel}</span></span>
+                              <span className={`mob-g-result ${rs}`}>{g.result || '대기'}</span>
+                            </div>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  </div>
+                );
+              });
+            })}
+            {filteredData.every(d => !d.allFiveBets || !d.allFiveBets.length) && (
+              <div className="mob-empty">📝 도전경기 베팅 내역이 없습니다</div>
+            )}
+          </>
+        )}
+        {betSubTab === 'single' && (
+          <>
+            {[...filteredData].reverse().map((d, i) => {
+              const bets = d.singleBets || [];
+              if (!bets.length) return null;
+
+              const totalAmount = bets.reduce((s, b) => s + (b.amount || 0), 0);
+              const totalProfit = bets.reduce((s, b) => s + (getProfit(b) || 0), 0);
+
+              return (
+                <div key={`s-${i}`} className="mob-day-card">
+                  <div className="mob-day-header">
+                    <span className="mob-day-date">📅 {d.date}</span>
+                  </div>
+                  <div className="mob-bet-detail" style={{paddingTop: '4px'}}>
+                    <div className="mob-bet-summary" style={{marginBottom: '8px', paddingBottom: '8px', borderBottom: '1px solid rgba(255,255,255,0.05)'}}>
+                      <span className="highlight">{bets.length}경기</span> / 총 베팅 <span className="highlight">{totalAmount.toLocaleString()}원</span>
+                      {totalProfit !== 0 && (
+                        <span> / <span className={`profit ${totalProfit > 0 ? 'hit' : 'miss'}`}>
+                          {totalProfit > 0 ? '📈 +' + totalProfit.toLocaleString() + '원' : '📉 ' + totalProfit.toLocaleString() + '원'}
+                        </span></span>
+                      )}
+                    </div>
+                    <div className="mob-single-header-row">
+                      <div className="mob-sh-matchup">매치업 / 픽</div>
+                      <div className="mob-sh-odds">배당</div>
+                      <div className="mob-sh-result">결과</div>
+                    </div>
+                    <div className="mob-single-list">
+                      {bets.map((bet, bi) => {
+                        const status = bet.betResult;
+                        const profit = getProfit(bet);
+                        const displayGames = bet.customGames || d.games;
+                        const labels = bet.pickLabels || displayGames.map(g => g.pick);
+                        const g = displayGames[0] || {};
+                        const pickLabel = labels[0] || g.pick;
+                        
+                        let rs = 'pending';
+                        let resultText = g.result || '대기';
+                        let amountText = `베팅 ${(bet.amount||0).toLocaleString()}원`;
+                        let profitText = '-';
+
+                        if (g.result === '취소') {
+                          rs = 'cancel';
+                          resultText = '취소';
+                          amountText = `베팅 0(환불)원`;
+                          profitText = '취소(환불)';
+                        } else if (g.result) {
+                          if (pickLabel === g.result) {
+                            rs = 'hit';
+                            const hitProfit = profit !== null ? profit : Math.round((bet.amount||0) * (bet.odds||1) - (bet.amount||0));
+                            profitText = `+${hitProfit.toLocaleString()}원`;
+                          } else {
+                            rs = 'miss';
+                            const missProfit = profit !== null ? profit : -(bet.amount||0);
+                            profitText = `${missProfit.toLocaleString()}원`;
+                          }
+                        }
+
+                        return (
+                          <div key={`sr-${bi}`} className="mob-single-bet-row">
+                            <div className="mob-single-row-1">
+                              <div className="mob-sr1-matchup">
+                                {g.matchup} <span className="mob-pick-chip" style={{marginLeft:6}}>{pickLabel}</span>
+                              </div>
+                              <div className="mob-sr1-odds">{bet.odds}배</div>
+                              <div className={`mob-sr1-result ${rs}`}>{resultText}</div>
+                            </div>
+                            <div className="mob-single-row-2">
+                              <div className="mob-sr2-amount">{amountText}</div>
+                              <div className={`mob-sr2-profit ${rs}`}>{profitText}</div>
+                            </div>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+            {filteredData.every(d => !d.singleBets || !d.singleBets.length) && (
+              <div className="mob-empty">📝 단독베팅 내역이 없습니다</div>
+            )}
+          </>
+        )}
+      </div>
+    );
+  };
+
+  /* 4. 오늘의 예측 탭 */
+  const renderToday = () => {
+    const todayData = data.find(d => d.date === today);
+    const recentDays = [...data].reverse().slice(0, 3);
+    return (
+      <div className="mob-section">
+        <div className="mob-section-title">📅 오늘 ({today})</div>
+        {todayData ? (
+          <div className="mob-day-card">
+            <div className="mob-game-list">
+              <div className="mob-game-header">
+                <span className="mob-g-matchup">경기</span>
+                <span className="mob-g-pick">AI 예측</span>
+                <span className="mob-g-result">결과</span>
+              </div>
+              {todayData.games.map((g, j) => {
+                const rs = g.result === null ? 'pending' : g.pick === g.result ? 'hit' : 'miss';
+                const unani = g.ai1 !== '-' && g.ai1 === g.ai2 && g.ai2 === g.ai3;
+                return (
+                  <div key={j} className="mob-game-row">
+                    <span className="mob-g-matchup">{g.matchup}{unani && <span className="unani-dot"></span>}</span>
+                    <span className="mob-g-pick"><span className="mob-pick-chip purple">{g.pick}</span></span>
+                    <span className={`mob-g-result ${rs}`}>{g.result || '⏳ 대기'}</span>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        ) : (
+          <div className="mob-empty">
+            📊 오늘({today}) 예측 데이터가 없습니다<br/>
+            <span style={{fontSize:'12px', color:'#6b7280'}}>관리자에서 입력하거나 크론이 자동 수집합니다</span>
+          </div>
+        )}
+
+        <div className="mob-section-title" style={{marginTop: '20px'}}>🕐 최근 경기 요약</div>
+        {recentDays.map((d, i) => (
+          <div key={i} className="mob-summary-row">
+            <span className="mob-summary-date">{d.date}</span>
+            <span className="mob-summary-games">{d.games.length}경기</span>
+            <span className={`mob-badge small ${
+              d.games.some(g => g.result === null) ? 'pending' :
+              d.games.filter(g => g.pick === g.result && g.pick !== '-').length === d.games.filter(g => g.pick !== '-').length ? 'hit' : 'miss'
+            }`}>
+              {d.games.some(g => g.result === null) ? '대기' :
+               `${d.games.filter(g => g.pick === g.result && g.pick !== '-').length}/${d.games.filter(g => g.pick !== '-').length} 적중`}
+            </span>
+          </div>
+        ))}
+      </div>
+    );
+  };
+
+  // ── 메인 렌더 ─────────────────────────────────────────────
+  return (
+    <div className="mob-app">
+      {/* 헤더 */}
+      <header className="mob-header">
+        <div className="mob-logo">⚾ KBO<em>TOTO</em></div>
+        <button className="mob-filter-btn" onClick={() => setShowFilter(v => !v)}>
+          📅 {startDate?.slice(5)} ~ {endDate?.slice(5)}
+        </button>
+      </header>
+
+      {/* 날짜 필터 드로어 */}
+      {showFilter && (
+        <div className="mob-filter-drawer">
+          <div className="mob-filter-row">
+            <input type="date" value={startDate} onChange={e => setStartDate(e.target.value)} className="mob-date-input" />
+            <span style={{color:'#6b7280'}}>~</span>
+            <input type="date" value={endDate} onChange={e => setEndDate(e.target.value)} className="mob-date-input" />
+          </div>
+          <div className="mob-filter-row" style={{gap:'8px', justifyContent:'flex-end'}}>
+            <button className="mob-filter-reset" onClick={() => { setStartDate(yyyy_mm+'-01'); setEndDate(yyyy_mm+'-'+String(lastDay).padStart(2,'0')); }}>이번 달</button>
+            <button className="mob-filter-reset" onClick={() => { setShowFilter(false); }}>적용</button>
+          </div>
+        </div>
+      )}
+
+      {/* 컨텐츠 */}
+      <main className="mob-content">
+        {loading && <div className="mob-loading"><div className="mob-spinner" />데이터 불러오는 중...</div>}
+        {!loading && (
+          <>
+            {activeTab === 'dashboard' && renderDashboard()}
+            {activeTab === 'records' && renderRecords()}
+            {activeTab === 'betting' && renderBetting()}
+            {activeTab === 'today' && renderToday()}
+          </>
+        )}
+      </main>
+
+      {/* 하단 탭 바 */}
+      <nav className="mob-bottom-nav">
+        {[
+          { key: 'dashboard', icon: '📊', label: '대시보드' },
+          { key: 'records',   icon: '📋', label: '경기기록' },
+          { key: 'betting',   icon: '🎯', label: '베팅내역' },
+          { key: 'today',     icon: '📅', label: '오늘예측' },
+        ].map(({ key, icon, label }) => (
+          <button
+            key={key}
+            className={`mob-tab-btn ${activeTab === key ? 'active' : ''}`}
+            onClick={() => setActiveTab(key)}
+          >
+            <span className="mob-tab-icon">{icon}</span>
+            <span className="mob-tab-label">{label}</span>
+          </button>
+        ))}
+
+      </nav>
+    </div>
+  );
+};
+
+export default MobileDashboard;
