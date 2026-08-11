@@ -1,0 +1,36 @@
+{
+  "date": "2026-08-11",
+  "gmTs": 260088,
+  "odds": [
+    {
+      "homeTeam": "LG 트윈스",
+      "awayTeam": "키움 히어로즈",
+      "win": 1.23,
+      "lose": 3.09
+    },
+    {
+      "homeTeam": "삼성 라이온즈",
+      "awayTeam": "KIA 타이거즈",
+      "win": 1.94,
+      "lose": 1.61
+    },
+    {
+      "homeTeam": "SSG 랜더스",
+      "awayTeam": "두산 베어스",
+      "win": 1.81,
+      "lose": 1.71
+    },
+    {
+      "homeTeam": "NC 다이노스",
+      "awayTeam": "KT 위즈",
+      "win": 2.15,
+      "lose": 1.49
+    },
+    {
+      "homeTeam": "한화 이글스",
+      "awayTeam": "롯데 자이언츠",
+      "win": 1.51,
+      "lose": 2.11
+    }
+  ]
+}
