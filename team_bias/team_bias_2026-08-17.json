@@ -6,12 +6,12 @@
       "team": "KT",
       "recent10_pct": 70,
       "recent10_record": "7승 3패",
-      "recent30_pct": 60,
-      "recent30_record": "18승 12패",
-      "all_pct": 61.4,
-      "all_record": "27승 17패",
-      "gap_10_vs_30": 10,
-      "status": "상승전환"
+      "recent30_pct": 63.3,
+      "recent30_record": "19승 11패",
+      "all_pct": 64.3,
+      "all_record": "27승 15패",
+      "gap_10_vs_30": 6.7,
+      "status": "혼조"
     },
     {
       "team": "삼성",
@@ -39,12 +39,12 @@
       "team": "두산",
       "recent10_pct": 60,
       "recent10_record": "6승 4패",
-      "recent30_pct": 56.7,
-      "recent30_record": "17승 13패",
-      "all_pct": 53.3,
-      "all_record": "24승 21패",
-      "gap_10_vs_30": 3.3,
-      "status": "안정"
+      "recent30_pct": 63.3,
+      "recent30_record": "19승 11패",
+      "all_pct": 55.8,
+      "all_record": "24승 19패",
+      "gap_10_vs_30": -3.3,
+      "status": "혼조"
     },
     {
       "team": "KIA",
