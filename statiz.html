@@ -1,0 +1,1802 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>⚾ KBO 토토 투자기록부 2026</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=Black+Han+Sans&display=swap');
+:root{--bg:#0a1a0f;--bg2:#0f1f12;--card:#1a2d1e;--border:#1e4028;--gold:#39d353;--gold2:#56e87a;--green:#06d6a0;--red:#ef476f;--blue:#118ab2;--gray:#6b7280;--light:#e2e8f0;--white:#ffffff;--h-header:52px;}
+*{margin:0;padding:0;box-sizing:border-box;}
+html,body{font-family:'Noto Sans KR',sans-serif;background:var(--bg);color:var(--light);min-height:100vh;}
+header{background:linear-gradient(135deg,#061a09 0%,#0f3d1a 100%);border-bottom:2px solid var(--gold);padding:14px 20px;position:sticky;top:0;z-index:100;height:var(--h-header);box-sizing:border-box;}
+.header-inner{max-width:100%;margin:0 auto;display:flex;align-items:center;justify-content:space-between;}
+.logo{font-family:'Black Han Sans',sans-serif;font-size:22px;color:var(--gold);letter-spacing:1px;}
+.logo em{color:var(--white);font-style:normal;}
+.header-sub{font-size:11px;color:var(--gray);}
+.tabs{max-width:100%;margin:0 auto;padding:10px 12px 0;display:flex;gap:6px;position:sticky;top:var(--h-header);z-index:90;background:var(--bg);}
+.tab{flex:1;padding:10px 6px;text-align:center;background:var(--card);border:1px solid var(--border);border-radius:10px 10px 0 0;cursor:pointer;font-size:12px;font-weight:700;color:var(--gray);transition:all .25s;border-top:3px solid transparent;}
+.tab.active{background:linear-gradient(180deg,rgba(57,211,83,0.15) 0%,var(--bg2) 100%);border-color:var(--gold) var(--border) var(--bg2) var(--border);border-top:3px solid var(--gold);color:var(--gold2);font-weight:900;text-shadow:0 0 12px rgba(245,166,35,0.5);box-shadow:0 -2px 12px rgba(57,211,83,0.15);}
+main{max-width:100%;margin:0 auto;padding:0 12px 60px;overflow-x:hidden;}
+.panel{display:none;background:var(--bg2);border:1px solid var(--border);border-radius:0 0 14px 14px;padding:20px;}
+.panel.active{display:block;}
+.sec{font-size:12px;font-weight:700;color:var(--gold);letter-spacing:1px;text-transform:uppercase;padding-bottom:8px;border-bottom:1px solid var(--border);margin-bottom:14px;margin-top:24px;}
+.sec:first-child{margin-top:0;}
+
+/* 대시보드 메인 메뉴 카드 */
+.dash-menu-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:8px;}
+.dash-menu-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:20px 16px;cursor:pointer;transition:all .25s;position:relative;overflow:hidden;}
+.dash-menu-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;}
+.dash-menu-card.c1::before{background:linear-gradient(90deg,var(--gold),var(--gold2));}
+.dash-menu-card.c2::before{background:linear-gradient(90deg,var(--green),#00b894);}
+.dash-menu-card.c3::before{background:linear-gradient(90deg,#5ba8ff,#a29bfe);}
+.dash-menu-card.c4::before{background:linear-gradient(90deg,var(--red),#fd79a8);}
+.dash-menu-card:active{transform:scale(0.97);}
+.dash-menu-icon{font-size:28px;margin-bottom:8px;}
+.dash-menu-title{font-size:13px;font-weight:900;color:var(--light);margin-bottom:4px;}
+.dash-menu-desc{font-size:10px;color:var(--gray);line-height:1.4;}
+.dash-menu-badge{position:absolute;top:12px;right:12px;font-size:10px;font-weight:700;padding:2px 7px;border-radius:20px;}
+.dash-menu-card.c1 .dash-menu-badge{background:rgba(57,211,83,0.15);color:var(--gold);}
+.dash-menu-card.c2 .dash-menu-badge{background:rgba(6,214,160,0.15);color:var(--green);}
+.dash-menu-card.c3 .dash-menu-badge{background:rgba(91,168,255,0.15);color:#5ba8ff;}
+.dash-menu-card.c4 .dash-menu-badge{background:rgba(239,71,111,0.15);color:var(--red);}
+
+/* 상세 화면 공통 */
+.detail-view{display:none;}
+.detail-view.active{display:block;}
+.back-btn{display:flex;align-items:center;gap:6px;color:var(--gray);font-size:13px;font-weight:700;cursor:pointer;padding:8px 0 16px;border:none;background:none;}
+.back-btn:active{color:var(--light);}
+.back-arrow{font-size:18px;line-height:1;}
+
+/* KPI 카드 */
+.kpi-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:16px;}
+.kpi-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:14px;text-align:center;}
+.kpi-label{font-size:10px;color:var(--gray);margin-bottom:4px;}
+.kpi-val{font-size:22px;font-weight:900;}
+.kpi-val.gold{color:var(--gold);}
+.kpi-val.green{color:var(--green);}
+.kpi-val.red{color:var(--red);}
+.kpi-val.blue{color:#5ba8ff;}
+
+/* 적중률 바 */
+.rate-bar-wrap{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:16px;margin-bottom:12px;}
+.rate-bar-label{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;}
+.rate-bar-name{font-size:12px;font-weight:700;color:var(--light);}
+.rate-bar-pct{font-size:14px;font-weight:900;}
+.rate-bar-bg{background:rgba(255,255,255,0.06);border-radius:99px;height:8px;overflow:hidden;}
+.rate-bar-fill{height:100%;border-radius:99px;transition:width .6s ease;}
+.rate-bar-sub{font-size:10px;color:var(--gray);margin-top:6px;}
+
+/* AI 비교 */
+.ai-compare-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px;}
+.ai-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:14px;text-align:center;}
+.ai-name{font-size:11px;font-weight:700;margin-bottom:6px;}
+.ai-pct{font-size:20px;font-weight:900;color:var(--gold);}
+.ai-sub{font-size:10px;color:var(--gray);margin-top:2px;}
+
+/* 수익 관련 */
+.profit-summary-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:16px;margin-bottom:12px;}
+.profit-row{display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid rgba(255,255,255,0.05);font-size:13px;}
+.profit-row:last-child{border-bottom:none;}
+.profit-label{color:var(--gray);font-size:12px;}
+.profit-val{font-weight:700;}
+
+/* 차트 */
+.chart-wrap{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:16px;margin-bottom:16px;}
+canvas{width:100%!important;}
+
+/* 패턴 분석 */
+.pattern-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:16px;margin-bottom:12px;}
+.pattern-title{font-size:12px;font-weight:700;color:var(--gold);margin-bottom:12px;}
+.pattern-row{display:flex;align-items:center;gap:10px;padding:5px 0;font-size:12px;}
+.pattern-label{width:50px;color:var(--gray);flex-shrink:0;}
+.pattern-bar-bg{flex:1;background:rgba(255,255,255,0.06);border-radius:99px;height:6px;overflow:hidden;}
+.pattern-bar-fill{height:100%;border-radius:99px;}
+.pattern-pct{width:35px;text-align:right;font-weight:700;font-size:11px;flex-shrink:0;}
+.team-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;}
+.team-item{display:flex;justify-content:space-between;align-items:center;background:rgba(255,255,255,0.03);border-radius:8px;padding:8px 10px;font-size:12px;}
+.team-name{font-weight:700;}
+.team-rate{font-weight:900;}
+
+/* 오늘 현황 */
+.today-game-card{background:var(--card);border:1px solid var(--border);border-radius:12px;margin-bottom:10px;overflow:hidden;}
+.today-game-header{padding:10px 14px;background:linear-gradient(90deg,#1a2235,#111827);border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;}
+.today-matchup{font-size:13px;font-weight:900;color:var(--light);}
+.today-pick-chip{padding:3px 10px;background:rgba(245,166,35,0.18);color:var(--gold);font-size:11px;font-weight:700;border-radius:20px;}
+.today-game-body{padding:10px 14px;display:flex;justify-content:space-between;align-items:center;font-size:11px;}
+.today-ai-row{display:flex;gap:8px;}
+.today-ai-item{color:var(--gray);}
+.today-ai-item span{color:var(--light);font-weight:700;}
+.today-result{font-size:13px;font-weight:900;}
+.today-bet-summary{background:linear-gradient(135deg,rgba(245,166,35,0.08),rgba(245,166,35,0.02));border:1px solid rgba(245,166,35,0.2);border-radius:12px;padding:16px;margin-bottom:16px;}
+.today-bet-title{font-size:11px;color:var(--gold);font-weight:700;margin-bottom:10px;letter-spacing:0.5px;}
+.today-bet-row{display:flex;justify-content:space-between;font-size:12px;padding:4px 0;}
+.today-bet-label{color:var(--gray);}
+.today-bet-val{font-weight:700;}
+
+/* 경기기록/베팅내역 공통 */
+.day-card{background:var(--card);border:1px solid var(--border);border-radius:12px;margin-bottom:14px;overflow:hidden;}
+.day-header{display:flex;justify-content:space-between;align-items:center;padding:10px 14px 10px 20px;background:linear-gradient(90deg,#1a2235 0%,#111827 100%);border-bottom:1px solid var(--border);}
+.day-date{font-size:14px;font-weight:900;color:var(--gold);}
+.day-badge{padding:3px 8px;border-radius:20px;font-size:10px;font-weight:700;}
+.day-badge.hit{background:rgba(6,214,160,.15);color:var(--green);border:1px solid var(--green);}
+.day-badge.miss{background:rgba(239,71,111,.15);color:var(--red);border:1px solid var(--red);}
+.day-badge.pending{background:rgba(107,114,128,.15);color:var(--gray);border:1px solid var(--gray);}
+.bet-header-summary{font-size:11px;font-weight:700;color:#a8c4e0;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:6px;padding:3px 9px;margin-left:10px;white-space:nowrap;}
+.bet-header-summary strong{color:var(--gold2);font-weight:900;font-size:12px;}
+.table-scroll-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;}
+.games-table{width:100%;border-collapse:collapse;font-size:11px;white-space:nowrap;}
+.games-table .th-group{font-size:9px;font-weight:700;letter-spacing:1px;padding:4px 6px;text-align:center;border-bottom:none;}
+.games-table .th-group.group-match{background:transparent;}
+.games-table .th-group.group-ai{background:rgba(91,168,255,0.12);color:#5ba8ff;border-radius:4px 4px 0 0;}
+.games-table .th-group.group-pick{background:rgba(57,211,83,0.10);}
+.games-table .th-group.group-result{background:rgba(6,214,160,0.10);}
+.games-table th{font-size:9px;font-weight:700;padding:4px 4px;text-align:center;border-bottom:2px solid var(--border);white-space:nowrap;}
+.games-table th.col-match{background:rgba(255,255,255,0.04);color:var(--light);text-align:left;padding-left:8px;border-right:1px solid var(--border);max-width:100px;min-width:80px;}
+.games-table th.col-ai1{background:rgba(91,168,255,0.10);color:#7ec8ff;}
+.games-table th.col-ai2{background:rgba(91,168,255,0.14);color:#5ba8ff;}
+.games-table th.col-ai3{background:rgba(91,168,255,0.10);color:#7ec8ff;border-right:2px solid var(--border);padding-right:4px;}
+.games-table th.col-pick{background:rgba(57,211,83,0.12);color:var(--gold);border-right:1px solid var(--border);padding-left:4px;}
+.games-table th.col-result{background:rgba(6,214,160,0.10);color:var(--green);}
+.games-table td{padding:6px 4px;text-align:center;border-bottom:1px solid rgba(30,50,80,.4);font-size:11px;white-space:nowrap;}
+.games-table td.col-match{text-align:left;padding-left:20px;font-weight:700;color:var(--light);border-right:1px solid var(--border);}
+.games-table td.col-ai1{background:rgba(91,168,255,0.04);color:var(--light);}
+.games-table td.col-ai2{background:rgba(91,168,255,0.06);color:var(--light);}
+.games-table td.col-ai3{background:rgba(91,168,255,0.04);color:var(--light);border-right:2px solid var(--border);padding-right:12px;}
+.games-table td.col-pick{color:var(--gold);font-weight:700;padding-left:12px;border-right:1px solid var(--border);}
+.games-table tr:last-child td{border-bottom:none;}
+.games-table tr:nth-child(even) td{filter:brightness(1.04);}
+.unani-dot{display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--gold);margin-left:3px;vertical-align:middle;}
+.td-result-hit{color:var(--green);font-weight:900;}
+.td-result-miss{color:var(--red);font-weight:900;}
+.td-result-pending{color:var(--gray);}
+.td-result-cancel{color:#f5c518;font-weight:700;}
+.day-body{padding:12px;}
+.game-list-header{display:flex;align-items:center;padding:5px 0 7px;border-bottom:2px solid var(--border);margin-bottom:2px;font-size:10px;font-weight:700;letter-spacing:0.8px;text-transform:uppercase;}
+.game-list-header .col-match{flex:1;color:var(--light);padding-left:20px;}
+.game-list-header .col-pick{width:70px;text-align:center;color:var(--gold);background:rgba(245,166,35,0.08);padding:3px 0;border-radius:4px 0 0 0;}
+.game-list-header .col-result{width:70px;text-align:center;color:var(--green);background:rgba(6,214,160,0.08);padding:3px 0;border-radius:0 4px 0 0;margin-right:4px;}
+.game-row{display:flex;align-items:center;padding:7px 0;border-bottom:1px solid rgba(255,255,255,0.04);font-size:12px;}
+.game-row:last-of-type{border-bottom:none;}
+.game-matchup{flex:1;font-weight:500;color:var(--light);padding-left:20px;}
+.col-pick-cell{width:70px;text-align:center;background:rgba(245,166,35,0.04);}
+.col-result-cell{width:70px;text-align:center;margin-right:4px;}
+.pick-chip{padding:2px 8px;background:rgba(245,166,35,0.18);color:var(--gold);font-size:11px;font-weight:700;border-radius:4px;}
+.game-result.hit{color:var(--green);font-weight:700;}
+.game-result.miss{color:var(--red);font-weight:700;}
+.game-result.pending{color:var(--gray);}
+.game-result.cancel{color:#f5c518!important;font-weight:700;}
+.bet-filter-wrap{display:flex;gap:8px;margin-bottom:16px;position:sticky;top:calc(var(--h-header) + 46px);z-index:80;background:var(--bg2);padding:8px 0 4px;}
+.btn-filter{flex:1;padding:10px;font-size:12px;font-weight:700;background:var(--card);border:1px solid var(--border);color:var(--gray);border-radius:8px;cursor:pointer;transition:all .2s;text-align:center;}
+.btn-filter.active.unanimous{border-color:var(--gold);color:var(--gold);background:rgba(245,166,35,0.05);}
+.btn-filter.active.allfive{border-color:#5ba8ff;color:#5ba8ff;background:rgba(91,168,255,0.05);}
+.btn-filter.active.single{border-color:var(--green);color:var(--green);background:rgba(6,214,160,0.05);}
+.bet-content-panel{display:none;}
+.bet-content-panel.active{display:block;}
+.bet-card-header-row1{display:flex;align-items:center;justify-content:space-between;}
+.bet-card-summary-row{display:block;margin-top:4px;}
+.bet-pc-header{display:none;}
+.empty{text-align:center;padding:40px;color:var(--gray);font-size:13px;}
+.pos{color:var(--green);}
+.neg{color:var(--red);}
+.neu{color:var(--gray);}
+
+/* 편집 모달 */
+.modal-overlay{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.7);z-index:999;overflow-y:auto;}
+.modal-overlay.active{display:flex;align-items:flex-start;justify-content:center;padding:20px 12px;}
+.modal-box{background:var(--bg2);border:1px solid var(--border);border-radius:16px;width:100%;max-width:480px;padding:20px;margin:auto;}
+.modal-title{font-size:15px;font-weight:900;color:var(--gold);margin-bottom:16px;display:flex;justify-content:space-between;align-items:center;}
+.modal-close{font-size:20px;cursor:pointer;color:var(--gray);background:none;border:none;}
+.modal-section{font-size:11px;font-weight:700;color:var(--gold);letter-spacing:1px;margin:14px 0 8px;padding-bottom:6px;border-bottom:1px solid var(--border);}
+.modal-field{display:flex;align-items:center;gap:10px;margin-bottom:10px;}
+.modal-label{font-size:11px;color:var(--gray);width:70px;flex-shrink:0;}
+.modal-input{flex:1;background:var(--card);border:1px solid var(--border);border-radius:8px;padding:8px 10px;color:var(--light);font-size:12px;outline:none;font-family:inherit;}
+.modal-input:focus{border-color:var(--gold);}
+.modal-select{flex:1;background:var(--card);border:1px solid var(--border);border-radius:8px;padding:8px 10px;color:var(--light);font-size:12px;outline:none;font-family:inherit;}
+.modal-select:focus{border-color:var(--gold);}
+.modal-game-row{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:12px;margin-bottom:8px;}
+.modal-game-title{font-size:11px;font-weight:700;color:var(--light);margin-bottom:8px;}
+.modal-btn-row{display:flex;gap:8px;margin-top:16px;}
+.modal-btn{flex:1;padding:12px;border-radius:10px;font-size:13px;font-weight:700;cursor:pointer;border:none;font-family:inherit;}
+.modal-btn.confirm{background:var(--gold);color:#000;}
+.modal-btn.cancel{background:var(--card);color:var(--gray);border:1px solid var(--border);}
+.edit-btn{background:none;border:none;cursor:pointer;font-size:14px;padding:2px 6px;color:var(--gray);}
+@media(min-width:600px){.bet-card-summary-row{display:flex;align-items:center;flex:1;margin-top:0;gap:8px;}}
+@media(min-width:1024px){
+  .header-inner,.tabs,main{max-width:66vw;margin:0 auto;}
+  .bet-filter-wrap{display:none!important;}
+  .bet-lists-container{display:flex;gap:20px;align-items:flex-start;}
+  .bet-content-panel{display:block!important;flex:1;min-width:0;}
+  .bet-pc-header{display:block;font-size:15px;font-weight:900;margin-bottom:16px;padding-bottom:8px;border-bottom:2px solid var(--border);color:var(--gold);}
+  #panel-allfive .bet-pc-header{color:#5ba8ff;border-bottom-color:#5ba8ff;}
+  #panel-single .bet-pc-header{color:var(--green);border-bottom-color:var(--green);}
+  .dash-menu-grid{grid-template-columns:repeat(4,1fr);}
+}
+</style>
+</head>
+<body>
+<header><div class="header-inner"><div class="logo">⚾ KBO<em>TOTO</em></div><div class="header-sub">스탯티즈 승부예측 기록부</div></div></header>
+<div id="tabs-sticky" style="position:sticky;top:var(--h-header);z-index:90;background:var(--bg);">
+  <div class="tabs" style="position:static;">
+    <div class="tab active" onclick="showTab('dashboard')">📊 대시보드</div>
+    <div class="tab" onclick="showTab('records')">📋 경기기록</div>
+    <div class="tab" onclick="showTab('betting')">🎯 베팅내역</div>
+    <a href="index.html" class="tab" style="text-decoration:none;">← 메인</a>
+  </div>
+  <div id="bet-filter-sticky" style="display:none;padding:6px 12px 4px;background:var(--bg2);border-left:1px solid var(--border);border-right:1px solid var(--border);">
+    <div style="display:flex;gap:8px;">
+      <div class="btn-filter active unanimous" id="btn-unanimous" onclick="filterBetType('unanimous')">🎯 만장일치</div>
+      <div class="btn-filter allfive" id="btn-allfive" onclick="filterBetType('allfive')">⚡ 도전경기</div>
+      <div class="btn-filter single" id="btn-single" onclick="filterBetType('single')">1️⃣ 단독베팅</div>
+    </div>
+  </div>
+</div>
+<main>
+<!-- 대시보드 탭 -->
+<div class="panel active" id="tab-dashboard">
+  <!-- 메인 메뉴 화면 -->
+  <div id="dash-main">
+    <div class="sec" style="margin-top:0;">📊 대시보드</div>
+    <div class="dash-menu-grid">
+      <div class="dash-menu-card c1" onclick="showDetail('accuracy')">
+        <div class="dash-menu-badge">1순위</div>
+        <div class="dash-menu-icon">🎯</div>
+        <div class="dash-menu-title">적중률 / 수익률</div>
+        <div class="dash-menu-desc">베팅 유형별 적중률<br>AI 3인 예측 성적</div>
+      </div>
+      <div class="dash-menu-card c2" onclick="showDetail('profit')">
+        <div class="dash-menu-badge">2순위</div>
+        <div class="dash-menu-icon">💰</div>
+        <div class="dash-menu-title">수익 관련</div>
+        <div class="dash-menu-desc">총 투자 / 수익<br>누적 손익 그래프</div>
+      </div>
+      <div class="dash-menu-card c3" onclick="showDetail('pattern')">
+        <div class="dash-menu-badge">3순위</div>
+        <div class="dash-menu-icon">📈</div>
+        <div class="dash-menu-title">패턴 분석</div>
+        <div class="dash-menu-desc">요일별 승률<br>팀별 픽 성공률</div>
+      </div>
+      <div class="dash-menu-card c4" onclick="showDetail('today')">
+        <div class="dash-menu-badge">4순위</div>
+        <div class="dash-menu-icon">⚾</div>
+        <div class="dash-menu-title">오늘 현황</div>
+        <div class="dash-menu-desc">오늘 베팅 & 경기<br>예상 수익 확인</div>
+      </div>
+    </div>
+
+    <!-- 일별 손익 현황 -->
+    <div class="sec" style="cursor:pointer;" onclick="showDetail('daily')">📅 일별 손익 현황 <span style="float:right;font-size:11px;color:var(--gray);font-weight:400;letter-spacing:0;text-transform:none;">전체보기 ›</span></div>
+    <div id="daily-summary-list"></div>
+  </div>
+
+  <!-- 5. 일별 손익 상세 -->
+  <div class="detail-view" id="detail-daily">
+    <button class="back-btn" onclick="showMain()"><span class="back-arrow">←</span> 대시보드</button>
+    <div class="sec" style="margin-top:0;">📅 일별 손익 전체 내역</div>
+    <div id="daily-detail-list"></div>
+  </div>
+  <div class="detail-view" id="detail-accuracy">
+    <!-- 적중률 메인 화면 -->
+    <div id="acc-main">
+      <button class="back-btn" onclick="showMain()"><span class="back-arrow">←</span> 대시보드</button>
+      <div class="sec" style="margin-top:0;cursor:pointer;" onclick="showAccDetail('all')">🎯 베팅 유형별 적중률 <span style="float:right;font-size:11px;color:var(--gray);font-weight:400;letter-spacing:0;text-transform:none;">날짜별 보기 ›</span></div>
+      <div id="acc-rate-bars"></div>
+      <div class="sec">🦾 AI 예측 적중률</div>
+      <div class="ai-compare-grid" id="acc-ai-cards"></div>
+      <div class="sec">💹 전체 수익률</div>
+      <div class="kpi-grid" id="acc-kpi"></div>
+    </div>
+    <!-- 날짜별 리스트 서브뷰 -->
+    <div id="acc-detail" style="display:none;">
+      <button class="back-btn" onclick="hideAccDetail()"><span class="back-arrow">←</span> 적중률 / 수익률</button>
+      <div class="sec" style="margin-top:0;" id="acc-detail-title"></div>
+      <div id="acc-detail-list"></div>
+    </div>
+  </div>
+
+  <!-- 2. 수익 관련 상세 -->
+  <div class="detail-view" id="detail-profit">
+    <button class="back-btn" onclick="showMain()"><span class="back-arrow">←</span> 대시보드</button>
+    <div class="sec" style="margin-top:0;">💰 수익 요약</div>
+    <div class="kpi-grid" id="profit-kpi"></div>
+    <div class="profit-summary-card" id="profit-detail"></div>
+    <div class="sec">📈 누적 손익 추이</div>
+    <div class="chart-wrap"><canvas id="chart" height="160"></canvas></div>
+  </div>
+
+  <!-- 3. 패턴 분석 상세 -->
+  <div class="detail-view" id="detail-pattern">
+    <button class="back-btn" onclick="showMain()"><span class="back-arrow">←</span> 대시보드</button>
+    <div class="sec" style="margin-top:0;">📅 요일별 승률</div>
+    <div class="pattern-card" id="pattern-day"></div>
+    <div class="sec">⚾ 팀별 픽 성공률</div>
+    <div class="pattern-card" id="pattern-team"></div>
+    <div class="sec">🔥 연속 기록</div>
+    <div class="kpi-grid" id="pattern-streak"></div>
+  </div>
+
+  <!-- 4. 오늘 현황 상세 -->
+  <div class="detail-view" id="detail-today">
+    <button class="back-btn" onclick="showMain()"><span class="back-arrow">←</span> 대시보드</button>
+    <div class="sec" style="margin-top:0;">⚾ 오늘 경기 현황</div>
+    <div id="today-content"></div>
+  </div>
+</div>
+
+<!-- 경기기록 탭 -->
+<div class="panel" id="tab-records"><div id="records-list"></div></div>
+
+<!-- 베팅내역 탭 -->
+<div class="panel" id="tab-betting" style="padding-top:12px;border-top:none;border-radius:0 0 14px 14px;">
+  <div class="bet-lists-container">
+    <div class="bet-content-panel active" id="panel-unanimous"><div class="bet-pc-header">🎯 만장일치 내역</div><div id="unanimous-list"></div></div>
+    <div class="bet-content-panel" id="panel-allfive"><div class="bet-pc-header">⚡ 도전경기 내역</div><div id="allfive-list"></div></div>
+    <div class="bet-content-panel" id="panel-single"><div class="bet-pc-header">1️⃣ 단독베팅 내역</div><div id="single-list"></div></div>
+  </div>
+</div>
+<!-- 편집 모달 -->
+<div class="modal-overlay" id="edit-modal">
+  <div class="modal-box">
+    <div class="modal-title">
+      <span id="modal-title-text">✏️ 기록 수정</span>
+      <button class="modal-close" onclick="closeModal()">✕</button>
+    </div>
+    <div id="modal-body"></div>
+    <div class="modal-btn-row">
+      <button class="modal-btn cancel" onclick="closeModal()">취소</button>
+      <button class="modal-btn confirm" onclick="saveModal()">저장</button>
+    </div>
+  </div>
+</div>
+</main>
+
+<script>
+const DATA=[
+  {date:"2026-06-23",games:[
+    {matchup:"삼성 vs LG",  ai1:"LG",  ai2:"LG",  ai3:"LG",  pick:"LG",  result:"LG"},
+    {matchup:"NC vs 롯데",  ai1:"NC",  ai2:"NC",  ai3:"NC",  pick:"NC",  result:"롯데"},
+    {matchup:"SSG vs KT",   ai1:"KT",  ai2:"KT",  ai3:"KT",  pick:"KT",  result:"KT"},
+    {matchup:"두산 vs 한화",ai1:"한화",ai2:"한화",ai3:"한화",pick:"한화",result:"한화"},
+    {matchup:"키움 vs KIA", ai1:"KIA", ai2:"KIA", ai3:"KIA", pick:"KIA", result:"KIA"},
+  ],unanimousBet:null,
+  allFiveBets:[{label:"도전경기",odds:6.4,amount:100,betResult:"miss",pickLabels:["LG승","NC승","KT승","한화승","KIA승"]}],
+  singleBets:[
+    {matchup:"삼성 vs LG",  pick:"LG",  odds:1.67,amount:100,betResult:"hit",result:"LG"},
+    {matchup:"NC vs 롯데",  pick:"NC",  odds:1.49,amount:100,betResult:"miss",result:"롯데"},
+    {matchup:"SSG vs KT",   pick:"KT",  odds:1.50,amount:100,betResult:"hit",result:"KT"},
+    {matchup:"두산 vs 한화",pick:"한화",odds:1.39,amount:100,betResult:"hit",result:"한화"},
+    {matchup:"키움 vs KIA", pick:"KIA", odds:1.23,amount:100,betResult:"hit",result:"KIA"},
+  ]},
+  {date:"2026-06-24",games:[
+    {matchup:"삼성 vs LG",  ai1:"LG",  ai2:"LG",  ai3:"LG",  pick:"LG",  result:"LG"},
+    {matchup:"KIA vs 키움", ai1:"KIA", ai2:"KIA", ai3:"KIA", pick:"KIA", result:"KIA"},
+    {matchup:"SSG vs KT",   ai1:"KT",  ai2:"KT",  ai3:"KT",  pick:"KT",  result:"SSG"},
+    {matchup:"두산 vs 한화",ai1:"한화",ai2:"한화",ai3:"한화",pick:"한화",result:"두산"},
+    {matchup:"NC vs 롯데",  ai1:"롯데",ai2:"롯데",ai3:"롯데",pick:"롯데",result:"롯데"},
+  ],unanimousBet:null,
+  allFiveBets:[{label:"도전경기",odds:10.7,amount:100,betResult:"miss",pickLabels:["LG승","KIA승","KT승","한화승","롯데승"]}],
+  singleBets:[
+    {matchup:"삼성 vs LG",  pick:"LG",  odds:1.66,amount:100,betResult:"hit",result:"LG"},
+    {matchup:"KIA vs 키움", pick:"KIA", odds:1.57,amount:100,betResult:"hit",result:"KIA"},
+    {matchup:"SSG vs KT",   pick:"KT",  odds:1.51,amount:100,betResult:"miss",result:"SSG"},
+    {matchup:"두산 vs 한화",pick:"한화",odds:1.52,amount:100,betResult:"miss",result:"두산"},
+    {matchup:"NC vs 롯데",  pick:"롯데",odds:1.78,amount:100,betResult:"hit",result:"롯데"},
+  ]},
+  {date:"2026-06-25",games:[
+    {matchup:"키움 vs KIA", ai1:"KIA", ai2:"KIA", ai3:"KIA", pick:"KIA", result:"KIA"},
+    {matchup:"롯데 vs NC",  ai1:"롯데",ai2:"롯데",ai3:"롯데",pick:"롯데",result:"NC"},
+    {matchup:"한화 vs 두산",ai1:"한화",ai2:"한화",ai3:"한화",pick:"한화",result:"두산"},
+    {matchup:"KT vs SSG",   ai1:"KT",  ai2:"KT",  ai3:"KT",  pick:"KT",  result:"KT"},
+    {matchup:"LG vs 삼성",  ai1:"LG",  ai2:"LG",  ai3:"LG",  pick:"LG",  result:"삼성"},
+  ],unanimousBet:null,
+  allFiveBets:[{label:"도전경기",odds:20.7,amount:100,betResult:"miss",pickLabels:["KIA승","롯데승","한화승","KT승","LG승"]}],
+  singleBets:[
+    {matchup:"키움 vs KIA", pick:"KIA",  odds:1.4, amount:100,betResult:"hit",result:"KIA"},
+    {matchup:"롯데 vs NC",  pick:"롯데", odds:2.1, amount:100,betResult:"miss",result:"NC"},
+    {matchup:"한화 vs 두산",pick:"한화", odds:2.2, amount:100,betResult:"miss",result:"두산"},
+    {matchup:"KT vs SSG",   pick:"KT",  odds:1.6, amount:100,betResult:"hit",result:"KT"},
+    {matchup:"LG vs 삼성",  pick:"LG",  odds:2.0, amount:100,betResult:"miss",result:"삼성"},
+  ]},
+  {date:"2026-06-26",games:[
+    {matchup:"KIA vs 두산", ai1:"KIA", ai2:"KIA", ai3:"KIA", pick:"KIA", result:"두산"},
+    {matchup:"LG vs 롯데",  ai1:"LG",  ai2:"LG",  ai3:"LG",  pick:"LG",  result:"롯데"},
+    {matchup:"한화 vs SSG", ai1:"한화",ai2:"한화",ai3:"한화",pick:"한화",result:"한화"},
+    {matchup:"KT vs 삼성",  ai1:"삼성",ai2:"삼성",ai3:"삼성",pick:"삼성",result:"삼성"},
+    {matchup:"키움 vs NC",  ai1:"NC",  ai2:"NC",  ai3:"NC",  pick:"NC",  result:"NC"},
+  ],unanimousBet:null,
+  allFiveBets:[{label:"도전경기",odds:10.2,amount:100,betResult:"miss",pickLabels:["KIA승","LG승","한화승","삼성승","NC승"]}],
+  singleBets:[
+    {matchup:"KIA vs 두산", pick:"KIA",  odds:1.8, amount:100,betResult:"miss",result:"두산"},
+    {matchup:"LG vs 롯데",  pick:"LG",  odds:1.4, amount:100,betResult:"miss",result:"롯데"},
+    {matchup:"한화 vs SSG", pick:"한화", odds:1.7, amount:100,betResult:"hit",result:"한화"},
+    {matchup:"KT vs 삼성",  pick:"삼성", odds:1.7, amount:100,betResult:"hit",result:"삼성"},
+    {matchup:"키움 vs NC",  pick:"NC",  odds:1.4, amount:100,betResult:"hit",result:"NC"},
+  ]},
+  {date:"2026-06-27",games:[
+    {matchup:"롯데 vs LG",  ai1:"LG",  ai2:"LG",  ai3:"LG",  pick:"LG",  result:"LG"},
+    {matchup:"SSG vs 한화", ai1:"한화",ai2:"한화",ai3:"한화",pick:"한화",result:"한화"},
+    {matchup:"NC vs 키움",  ai1:"NC",  ai2:"NC",  ai3:"NC",  pick:"NC",  result:"키움"},
+    {matchup:"두산 vs KIA", ai1:"두산",ai2:"두산",ai3:"두산",pick:"두산",result:"두산"},
+    {matchup:"삼성 vs KT",  ai1:"삼성",ai2:"삼성",ai3:"삼성",pick:"삼성",result:"삼성"},
+  ],unanimousBet:null,
+  allFiveBets:[{label:"도전경기",odds:6.7,amount:100,betResult:"miss",pickLabels:["LG승","한화승","NC승","두산승","삼성승"]}],
+  singleBets:[
+    {matchup:"롯데 vs LG",  pick:"LG",  odds:1.35,amount:100,betResult:"hit", result:"LG"},
+    {matchup:"SSG vs 한화", pick:"한화", odds:1.59,amount:100,betResult:"hit", result:"한화"},
+    {matchup:"NC vs 키움",  pick:"NC",  odds:1.26,amount:100,betResult:"miss",result:"키움"},
+    {matchup:"두산 vs KIA", pick:"두산", odds:1.54,amount:100,betResult:"hit", result:"두산"},
+    {matchup:"삼성 vs KT",  pick:"삼성", odds:1.60,amount:100,betResult:"hit", result:"삼성"},
+  ]},
+  {date:"2026-06-28",games:[
+    {matchup:"두산 vs KIA", ai1:"두산",ai2:"두산",ai3:"두산",pick:"두산",result:"KIA"},
+    {matchup:"삼성 vs KT",  ai1:"삼성",ai2:"삼성",ai3:"삼성",pick:"삼성",result:"삼성"},
+    {matchup:"롯데 vs LG",  ai1:"롯데",ai2:"롯데",ai3:"롯데",pick:"롯데",result:"롯데"},
+    {matchup:"SSG vs 한화", ai1:"한화",ai2:"한화",ai3:"한화",pick:"한화",result:"한화"},
+    {matchup:"NC vs 키움",  ai1:"NC",  ai2:"NC",  ai3:"NC",  pick:"NC",  result:"NC"},
+  ],unanimousBet:null,
+  allFiveBets:[
+    {label:"도전경기(-)",odds:6.6,amount:100,betResult:"hit",pickLabels:["삼성","롯데","한화","NC"],excludedGame:"두산 vs KIA"},
+    {label:"도전경기",odds:11.5,amount:100,betResult:"miss",pickLabels:["두산","삼성","롯데","한화","NC"]},
+  ],
+  singleBets:[
+    {matchup:"두산 vs KIA", pick:"두산", odds:1.75,amount:100,betResult:"miss",result:"KIA"},
+    {matchup:"삼성 vs KT",  pick:"삼성", odds:1.93,amount:100,betResult:"hit",result:"삼성"},
+    {matchup:"롯데 vs LG",  pick:"롯데", odds:1.89,amount:100,betResult:"hit",result:"롯데"},
+    {matchup:"SSG vs 한화", pick:"한화", odds:1.39,amount:100,betResult:"hit",result:"한화"},
+    {matchup:"NC vs 키움",  pick:"NC",  odds:1.29,amount:100,betResult:"hit",result:"NC"},
+  ]},
+  {date:"2026-06-30",games:[
+    {matchup:"두산 vs 롯데", ai1:"두산",ai2:"두산",ai3:"두산",pick:"두산",result:"두산"},
+    {matchup:"KIA vs SSG",  ai1:"KIA", ai2:"KIA", ai3:"KIA", pick:"KIA", result:"KIA"},
+    {matchup:"NC vs 삼성",  ai1:"삼성",ai2:"삼성",ai3:"삼성",pick:"삼성",result:"삼성"},
+    {matchup:"한화 vs KT",  ai1:"한화",ai2:"한화",ai3:"한화",pick:"한화",result:"취소"},
+    {matchup:"키움 vs LG",  ai1:"LG",  ai2:"LG",  ai3:"LG",  pick:"LG",  result:"키움"},
+  ],unanimousBet:null,
+  allFiveBets:[
+    {label:"도전경기",odds:7.8,amount:100,betResult:"miss",pickLabels:["두산","KIA","삼성","한화","LG"]},
+  ],
+  singleBets:[
+    {matchup:"두산 vs 롯데", pick:"두산", odds:1.55,amount:100,betResult:"hit", result:"두산"},
+    {matchup:"KIA vs SSG",  pick:"KIA",  odds:1.40,amount:100,betResult:"hit", result:"KIA"},
+    {matchup:"NC vs 삼성",  pick:"삼성", odds:1.50,amount:100,betResult:"hit", result:"삼성"},
+    {matchup:"한화 vs KT",  pick:"한화", odds:1.72,amount:100,betResult:"cancel",result:"취소"},
+    {matchup:"키움 vs LG",  pick:"LG",  odds:1.38,amount:100,betResult:"miss", result:"키움"},
+  ]},
+  {date:"2026-07-01",games:[
+    {matchup:"두산 vs 롯데", ai1:"두산",ai2:"두산",ai3:"두산",pick:"두산",result:"롯데"},
+    {matchup:"KIA vs SSG",  ai1:"KIA", ai2:"KIA", ai3:"KIA", pick:"KIA", result:"무승부"},
+    {matchup:"NC vs 삼성",  ai1:"삼성",ai2:"삼성",ai3:"삼성",pick:"삼성",result:"NC"},
+    {matchup:"한화 vs KT",  ai1:"한화",ai2:"한화",ai3:"한화",pick:"한화",result:"KT"},
+    {matchup:"키움 vs LG",  ai1:"LG",  ai2:"LG",  ai3:"LG",  pick:"LG",  result:"LG"},
+  ],unanimousBet:null,
+  allFiveBets:[
+    {label:"도전경기",odds:11.0,amount:100,betResult:"miss",pickLabels:["두산","KIA","삼성","한화","LG"]},
+  ],
+  singleBets:[
+    {matchup:"두산 vs 롯데", pick:"두산", odds:1.56,amount:100,betResult:"miss",result:"롯데"},
+    {matchup:"KIA vs SSG",  pick:"KIA",  odds:1.55,amount:100,betResult:"cancel",result:"무승부"},
+    {matchup:"NC vs 삼성",  pick:"삼성", odds:1.36,amount:100,betResult:"miss",result:"NC"},
+    {matchup:"한화 vs KT",  pick:"한화", odds:2.15,amount:100,betResult:"miss",result:"KT"},
+    {matchup:"키움 vs LG",  pick:"LG",  odds:1.55,amount:100,betResult:"hit",result:"LG"},
+  ]},
+  {date:"2026-07-02",games:[
+    {matchup:"두산 vs 롯데", ai1:"두산",ai2:"두산",ai3:"두산",pick:"두산",result:"두산"},
+    {matchup:"KIA vs SSG",  ai1:"KIA", ai2:"KIA", ai3:"KIA", pick:"KIA", result:"KIA"},
+    {matchup:"NC vs 삼성",  ai1:"삼성",ai2:"삼성",ai3:"삼성",pick:"삼성",result:"삼성"},
+    {matchup:"한화 vs KT",  ai1:"KT",  ai2:"KT",  ai3:"KT",  pick:"KT",  result:"한화"},
+    {matchup:"키움 vs LG",  ai1:"LG",  ai2:"LG",  ai3:"LG",  pick:"LG",  result:"LG"},
+  ],unanimousBet:null,
+  allFiveBets:[
+    {label:"도전경기",odds:9.4,amount:100,betResult:"miss",pickLabels:["두산","KIA","삼성","KT","LG"]},
+  ],
+  singleBets:[
+    {matchup:"두산 vs 롯데", pick:"두산", odds:1.56,amount:100,betResult:"hit",result:"두산"},
+    {matchup:"KIA vs SSG",  pick:"KIA",  odds:1.48,amount:100,betResult:"hit",result:"KIA"},
+    {matchup:"NC vs 삼성",  pick:"삼성", odds:1.74,amount:100,betResult:"hit",result:"삼성"},
+    {matchup:"한화 vs KT",  pick:"KT",  odds:1.80,amount:100,betResult:"miss",result:"한화"},
+    {matchup:"키움 vs LG",  pick:"LG",  odds:1.30,amount:100,betResult:"hit",result:"LG"},
+  ]},
+  {date:"2026-07-03",games:[
+    {matchup:"LG vs 한화",  ai1:"LG",  ai2:"LG",  ai3:"LG",  pick:"LG",  result:"한화"},
+    {matchup:"KT vs 롯데",  ai1:"롯데",ai2:"롯데",ai3:"롯데",pick:"롯데",result:"롯데"},
+    {matchup:"KIA vs NC",   ai1:"KIA", ai2:"KIA", ai3:"KIA", pick:"KIA", result:"NC"},
+    {matchup:"키움 vs 두산",ai1:"두산",ai2:"두산",ai3:"두산",pick:"두산",result:"키움"},
+    {matchup:"SSG vs 삼성", ai1:"삼성",ai2:"삼성",ai3:"삼성",pick:"삼성",result:"삼성"},
+  ],unanimousBet:null,
+  allFiveBets:[
+    {label:"도전경기",odds:10.7,amount:100,betResult:"miss",pickLabels:["LG","롯데","KIA","두산","삼성"]},
+  ],
+  singleBets:[
+    {matchup:"LG vs 한화",  pick:"LG",  odds:1.50,amount:100,betResult:"miss",result:"한화"},
+    {matchup:"KT vs 롯데",  pick:"롯데",odds:1.91,amount:100,betResult:"hit",result:"롯데"},
+    {matchup:"KIA vs NC",   pick:"KIA", odds:2.04,amount:100,betResult:"miss",result:"NC"},
+    {matchup:"키움 vs 두산",pick:"두산",odds:1.33,amount:100,betResult:"miss",result:"키움"},
+    {matchup:"SSG vs 삼성", pick:"삼성",odds:1.37,amount:100,betResult:"hit",result:"삼성"},
+  ]},
+  {date:"2026-07-04",games:[
+    {matchup:"LG vs 한화",  ai1:"한화",ai2:"한화",ai3:"한화",pick:"한화",result:"LG"},
+    {matchup:"KIA vs NC",   ai1:"NC",  ai2:"NC",  ai3:"NC",  pick:"NC",  result:"NC"},
+    {matchup:"키움 vs 두산",ai1:"두산",ai2:"두산",ai3:"두산",pick:"두산",result:"두산"},
+    {matchup:"KT vs 롯데",  ai1:"롯데",ai2:"롯데",ai3:"롯데",pick:"롯데",result:"롯데"},
+    {matchup:"SSG vs 삼성", ai1:"삼성",ai2:"삼성",ai3:"삼성",pick:"삼성",result:"삼성"},
+  ],unanimousBet:null,
+  allFiveBets:[
+    {label:"도전경기",odds:12.1,amount:100,betResult:"miss",pickLabels:["한화","NC","두산","롯데","삼성"]},
+  ],
+  singleBets:[
+    {matchup:"LG vs 한화",  pick:"한화",odds:1.79,amount:100,betResult:"miss",result:"LG"},
+    {matchup:"KIA vs NC",   pick:"NC",  odds:1.53,amount:100,betResult:"hit",result:"NC"},
+    {matchup:"키움 vs 두산",pick:"두산",odds:1.49,amount:100,betResult:"hit",result:"두산"},
+    {matchup:"KT vs 롯데",  pick:"롯데",odds:1.91,amount:100,betResult:"hit",result:"롯데"},
+    {matchup:"SSG vs 삼성", pick:"삼성",odds:1.55,amount:100,betResult:"hit",result:"삼성"},
+  ]},
+  {date:"2026-07-05",games:[
+    {matchup:"LG vs 한화",  ai1:"한화",ai2:"한화",ai3:"한화",pick:"한화",result:"취소"},
+    {matchup:"SSG vs 삼성", ai1:"삼성",ai2:"삼성",ai3:"삼성",pick:"삼성",result:"삼성"},
+    {matchup:"KIA vs NC",   ai1:"NC",  ai2:"NC",  ai3:"NC",  pick:"NC",  result:"취소"},
+    {matchup:"KT vs 롯데",  ai1:"롯데",ai2:"롯데",ai3:"롯데",pick:"롯데",result:"KT"},
+  ],unanimousBet:null,
+  allFiveBets:[
+    {label:"도전경기",odds:9.6,amount:100,betResult:"miss",pickLabels:["한화","삼성","NC","롯데"],note:"LGvs한화·KIAvsNC 우천취소, 롯데 미적중으로 전체 미적중"},
+  ],
+  singleBets:[
+    {matchup:"LG vs 한화",  pick:"한화",odds:1.80,amount:100,betResult:"cancel",result:"취소"},
+    {matchup:"SSG vs 삼성", pick:"삼성",odds:1.50,amount:100,betResult:"hit",result:"삼성"},
+    {matchup:"KIA vs NC",   pick:"NC",  odds:1.68,amount:100,betResult:"cancel",result:"취소"},
+    {matchup:"KT vs 롯데",  pick:"롯데",odds:2.11,amount:100,betResult:"miss",result:"KT"},
+  ]},
+  {date:"2026-07-07",games:[
+    {matchup:"두산 vs SSG", ai1:"두산",ai2:"두산",ai3:"두산",pick:"두산",result:"SSG"},
+    {matchup:"삼성 vs LG",  ai1:"삼성",ai2:"삼성",ai3:"삼성",pick:"삼성",result:"삼성"},
+    {matchup:"롯데 vs KIA", ai1:"KIA", ai2:"KIA", ai3:"KIA", pick:"KIA", result:"롯데"},
+    {matchup:"KT vs 키움",  ai1:"KT",  ai2:"KT",  ai3:"KT",  pick:"KT",  result:"KT"},
+    {matchup:"한화 vs NC",  ai1:"한화",ai2:"한화",ai3:"한화",pick:"한화",result:"NC"},
+  ],unanimousBet:null,
+  allFiveBets:[
+    {label:"도전경기",odds:11.2,amount:100,betResult:"miss",pickLabels:["두산","삼성","KIA","KT","한화"]},
+  ],
+  singleBets:[
+    {matchup:"두산 vs SSG", pick:"두산",odds:1.42,amount:100,betResult:"miss",result:"SSG"},
+    {matchup:"삼성 vs LG",  pick:"삼성",odds:1.66,amount:100,betResult:"hit",result:"삼성"},
+    {matchup:"롯데 vs KIA", pick:"KIA", odds:1.84,amount:100,betResult:"miss",result:"롯데"},
+    {matchup:"KT vs 키움",  pick:"KT",  odds:1.49,amount:100,betResult:"hit",result:"KT"},
+    {matchup:"한화 vs NC",  pick:"한화",odds:1.73,amount:100,betResult:"miss",result:"NC"},
+  ]},
+  {date:"2026-07-08",games:[
+    {matchup:"두산 vs SSG", ai1:"두산",ai2:"두산",ai3:"두산",pick:"두산",result:"두산"},
+    {matchup:"삼성 vs LG",  ai1:"삼성",ai2:"삼성",ai3:"삼성",pick:"삼성",result:"LG"},
+    {matchup:"롯데 vs KIA", ai1:"KIA", ai2:"KIA", ai3:"KIA", pick:"KIA", result:"롯데"},
+    {matchup:"KT vs 키움",  ai1:"KT",  ai2:"KT",  ai3:"KT",  pick:"KT",  result:"KT"},
+    {matchup:"한화 vs NC",  ai1:"NC",  ai2:"NC",  ai3:"NC",  pick:"NC",  result:"취소"},
+  ],unanimousBet:null,
+  allFiveBets:[
+    {label:"도전경기",odds:8.8,amount:100,betResult:"miss",pickLabels:["두산","삼성","KIA","KT","NC"]},
+  ],
+  singleBets:[
+    {matchup:"두산 vs SSG", pick:"두산",odds:1.39,amount:100,betResult:"hit",result:"두산"},
+    {matchup:"삼성 vs LG",  pick:"삼성",odds:1.81,amount:100,betResult:"miss",result:"LG"},
+    {matchup:"롯데 vs KIA", pick:"KIA", odds:1.39,amount:100,betResult:"miss",result:"롯데"},
+    {matchup:"KT vs 키움",  pick:"KT",  odds:1.34,amount:100,betResult:"hit",result:"KT"},
+    {matchup:"한화 vs NC",  pick:"NC",  odds:1.86,amount:100,betResult:"cancel",result:"취소"},
+  ]},
+  {date:"2026-07-09",games:[
+    {matchup:"두산 vs SSG", ai1:"두산",ai2:"두산",ai3:"두산",pick:"두산",result:"두산"},
+    {matchup:"삼성 vs LG",  ai1:"삼성",ai2:"삼성",ai3:"삼성",pick:"삼성",result:"삼성"},
+    {matchup:"롯데 vs KIA", ai1:"롯데",ai2:"롯데",ai3:"롯데",pick:"롯데",result:"KIA"},
+    {matchup:"KT vs 키움",  ai1:"KT",  ai2:"KT",  ai3:"KT",  pick:"KT",  result:"취소"},
+    {matchup:"한화 vs NC",  ai1:"NC",  ai2:"NC",  ai3:"NC",  pick:"NC",  result:"한화"},
+  ],unanimousBet:null,
+  allFiveBets:[
+    {label:"도전경기",odds:14.2,amount:100,betResult:"miss",pickLabels:["두산","삼성","롯데","KT","NC"]},
+  ],
+  singleBets:[
+    {matchup:"두산 vs SSG", pick:"두산",odds:1.53,amount:100,betResult:"hit",result:"두산"},
+    {matchup:"삼성 vs LG",  pick:"삼성",odds:1.91,amount:100,betResult:"hit",result:"삼성"},
+    {matchup:"롯데 vs KIA", pick:"롯데",odds:1.84,amount:100,betResult:"miss",result:"KIA"},
+    {matchup:"KT vs 키움",  pick:"KT",  odds:1.51,amount:100,betResult:"cancel",result:"취소"},
+    {matchup:"한화 vs NC",  pick:"NC",  odds:1.75,amount:100,betResult:"miss",result:"한화"},
+  ]},
+  {date:"2026-07-16",games:[
+    {matchup:"LG vs KT",ai1:"LG",ai2:"LG",ai3:"LG",pick:"LG",result:"KT"},
+    {matchup:"삼성 vs 롯데",ai1:"삼성",ai2:"삼성",ai3:"삼성",pick:"삼성",result:"삼성"},
+    {matchup:"SSG vs KIA",ai1:"KIA",ai2:"KIA",ai3:"KIA",pick:"KIA",result:"SSG"},
+    {matchup:"NC vs 두산",ai1:"NC",ai2:"NC",ai3:"NC",pick:"NC",result:"NC"},
+    {matchup:"한화 vs 키움",ai1:"한화",ai2:"한화",ai3:"한화",pick:"한화",result:"키움"},
+  ],unanimousBet:null,
+  allFiveBets:[
+    {label:"도전경기",odds:7.9,amount:100,betResult:"miss",pickLabels:["LG","삼성","KIA","NC","한화"]},
+  ],
+  singleBets:[
+    {matchup:"LG vs KT",pick:"LG",odds:1.57,amount:100,betResult:"miss",result:"KT"},
+    {matchup:"삼성 vs 롯데",pick:"삼성",odds:1.47,amount:100,betResult:"hit",result:"삼성"},
+    {matchup:"SSG vs KIA",pick:"KIA",odds:1.41,amount:100,betResult:"miss",result:"SSG"},
+    {matchup:"NC vs 두산",pick:"NC",odds:1.78,amount:100,betResult:"hit",result:"NC"},
+    {matchup:"한화 vs 키움",pick:"한화",odds:1.36,amount:100,betResult:"miss",result:"키움"},
+  ]},
+  {date:"2026-07-17",games:[
+    {matchup:"LG vs KT",ai1:"LG",ai2:"LG",ai3:"LG",pick:"LG",result:"KT"},
+    {matchup:"삼성 vs 롯데",ai1:"삼성",ai2:"삼성",ai3:"삼성",pick:"삼성",result:"취소"},
+    {matchup:"SSG vs KIA",ai1:"KIA",ai2:"KIA",ai3:"KIA",pick:"KIA",result:"KIA"},
+    {matchup:"NC vs 두산",ai1:"NC",ai2:"NC",ai3:"NC",pick:"NC",result:"두산"},
+    {matchup:"한화 vs 키움",ai1:"한화",ai2:"한화",ai3:"한화",pick:"한화",result:"키움"},
+  ],unanimousBet:null,
+  allFiveBets:[
+    {label:"도전경기",odds:6.4,amount:100,betResult:"miss",pickLabels:["LG","KIA","NC","한화"],note:"삼성vs롯데 우천취소, 나머지 4경기로 배당 재계산"},
+  ],
+  singleBets:[
+    {matchup:"LG vs KT",pick:"LG",odds:1.55,amount:100,betResult:"miss",result:"KT"},
+    {matchup:"삼성 vs 롯데",pick:"삼성",odds:1.39,amount:100,betResult:"cancel",result:"취소"},
+    {matchup:"SSG vs KIA",pick:"KIA",odds:1.67,amount:100,betResult:"hit",result:"KIA"},
+    {matchup:"NC vs 두산",pick:"NC",odds:1.80,amount:100,betResult:"miss",result:"두산"},
+    {matchup:"한화 vs 키움",pick:"한화",odds:1.37,amount:100,betResult:"miss",result:"키움"},
+  ]},
+  {date:"2026-07-18",games:[
+    {matchup:"SSG vs KIA",ai1:"KIA",ai2:"KIA",ai3:"KIA",pick:"KIA",result:"KIA"},
+    {matchup:"LG vs KT",ai1:"KT",ai2:"KT",ai3:"KT",pick:"KT",result:"KT"},
+    {matchup:"삼성 vs 롯데",ai1:"삼성",ai2:"삼성",ai3:"삼성",pick:"삼성",result:"삼성"},
+    {matchup:"NC vs 두산",ai1:"NC",ai2:"NC",ai3:"NC",pick:"NC",result:"두산"},
+    {matchup:"한화 vs 키움",ai1:"키움",ai2:"키움",ai3:"키움",pick:"키움",result:"키움"},
+  ],unanimousBet:null,
+  allFiveBets:[
+    {label:"도전경기",odds:18.8,amount:100,betResult:"miss",pickLabels:["KIA","KT","삼성","NC","키움"]},
+  ],
+  singleBets:[
+    {matchup:"SSG vs KIA",pick:"KIA",odds:1.62,amount:100,betResult:"hit",result:"KIA"},
+    {matchup:"LG vs KT",pick:"KT",odds:2.02,amount:100,betResult:"hit",result:"KT"},
+    {matchup:"삼성 vs 롯데",pick:"삼성",odds:1.48,amount:100,betResult:"hit",result:"삼성"},
+    {matchup:"NC vs 두산",pick:"NC",odds:1.84,amount:100,betResult:"miss",result:"두산"},
+    {matchup:"한화 vs 키움",pick:"키움",odds:2.11,amount:100,betResult:"hit",result:"키움"},
+  ]},
+  {date:"2026-07-19",games:[
+    {matchup:"LG vs KT",ai1:"KT",ai2:"KT",ai3:"KT",pick:"KT",result:"KT"},
+    {matchup:"삼성 vs 롯데",ai1:"삼성",ai2:"삼성",ai3:"삼성",pick:"삼성",result:"롯데"},
+    {matchup:"SSG vs KIA",ai1:"KIA",ai2:"KIA",ai3:"KIA",pick:"KIA",result:"KIA"},
+    {matchup:"NC vs 두산",ai1:"두산",ai2:"두산",ai3:"두산",pick:"두산",result:"두산"},
+    {matchup:"한화 vs 키움",ai1:"한화",ai2:"한화",ai3:"한화",pick:"한화",result:"무승부"},
+  ],unanimousBet:null,
+  allFiveBets:[
+    {label:"도전경기",odds:7.4,amount:100,betResult:"miss",pickLabels:["KT","삼성","KIA","두산"],note:"한화vs키움 무승부, 나머지 4경기로 배당 재계산"},
+  ],
+  singleBets:[
+    {matchup:"LG vs KT",pick:"KT",odds:1.89,amount:100,betResult:"hit",result:"KT"},
+    {matchup:"삼성 vs 롯데",pick:"삼성",odds:1.31,amount:100,betResult:"miss",result:"롯데"},
+    {matchup:"SSG vs KIA",pick:"KIA",odds:1.66,amount:100,betResult:"hit",result:"KIA"},
+    {matchup:"NC vs 두산",pick:"두산",odds:1.80,amount:100,betResult:"hit",result:"두산"},
+    {matchup:"한화 vs 키움",pick:"한화",odds:1.24,amount:100,betResult:"cancel",result:"무승부"},
+  ]},
+  {date:"2026-07-21",games:[
+    {matchup:"LG vs NC",ai1:"NC",ai2:"NC",ai3:"NC",pick:"NC",result:"NC"},
+    {matchup:"롯데 vs SSG",ai1:"롯데",ai2:"롯데",ai3:"롯데",pick:"롯데",result:"롯데"},
+    {matchup:"KIA vs 한화",ai1:"KIA",ai2:"KIA",ai3:"KIA",pick:"KIA",result:"KIA"},
+    {matchup:"KT vs 두산",ai1:"KT",ai2:"KT",ai3:"KT",pick:"KT",result:"무승부"},
+    {matchup:"키움 vs 삼성",ai1:"삼성",ai2:"삼성",ai3:"삼성",pick:"삼성",result:"삼성"},
+  ],unanimousBet:null,
+  allFiveBets:[
+    {label:"도전경기",odds:7.0,amount:100,betResult:"hit",pickLabels:["NC","롯데","KIA","삼성"],note:"KTvs두산 무승부, 나머지 4경기로 배당 재계산"},
+  ],
+  singleBets:[
+    {matchup:"LG vs NC",pick:"NC",odds:2.22,amount:100,betResult:"hit",result:"NC"},
+    {matchup:"롯데 vs SSG",pick:"롯데",odds:1.49,amount:100,betResult:"hit",result:"롯데"},
+    {matchup:"KIA vs 한화",pick:"KIA",odds:1.56,amount:100,betResult:"hit",result:"KIA"},
+    {matchup:"KT vs 두산",pick:"KT",odds:1.90,amount:100,betResult:"cancel",result:"무승부"},
+    {matchup:"키움 vs 삼성",pick:"삼성",odds:1.35,amount:100,betResult:"hit",result:"삼성"},
+  ]},
+  {date:"2026-07-23",games:[
+    {matchup:"LG vs NC",ai1:"NC",ai2:"NC",ai3:"NC",pick:"NC",result:"NC"},
+    {matchup:"롯데 vs SSG",ai1:"롯데",ai2:"롯데",ai3:"롯데",pick:"롯데",result:"SSG"},
+    {matchup:"KIA vs 한화",ai1:"KIA",ai2:"KIA",ai3:"KIA",pick:"KIA",result:"한화"},
+    {matchup:"KT vs 두산",ai1:"KT",ai2:"KT",ai3:"KT",pick:"KT",result:"우천취소"},
+    {matchup:"키움 vs 삼성",ai1:"삼성",ai2:"삼성",ai3:"삼성",pick:"삼성",result:"삼성"},
+  ],unanimousBet:null,
+  allFiveBets:[
+    {label:"도전경기",odds:9.9,amount:100,betResult:"miss",pickLabels:["NC","롯데","KIA","삼성"],note:"KTvs두산 우천취소, 나머지 4경기로 배당 재계산"},
+  ],
+  singleBets:[
+    {matchup:"LG vs NC",pick:"NC",odds:2.37,amount:100,betResult:"hit",result:"NC"},
+    {matchup:"롯데 vs SSG",pick:"롯데",odds:1.58,amount:100,betResult:"miss",result:"SSG"},
+    {matchup:"KIA vs 한화",pick:"KIA",odds:1.87,amount:100,betResult:"miss",result:"한화"},
+    {matchup:"KT vs 두산",pick:"KT",odds:1.79,amount:100,betResult:"cancel",result:"우천취소"},
+    {matchup:"키움 vs 삼성",pick:"삼성",odds:1.41,amount:100,betResult:"hit",result:"삼성"},
+  ]},
+  {date:"2026-07-24",games:[
+    {matchup:"두산 vs 삼성",ai1:"두산",ai2:"두산",ai3:"두산",pick:"두산",result:"삼성"},
+    {matchup:"롯데 vs KT",ai1:"KT",ai2:"KT",ai3:"KT",pick:"KT",result:"KT"},
+    {matchup:"SSG vs NC",ai1:"NC",ai2:"NC",ai3:"NC",pick:"NC",result:"SSG"},
+    {matchup:"KIA vs 키움",ai1:"KIA",ai2:"KIA",ai3:"KIA",pick:"KIA",result:"키움"},
+    {matchup:"한화 vs LG",ai1:"한화",ai2:"한화",ai3:"한화",pick:"한화",result:"한화"},
+  ],unanimousBet:null,
+  allFiveBets:[
+    {label:"도전경기",odds:14.9,amount:100,betResult:"miss",pickLabels:["두산","KT","NC","KIA","한화"]},
+  ],
+  singleBets:[
+    {matchup:"두산 vs 삼성",pick:"두산",odds:2.13,amount:100,betResult:"miss",result:"삼성"},
+    {matchup:"롯데 vs KT",pick:"KT",odds:1.45,amount:100,betResult:"hit",result:"KT"},
+    {matchup:"SSG vs NC",pick:"NC",odds:1.45,amount:100,betResult:"miss",result:"SSG"},
+    {matchup:"KIA vs 키움",pick:"KIA",odds:1.49,amount:100,betResult:"miss",result:"키움"},
+    {matchup:"한화 vs LG",pick:"한화",odds:2.22,amount:100,betResult:"hit",result:"한화"},
+  ]},
+  {date:"2026-07-25",games:[
+    {matchup:"두산 vs 삼성",ai1:"삼성",ai2:"삼성",ai3:"삼성",pick:"삼성",result:"삼성"},
+    {matchup:"롯데 vs KT",ai1:"KT",ai2:"KT",ai3:"KT",pick:"KT",result:"KT"},
+    {matchup:"SSG vs NC",ai1:"NC",ai2:"NC",ai3:"NC",pick:"NC",result:"SSG"},
+    {matchup:"KIA vs 키움",ai1:"KIA",ai2:"KIA",ai3:"KIA",pick:"KIA",result:"KIA"},
+    {matchup:"한화 vs LG",ai1:"한화",ai2:"한화",ai3:"한화",pick:"한화",result:"LG"},
+  ],unanimousBet:null,
+  allFiveBets:[
+    {label:"도전경기",odds:8.6,amount:100,betResult:"miss",pickLabels:["삼성","KT","NC","KIA","한화"]},
+  ],
+  singleBets:[
+    {matchup:"두산 vs 삼성",pick:"삼성",odds:1.56,amount:100,betResult:"hit",result:"삼성"},
+    {matchup:"롯데 vs KT",pick:"KT",odds:1.51,amount:100,betResult:"hit",result:"KT"},
+    {matchup:"SSG vs NC",pick:"NC",odds:1.58,amount:100,betResult:"miss",result:"SSG"},
+    {matchup:"KIA vs 키움",pick:"KIA",odds:1.38,amount:100,betResult:"hit",result:"KIA"},
+    {matchup:"한화 vs LG",pick:"한화",odds:1.66,amount:100,betResult:"miss",result:"LG"},
+  ]},
+  {date:"2026-07-26",games:[
+    {matchup:"두산 vs 삼성",ai1:"삼성",ai2:"삼성",ai3:"삼성",pick:"삼성",result:"두산"},
+    {matchup:"롯데 vs KT",ai1:"KT",ai2:"KT",ai3:"KT",pick:"KT",result:"롯데"},
+    {matchup:"SSG vs NC",ai1:"NC",ai2:"NC",ai3:"NC",pick:"NC",result:"무승부"},
+    {matchup:"KIA vs 키움",ai1:"KIA",ai2:"KIA",ai3:"KIA",pick:"KIA",result:"키움"},
+    {matchup:"한화 vs LG",ai1:"한화",ai2:"한화",ai3:"한화",pick:"한화",result:"한화"},
+  ],unanimousBet:null,
+  allFiveBets:[
+    {label:"도전경기",odds:8.1,amount:100,betResult:"miss",pickLabels:["삼성","KT","NC","KIA","한화"],note:"SSG vs NC 무승부 취소, 삼성·KT·KIA 미스로 조합 전체 미스"},
+  ],
+  singleBets:[
+    {matchup:"두산 vs 삼성",pick:"삼성",odds:1.81,amount:100,betResult:"miss",result:"두산"},
+    {matchup:"롯데 vs KT",pick:"KT",odds:1.59,amount:100,betResult:"miss",result:"롯데"},
+    {matchup:"SSG vs NC",pick:"NC",odds:1.33,amount:100,betResult:"cancel",result:"무승부"},
+    {matchup:"KIA vs 키움",pick:"KIA",odds:1.33,amount:100,betResult:"miss",result:"키움"},
+    {matchup:"한화 vs LG",pick:"한화",odds:1.59,amount:100,betResult:"hit",result:"한화"},
+  ]},
+  {date:"2026-07-28",games:[
+    {matchup:"LG vs 키움",ai1:"LG",ai2:"LG",ai3:"LG",pick:"LG",result:"LG"},
+    {matchup:"삼성 vs KIA",ai1:"KIA",ai2:"KIA",ai3:"KIA",pick:"KIA",result:"삼성"},
+    {matchup:"SSG vs 두산",ai1:"SSG",ai2:"SSG",ai3:"SSG",pick:"SSG",result:"두산"},
+    {matchup:"NC vs KT",ai1:"KT",ai2:"KT",ai3:"KT",pick:"KT",result:"KT"},
+    {matchup:"한화 vs 롯데",ai1:"한화",ai2:"한화",ai3:"한화",pick:"한화",result:"롯데"},
+  ],unanimousBet:null,
+  allFiveBets:[
+    {label:"도전경기",odds:8.6,amount:100,betResult:"miss",pickLabels:["LG","KIA","SSG","KT","한화"]},
+  ],
+  singleBets:[
+    {matchup:"LG vs 키움",pick:"LG",odds:1.23,amount:100,betResult:"hit",result:"LG"},
+    {matchup:"삼성 vs KIA",pick:"KIA",odds:1.61,amount:100,betResult:"miss",result:"삼성"},
+    {matchup:"SSG vs 두산",pick:"SSG",odds:1.87,amount:100,betResult:"miss",result:"두산"},
+    {matchup:"NC vs KT",pick:"KT",odds:1.58,amount:100,betResult:"hit",result:"KT"},
+    {matchup:"한화 vs 롯데",pick:"한화",odds:1.47,amount:100,betResult:"miss",result:"롯데"},
+  ]},
+  {date:"2026-07-29",games:[
+    {matchup:"LG vs 키움",ai1:"LG",ai2:"LG",ai3:"LG",pick:"LG",result:"키움"},
+    {matchup:"삼성 vs KIA",ai1:"삼성",ai2:"삼성",ai3:"삼성",pick:"삼성",result:"KIA"},
+    {matchup:"SSG vs 두산",ai1:"두산",ai2:"두산",ai3:"두산",pick:"두산",result:"SSG"},
+    {matchup:"NC vs KT",ai1:"KT",ai2:"KT",ai3:"KT",pick:"KT",result:"KT"},
+    {matchup:"한화 vs 롯데",ai1:"한화",ai2:"한화",ai3:"한화",pick:"한화",result:"한화"},
+  ],unanimousBet:null,
+  allFiveBets:[
+    {label:"도전경기",odds:8.7,amount:100,betResult:"miss",pickLabels:["LG","삼성","두산","KT","한화"],note:"KT·한화는 적중했으나 LG·삼성·두산 미스로 조합 전체 미스"},
+  ],
+  singleBets:[
+    {matchup:"LG vs 키움",pick:"LG",odds:1.25,amount:100,betResult:"miss",result:"키움"},
+    {matchup:"삼성 vs KIA",pick:"삼성",odds:1.53,amount:100,betResult:"miss",result:"KIA"},
+    {matchup:"SSG vs 두산",pick:"두산",odds:1.57,amount:100,betResult:"miss",result:"SSG"},
+    {matchup:"NC vs KT",pick:"KT",odds:1.73,amount:100,betResult:"hit",result:"KT"},
+    {matchup:"한화 vs 롯데",pick:"한화",odds:1.66,amount:100,betResult:"hit",result:"한화"},
+  ]},
+  {date:"2026-07-30",games:[
+    {matchup:"LG vs 키움",ai1:"키움",ai2:"키움",ai3:"키움",pick:"키움",result:"LG"},
+    {matchup:"삼성 vs KIA",ai1:"삼성",ai2:"삼성",ai3:"삼성",pick:"삼성",result:"KIA"},
+    {matchup:"SSG vs 두산",ai1:"두산",ai2:"두산",ai3:"두산",pick:"두산",result:"두산"},
+    {matchup:"NC vs KT",ai1:"KT",ai2:"KT",ai3:"KT",pick:"KT",result:"KT"},
+    {matchup:"한화 vs 롯데",ai1:"한화",ai2:"한화",ai3:"한화",pick:"한화",result:"한화"},
+  ],unanimousBet:null,
+  allFiveBets:[
+    {label:"도전경기",odds:18.1,amount:100,betResult:"miss",pickLabels:["키움","삼성","두산","KT","한화"],note:"두산·KT·한화 적중, 키움·삼성 미스로 조합 전체 미스"},
+  ],
+  singleBets:[
+    {matchup:"LG vs 키움",pick:"키움",odds:2.13,amount:100,betResult:"miss",result:"LG"},
+    {matchup:"삼성 vs KIA",pick:"삼성",odds:1.58,amount:100,betResult:"miss",result:"KIA"},
+    {matchup:"SSG vs 두산",pick:"두산",odds:1.73,amount:100,betResult:"hit",result:"두산"},
+    {matchup:"NC vs KT",pick:"KT",odds:1.94,amount:100,betResult:"hit",result:"KT"},
+    {matchup:"한화 vs 롯데",pick:"한화",odds:1.60,amount:100,betResult:"hit",result:"한화"},
+  ]},
+  {date:"2026-07-31",games:[
+    {matchup:"두산 vs LG",ai1:"두산",ai2:"두산",ai3:"두산",pick:"두산",result:"두산"},
+    {matchup:"롯데 vs 삼성",ai1:"삼성",ai2:"삼성",ai3:"삼성",pick:"삼성",result:"삼성"},
+    {matchup:"KT vs 한화",ai1:"KT",ai2:"KT",ai3:"KT",pick:"KT",result:"KT"},
+    {matchup:"NC vs KIA",ai1:"NC",ai2:"NC",ai3:"NC",pick:"NC",result:"NC"},
+    {matchup:"키움 vs SSG",ai1:"SSG",ai2:"SSG",ai3:"SSG",pick:"SSG",result:"키움"},
+  ],unanimousBet:null,
+  allFiveBets:[
+    {label:"도전경기",odds:13.5,amount:100,betResult:"miss",pickLabels:["두산","삼성","KT","NC","SSG"],note:"두산·삼성·KT·NC 적중, SSG 미스로 조합 전체 미스"},
+  ],
+  singleBets:[
+    {matchup:"두산 vs LG",pick:"두산",odds:1.77,amount:100,betResult:"hit",result:"두산"},
+    {matchup:"롯데 vs 삼성",pick:"삼성",odds:1.34,amount:100,betResult:"hit",result:"삼성"},
+    {matchup:"KT vs 한화",pick:"KT",odds:1.79,amount:100,betResult:"hit",result:"KT"},
+    {matchup:"NC vs KIA",pick:"NC",odds:1.90,amount:100,betResult:"hit",result:"NC"},
+    {matchup:"키움 vs SSG",pick:"SSG",odds:1.67,amount:100,betResult:"miss",result:"키움"},
+  ]},
+  {date:"2026-08-01",games:[
+    {matchup:"두산 vs LG",ai1:"두산",ai2:"두산",ai3:"두산",pick:"두산",result:"무승부"},
+    {matchup:"롯데 vs 삼성",ai1:"삼성",ai2:"삼성",ai3:"삼성",pick:"삼성",result:"취소"},
+    {matchup:"KT vs 한화",ai1:"KT",ai2:"KT",ai3:"KT",pick:"KT",result:"KT"},
+    {matchup:"NC vs KIA",ai1:"NC",ai2:"NC",ai3:"NC",pick:"NC",result:"취소"},
+    {matchup:"키움 vs SSG",ai1:"키움",ai2:"키움",ai3:"키움",pick:"키움",result:"SSG"},
+  ],unanimousBet:null,
+  allFiveBets:[
+    {label:"도전경기",odds:12.8,amount:100,betResult:"miss",pickLabels:["두산","삼성","KT","NC","키움"],note:"두산(무승부)·삼성(취소)·NC(취소) 3다리 취소, KT는 적중했으나 키움이 미스라 전체 미스"},
+  ],
+  singleBets:[
+    {matchup:"두산 vs LG",pick:"두산",odds:1.75,amount:100,betResult:"cancel",result:"무승부"},
+    {matchup:"롯데 vs 삼성",pick:"삼성",odds:1.48,amount:100,betResult:"cancel",result:"취소"},
+    {matchup:"KT vs 한화",pick:"KT",odds:1.73,amount:100,betResult:"hit",result:"KT"},
+    {matchup:"NC vs KIA",pick:"NC",odds:1.53,amount:100,betResult:"cancel",result:"취소"},
+    {matchup:"키움 vs SSG",pick:"키움",odds:1.86,amount:100,betResult:"miss",result:"SSG"},
+  ]},
+  {date:"2026-08-02",games:[
+    {matchup:"키움 vs SSG",ai1:"SSG",ai2:"SSG",ai3:"SSG",pick:"SSG",result:"키움"},
+    {matchup:"두산 vs LG",ai1:"두산",ai2:"두산",ai3:"두산",pick:"두산",result:"두산"},
+    {matchup:"롯데 vs 삼성",ai1:"삼성",ai2:"삼성",ai3:"삼성",pick:"삼성",result:"롯데"},
+    {matchup:"KT vs 한화",ai1:"KT",ai2:"KT",ai3:"KT",pick:"KT",result:"KT"},
+    {matchup:"NC vs KIA",ai1:"NC",ai2:"NC",ai3:"NC",pick:"NC",result:"취소"},
+  ],unanimousBet:null,
+  allFiveBets:[
+    {label:"도전경기",odds:10.0,amount:100,betResult:"miss",pickLabels:["SSG","두산","삼성","KT","NC"],note:"두산·KT 적중, SSG·삼성 미스라 조합 전체 미스(NC는 취소로 제외)"},
+  ],
+  singleBets:[
+    {matchup:"키움 vs SSG",pick:"SSG",odds:1.43,amount:100,betResult:"miss",result:"키움"},
+    {matchup:"두산 vs LG",pick:"두산",odds:1.77,amount:100,betResult:"hit",result:"두산"},
+    {matchup:"롯데 vs 삼성",pick:"삼성",odds:1.48,amount:100,betResult:"miss",result:"롯데"},
+    {matchup:"KT vs 한화",pick:"KT",odds:1.74,amount:100,betResult:"hit",result:"KT"},
+    {matchup:"NC vs KIA",pick:"NC",odds:1.53,amount:100,betResult:"cancel",result:"취소"},
+  ]},
+  {date:"2026-08-04",games:[
+    {matchup:"삼성 vs 한화",ai1:"삼성",ai2:"삼성",ai3:"삼성",pick:"삼성",result:"한화"},
+    {matchup:"롯데 vs 키움",ai1:"롯데",ai2:"롯데",ai3:"롯데",pick:"롯데",result:"롯데"},
+    {matchup:"SSG vs LG",ai1:"LG",ai2:"LG",ai3:"LG",pick:"LG",result:"SSG"},
+  ],unanimousBet:null,
+  allFiveBets:[
+    {label:"도전경기",odds:3.4,amount:100,betResult:"miss",pickLabels:["삼성","롯데","LG"],note:"오늘은 KT vs 한화·NC vs KIA 2경기 취소로 3경기만 발매돼 3경기 조합으로 계산. 롯데만 적중, 삼성·LG 미스라 조합 전체 미스"},
+  ],
+  singleBets:[
+    {matchup:"삼성 vs 한화",pick:"삼성",odds:1.65,amount:100,betResult:"miss",result:"한화"},
+    {matchup:"롯데 vs 키움",pick:"롯데",odds:1.48,amount:100,betResult:"hit",result:"롯데"},
+    {matchup:"SSG vs LG",pick:"LG",odds:1.37,amount:100,betResult:"miss",result:"SSG"},
+  ]},
+  {date:"2026-08-12",games:[
+    {matchup:"두산 vs 한화",ai1:"두산",ai2:"두산",ai3:"두산",pick:"두산",result:"한화"},
+    {matchup:"SSG vs 롯데",ai1:"SSG",ai2:"SSG",ai3:"SSG",pick:"SSG",result:"SSG"},
+    {matchup:"KIA vs 삼성",ai1:"KIA",ai2:"KIA",ai3:"KIA",pick:"KIA",result:"KIA"},
+    {matchup:"NC vs KT",ai1:"KT",ai2:"KT",ai3:"KT",pick:"KT",result:"NC"},
+    {matchup:"키움 vs LG",ai1:"LG",ai2:"LG",ai3:"LG",pick:"LG",result:"키움"},
+  ],unanimousBet:null,
+  allFiveBets:[
+    {label:"도전경기",odds:11.5,amount:100,betResult:"miss",pickLabels:["두산","SSG","KIA","KT","LG"],note:"SSG·KIA 적중, 두산·KT·LG 미스라 조합 전체 미스"},
+  ],
+  singleBets:[
+    {matchup:"두산 vs 한화",pick:"두산",odds:1.67,amount:100,betResult:"miss",result:"한화"},
+    {matchup:"SSG vs 롯데",pick:"SSG",odds:1.75,amount:100,betResult:"hit",result:"SSG"},
+    {matchup:"KIA vs 삼성",pick:"KIA",odds:1.68,amount:100,betResult:"hit",result:"KIA"},
+    {matchup:"NC vs KT",pick:"KT",odds:1.84,amount:100,betResult:"miss",result:"NC"},
+    {matchup:"키움 vs LG",pick:"LG",odds:1.27,amount:100,betResult:"miss",result:"키움"},
+  ]},
+  {date:"2026-08-13",games:[
+    {matchup:"두산 vs 한화",ai1:"두산",ai2:"두산",ai3:"두산",pick:"두산",result:"두산"},
+    {matchup:"SSG vs 롯데",ai1:"롯데",ai2:"롯데",ai3:"롯데",pick:"롯데",result:"롯데"},
+    {matchup:"KIA vs 삼성",ai1:"KIA",ai2:"KIA",ai3:"KIA",pick:"KIA",result:"삼성"},
+    {matchup:"NC vs KT",ai1:"KT",ai2:"KT",ai3:"KT",pick:"KT",result:"NC"},
+    {matchup:"키움 vs LG",ai1:"LG",ai2:"LG",ai3:"LG",pick:"LG",result:"LG"},
+  ],unanimousBet:null,
+  allFiveBets:[
+    {label:"도전경기",odds:20.4,amount:100,betResult:"miss",pickLabels:["두산","롯데","KIA","KT","LG"],note:"두산·롯데·LG 적중, KIA·KT 미스라 조합 전체 미스"},
+  ],
+  singleBets:[
+    {matchup:"두산 vs 한화",pick:"두산",odds:1.94,amount:100,betResult:"hit",result:"두산"},
+    {matchup:"SSG vs 롯데",pick:"롯데",odds:1.68,amount:100,betResult:"hit",result:"롯데"},
+    {matchup:"KIA vs 삼성",pick:"KIA",odds:2.40,amount:100,betResult:"miss",result:"삼성"},
+    {matchup:"NC vs KT",pick:"KT",odds:1.70,amount:100,betResult:"miss",result:"NC"},
+    {matchup:"키움 vs LG",pick:"LG",odds:1.53,amount:100,betResult:"hit",result:"LG"},
+  ]},
+  {date:"2026-08-14",games:[
+    {matchup:"LG vs SSG",ai1:"LG",ai2:"LG",ai3:"LG",pick:"LG",result:"SSG"},
+    {matchup:"삼성 vs 한화",ai1:"삼성",ai2:"삼성",ai3:"삼성",pick:"삼성",result:"삼성"},
+    {matchup:"롯데 vs NC",ai1:"롯데",ai2:"롯데",ai3:"롯데",pick:"롯데",result:"NC"},
+    {matchup:"KIA vs 두산",ai1:"두산",ai2:"두산",ai3:"두산",pick:"두산",result:"두산"},
+    {matchup:"KT vs 키움",ai1:"KT",ai2:"KT",ai3:"KT",pick:"KT",result:"KT"},
+  ],unanimousBet:null,
+  allFiveBets:[
+    {label:"도전경기",odds:7.6,amount:100,betResult:"miss",pickLabels:["LG","삼성","롯데","두산","KT"],note:"삼성·두산·KT 적중, LG·롯데 미스라 조합 전체 미스"},
+  ],
+  singleBets:[
+    {matchup:"LG vs SSG",pick:"LG",odds:1.44,amount:100,betResult:"miss",result:"SSG"},
+    {matchup:"삼성 vs 한화",pick:"삼성",odds:1.52,amount:100,betResult:"hit",result:"삼성"},
+    {matchup:"롯데 vs NC",pick:"롯데",odds:1.82,amount:100,betResult:"miss",result:"NC"},
+    {matchup:"KIA vs 두산",pick:"두산",odds:1.59,amount:100,betResult:"hit",result:"두산"},
+    {matchup:"KT vs 키움",pick:"KT",odds:1.20,amount:100,betResult:"hit",result:"KT"},
+  ]},
+  {date:"2026-08-15",games:[
+    {matchup:"KIA vs 두산",ai1:"두산",ai2:"두산",ai3:"두산",pick:"두산",result:"KIA"},
+    {matchup:"LG vs SSG",ai1:"LG",ai2:"LG",ai3:"LG",pick:"LG",result:"LG"},
+    {matchup:"롯데 vs NC",ai1:"NC",ai2:"NC",ai3:"NC",pick:"NC",result:"롯데"},
+    {matchup:"삼성 vs 한화",ai1:"삼성",ai2:"삼성",ai3:"삼성",pick:"삼성",result:"삼성"},
+    {matchup:"KT vs 키움",ai1:"KT",ai2:"KT",ai3:"KT",pick:"KT",result:"키움"},
+  ],unanimousBet:null,
+  allFiveBets:[
+    {label:"도전경기",odds:11.6,amount:100,betResult:"miss",pickLabels:["두산","LG","NC","삼성","KT"],note:"LG·삼성 적중, 두산·NC·KT 미스라 조합 전체 미스"},
+  ],
+  singleBets:[
+    {matchup:"KIA vs 두산",pick:"두산",odds:2.00,amount:100,betResult:"miss",result:"KIA"},
+    {matchup:"LG vs SSG",pick:"LG",odds:1.50,amount:100,betResult:"hit",result:"LG"},
+    {matchup:"롯데 vs NC",pick:"NC",odds:1.87,amount:100,betResult:"miss",result:"롯데"},
+    {matchup:"삼성 vs 한화",pick:"삼성",odds:1.51,amount:100,betResult:"hit",result:"삼성"},
+    {matchup:"KT vs 키움",pick:"KT",odds:1.37,amount:100,betResult:"miss",result:"키움"},
+  ]},
+{date:"2026-08-16",games:[{matchup:"LG vs SSG",ai1:"LG",ai2:"LG",ai3:"LG",pick:"LG",result:"SSG"},{matchup:"KIA vs 두산",ai1:"두산",ai2:"두산",ai3:"두산",pick:"두산",result:"KIA"},{matchup:"KT vs 키움",ai1:"KT",ai2:"KT",ai3:"KT",pick:"KT",result:"KT"}],unanimousBet:null,allFiveBets:[{label:"도전경기",odds:3.3,amount:100,betResult:"miss",pickLabels:["LG","두산","KT"],note:"KT만 적중, LG-SSG·KIA-두산 2경기 미스라 조합 전체 미스"}],singleBets:[{matchup:"LG vs SSG",pick:"LG",odds:1.5,amount:100,betResult:"miss",result:"SSG"},{matchup:"KIA vs 두산",pick:"두산",odds:1.77,amount:100,betResult:"miss",result:"KIA"},{matchup:"KT vs 키움",pick:"KT",odds:1.21,amount:100,betResult:"hit",result:"KT"}]},
+{date:"2026-08-18",games:[{matchup:"LG vs KT",ai1:"KT",ai2:"KT",ai3:"KT",pick:"KT",result:null},{matchup:"한화 vs KIA",ai1:"KIA",ai2:"KIA",ai3:"KIA",pick:"KIA",result:null},{matchup:"삼성 vs SSG",ai1:"삼성",ai2:"삼성",ai3:"삼성",pick:"삼성",result:null},{matchup:"롯데 vs 키움",ai1:"롯데",ai2:"롯데",ai3:"롯데",pick:"롯데",result:null},{matchup:"NC vs 두산",ai1:"두산",ai2:"두산",ai3:"두산",pick:"두산",result:null}],unanimousBet:null,allFiveBets:[{label:"도전경기",odds:9.0,amount:100,betResult:"pending",pickLabels:["KT","KIA","삼성","롯데","두산"]}],singleBets:[{matchup:"LG vs KT",pick:"KT",odds:1.66,amount:100,betResult:"pending"},{matchup:"한화 vs KIA",pick:"KIA",odds:1.75,amount:100,betResult:"pending"},{matchup:"삼성 vs SSG",pick:"삼성",odds:1.31,amount:100,betResult:"pending"},{matchup:"롯데 vs 키움",pick:"롯데",odds:1.38,amount:100,betResult:"pending"},{matchup:"NC vs 두산",pick:"두산",odds:1.71,amount:100,betResult:"pending"}]},
+];
+
+function isUnanimous(g){return g.ai1===g.ai2&&g.ai2===g.ai3;}
+function getUnanimousGames(day){return day.games.filter(g=>isUnanimous(g));}
+function calcBetStatus(games,item){
+  if(item.betResult==='hit'||item.betResult==='miss'||item.betResult==='cancel')return item.betResult;
+  const ag=games.filter(g=>g.result!=='취소');
+  if(ag.some(g=>g.result===null))return'pending';
+  if(ag.length===0)return'cancel';
+  return ag.every(g=>g.pick===g.result)?'hit':'miss';
+}
+function getProfit(bet){
+  if(bet.betResult==='pending')return null;
+  if(bet.betResult==='cancel')return 0;
+  if(bet.betResult==='hit')return Math.round(bet.amount*(bet.odds-1));
+  return -bet.amount;
+}
+function fmt(v,unit='원'){if(v===null)return'-';return(v>=0?'+':'')+v.toLocaleString()+unit;}
+
+// ── 일별 손익 ──
+function calcDayProfit(d){
+  let invest=0, profit=0, pending=false;
+  const allBets=[
+    d.unanimousBet,
+    ...(d.allFiveBets||[]),
+    ...(d.singleBets||[])
+  ].filter(Boolean);
+  allBets.forEach(b=>{
+    if(b.betResult==='pending'){pending=true;return;}
+    if(b.betResult==='cancel')return;
+    invest+=b.amount;
+    profit+=getProfit(b)||0;
+  });
+  return{invest,profit,pending};
+}
+
+function renderDailySummary(targetId, limit){
+  const days=[...DATA].sort((a,b)=>b.date.localeCompare(a.date));
+  const list=limit?days.slice(0,limit):days;
+  const el=document.getElementById(targetId);
+  if(!el)return;
+
+  el.innerHTML=list.map(d=>{
+    const{invest,profit,pending}=calcDayProfit(d);
+    const profitColor=pending?'var(--gray)':profit>=0?'var(--green)':'var(--red)';
+    const profitText=pending?'대기중':fmt(profit);
+    const roi=invest>0&&!pending?(profit/invest*100).toFixed(0)+'%':'-';
+    const allBets=[d.unanimousBet,...(d.allFiveBets||[]),...(d.singleBets||[])].filter(Boolean);
+    const hitCount=allBets.filter(b=>b.betResult==='hit').length;
+    const doneCount=allBets.filter(b=>b.betResult!=='pending'&&b.betResult!=='cancel').length;
+
+    return`<div style="background:var(--card);border:1px solid var(--border);border-radius:12px;padding:12px 16px;margin-bottom:10px;cursor:pointer;" onclick="showDetail('daily')">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+        <span style="font-size:13px;font-weight:900;color:var(--gold);">📅 ${d.date}</span>
+        <span style="font-size:18px;font-weight:900;color:${profitColor}">${profitText}</span>
+      </div>
+      <div style="display:flex;justify-content:space-between;font-size:11px;color:var(--gray);">
+        <span>💰 투자 <strong style="color:var(--light)">${invest.toLocaleString()}원</strong></span>
+        <span>🎯 적중 <strong style="color:var(--light)">${hitCount}/${doneCount}</strong></span>
+        <span>💹 수익률 <strong style="color:${profitColor}">${roi}</strong></span>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function renderDailyDetail(){
+  const days=[...DATA].sort((a,b)=>b.date.localeCompare(a.date));
+  const el=document.getElementById('daily-detail-list');
+  if(!el)return;
+
+  // 전체 합계
+  let totalInvest=0,totalProfit=0;
+  DATA.forEach(d=>{
+    const{invest,profit,pending}=calcDayProfit(d);
+    if(!pending){totalInvest+=invest;totalProfit+=profit;}
+  });
+  const totalRoi=totalInvest>0?(totalProfit/totalInvest*100).toFixed(1):0;
+  const totalColor=totalProfit>=0?'var(--green)':'var(--red)';
+
+  const summary=`<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:16px;">
+    <div style="background:var(--card);border:1px solid var(--border);border-radius:12px;padding:12px;text-align:center;">
+      <div style="font-size:10px;color:var(--gray);margin-bottom:4px;">총 투자</div>
+      <div style="font-size:16px;font-weight:900;color:var(--gold)">${totalInvest.toLocaleString()}원</div>
+    </div>
+    <div style="background:var(--card);border:1px solid var(--border);border-radius:12px;padding:12px;text-align:center;">
+      <div style="font-size:10px;color:var(--gray);margin-bottom:4px;">누적 손익</div>
+      <div style="font-size:16px;font-weight:900;color:${totalColor}">${fmt(totalProfit)}</div>
+    </div>
+    <div style="background:var(--card);border:1px solid var(--border);border-radius:12px;padding:12px;text-align:center;">
+      <div style="font-size:10px;color:var(--gray);margin-bottom:4px;">수익률</div>
+      <div style="font-size:16px;font-weight:900;color:${totalColor}">${totalRoi}%</div>
+    </div>
+  </div>`;
+
+  const rows=days.map(d=>{
+    const{invest,profit,pending}=calcDayProfit(d);
+    const profitColor=pending?'var(--gray)':profit>=0?'var(--green)':'var(--red)';
+    const roi=invest>0&&!pending?(profit/invest*100).toFixed(0)+'%':'-';
+    const allBets=[d.unanimousBet,...(d.allFiveBets||[]),...(d.singleBets||[])].filter(Boolean);
+    const hitCount=allBets.filter(b=>b.betResult==='hit').length;
+    const doneCount=allBets.filter(b=>b.betResult!=='pending'&&b.betResult!=='cancel').length;
+
+    // 베팅 상세
+    const betRows=[
+      {label:'🎯 만장일치',b:d.unanimousBet},
+      ...(d.allFiveBets||[]).map((b,i)=>({label:`⚡ ${b.label||'도전'+i}`,b})),
+      ...(d.singleBets||[]).map(b=>({label:`1️⃣ ${b.matchup}`,b})),
+    ].filter(x=>x.b&&x.b.betResult!=='cancel').map(({label,b})=>{
+      const p=getProfit(b);
+      const c=b.betResult==='hit'?'var(--green)':b.betResult==='miss'?'var(--red)':'var(--gray)';
+      const icon=b.betResult==='hit'?'✅':b.betResult==='miss'?'❌':'⏳';
+      return`<div style="display:flex;justify-content:space-between;align-items:center;padding:5px 0;border-bottom:1px solid rgba(255,255,255,0.04);font-size:11px;">
+        <span style="color:var(--gray);flex:1;">${label}</span>
+        <span style="color:var(--light);margin:0 8px;">${b.amount.toLocaleString()}원×${b.odds}배</span>
+        <span style="color:${c};font-weight:700;min-width:60px;text-align:right;">${icon} ${p===null?'-':fmt(p)}</span>
+      </div>`;
+    }).join('');
+
+    return`<div style="background:var(--card);border:1px solid var(--border);border-radius:12px;margin-bottom:12px;overflow:hidden;">
+      <div style="padding:10px 16px;background:linear-gradient(90deg,#1a2235,#111827);border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;">
+        <span style="font-size:13px;font-weight:900;color:var(--gold);">📅 ${d.date}</span>
+        <div style="text-align:right;">
+          <div style="font-size:16px;font-weight:900;color:${profitColor}">${pending?'대기중':fmt(profit)}</div>
+          <div style="font-size:10px;color:var(--gray);">투자 ${invest.toLocaleString()}원 / 적중 ${hitCount}/${doneCount} / ${roi}</div>
+        </div>
+      </div>
+      <div style="padding:8px 16px;">${betRows}</div>
+    </div>`;
+  }).join('');
+
+  el.innerHTML=summary+rows;
+}
+
+// ── 대시보드 네비게이션 ──
+function showMain(){
+  document.getElementById('dash-main').style.display='block';
+  document.querySelectorAll('.detail-view').forEach(el=>el.classList.remove('active'));
+  renderDailySummary('daily-summary-list', 5);
+}
+function showDetail(type){
+  document.getElementById('dash-main').style.display='none';
+  document.querySelectorAll('.detail-view').forEach(el=>el.classList.remove('active'));
+  document.getElementById('detail-'+type).classList.add('active');
+  if(type==='accuracy') renderAccuracy();
+  if(type==='profit') renderProfit();
+  if(type==='pattern') renderPattern();
+  if(type==='today') renderToday();
+  if(type==='daily') renderDailyDetail();
+}
+
+function hideAccDetail(){
+  document.getElementById('acc-main').style.display='block';
+  document.getElementById('acc-detail').style.display='none';
+}
+function showAccDetail(type){
+  document.getElementById('acc-main').style.display='none';
+  document.getElementById('acc-detail').style.display='block';
+
+  const titleMap={unanimous:'🎯 만장일치 날짜별 기록',allfive:'⚡ 도전경기 날짜별 기록',single:'1️⃣ 단독베팅 날짜별 기록',all:'📋 전체 날짜별 기록'};
+  document.getElementById('acc-detail-title').textContent=titleMap[type]||'날짜별 기록';
+
+  const done=DATA.filter(d=>d.allFiveBets&&d.allFiveBets.some(b=>b.betResult!=='pending'));
+
+  // 행 데이터 수집
+  let rows=[];
+
+  done.slice().sort((a,b)=>b.date.localeCompare(a.date)).forEach(d=>{
+    if(type==='unanimous'||type==='all'){
+      const item=d.unanimousBet;
+      if(item&&item.betResult!=='cancel'&&item.betResult!=='pending'){
+        const profit=getProfit(item);
+        rows.push({date:d.date.slice(5),label:'🎯 만장일치',st:item.betResult,odds:item.odds,profit});
+      }
+    }
+    if(type==='allfive'||type==='all'){
+      (d.allFiveBets||[]).filter(b=>b.betResult!=='cancel'&&b.betResult!=='pending').forEach(item=>{
+        const profit=getProfit(item);
+        rows.push({date:d.date.slice(5),label:`⚡ ${item.label||'도전경기'}`,st:item.betResult,odds:item.odds,profit});
+      });
+    }
+    if(type==='single'||type==='all'){
+      (d.singleBets||[]).filter(b=>b.betResult!=='cancel'&&b.betResult!=='pending').forEach(item=>{
+        const profit=getProfit(item);
+        rows.push({date:d.date.slice(5),label:`1️⃣ ${item.matchup}`,st:item.betResult,odds:item.odds,profit});
+      });
+    }
+  });
+
+  // 상단 요약
+  const hitCount=rows.filter(r=>r.st==='hit').length;
+  const total=rows.length;
+  const rate=total?Math.round(hitCount/total*100):0;
+  const totalProfit=rows.reduce((s,r)=>s+(r.profit||0),0);
+  const rateColor=rate>=60?'var(--green)':rate>=40?'var(--gold)':'var(--red)';
+  const profitColor=totalProfit>=0?'var(--green)':'var(--red)';
+
+  const summary=`<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px;">
+    <div style="background:var(--card);border:1px solid var(--border);border-radius:12px;padding:14px;text-align:center;">
+      <div style="font-size:10px;color:var(--gray);margin-bottom:4px;">전체 적중률</div>
+      <div style="font-size:24px;font-weight:900;color:${rateColor}">${rate}%</div>
+      <div style="font-size:10px;color:var(--gray);margin-top:2px;">${hitCount}회 적중 / 총 ${total}회</div>
+    </div>
+    <div style="background:var(--card);border:1px solid var(--border);border-radius:12px;padding:14px;text-align:center;">
+      <div style="font-size:10px;color:var(--gray);margin-bottom:4px;">전체 수익</div>
+      <div style="font-size:24px;font-weight:900;color:${profitColor}">${fmt(totalProfit)}</div>
+      <div style="font-size:10px;color:var(--gray);margin-top:2px;">${totalProfit>=0?'수익':'손실'} 중</div>
+    </div>
+  </div>`;
+
+  // 테이블 헤더
+  const thStyle='padding:8px 6px;font-size:10px;font-weight:700;color:var(--gray);border-bottom:2px solid var(--border);white-space:nowrap;';
+  const tableHeader=`<tr>
+    <th style="${thStyle}text-align:left;">날짜</th>
+    <th style="${thStyle}text-align:center;">결과</th>
+    <th style="${thStyle}text-align:center;">배당</th>
+    <th style="${thStyle}text-align:right;">손익</th>
+  </tr>`;
+
+  // 테이블 행
+  const tableRows=rows.map(r=>{
+    const stColor=r.st==='hit'?'var(--green)':r.st==='cancel'?'var(--gold)':'var(--red)';
+    const stText=r.st==='hit'?'✅ 적중':r.st==='cancel'?'🟡 무승부':'❌ 미적중';
+    const profitColor=(r.profit||0)>=0?'var(--green)':'var(--red)';
+    const tdStyle='padding:9px 6px;font-size:12px;border-bottom:1px solid rgba(255,255,255,0.04);';
+    // all 타입이면 날짜 옆에 유형 표시
+    const dateCell=type==='all'
+      ?`<td style="${tdStyle}font-weight:700;"><div>${r.date}</div><div style="font-size:10px;color:var(--gray);margin-top:1px;">${r.label}</div></td>`
+      :`<td style="${tdStyle}font-weight:700;">${r.date}</td>`;
+    return`<tr>
+      ${dateCell}
+      <td style="${tdStyle}text-align:center;font-weight:900;color:${stColor}">${stText}</td>
+      <td style="${tdStyle}text-align:center;color:var(--gold2);">${r.odds}배</td>
+      <td style="${tdStyle}text-align:right;font-weight:900;color:${profitColor}">${fmt(r.profit)}</td>
+    </tr>`;
+  }).join('');
+
+  const table=`<div style="background:var(--card);border:1px solid var(--border);border-radius:12px;overflow:hidden;">
+    <table style="width:100%;border-collapse:collapse;">
+      <thead>${tableHeader}</thead>
+      <tbody>${tableRows||'<tr><td colspan="4" style="text-align:center;padding:30px;color:var(--gray);">데이터가 없습니다</td></tr>'}</tbody>
+    </table>
+  </div>`;
+
+  document.getElementById('acc-detail-list').innerHTML=summary+table;
+}
+
+// ── 1. 적중률/수익률 ──
+function renderAccuracy(){
+  const done=DATA.filter(d=>d.allFiveBets&&d.allFiveBets.some(b=>b.betResult!=='pending'));
+
+  // 만장일치 (statiz는 unanimousBet:null)
+  const uBets=[];
+  const uHit=0;
+  const uRate=0;
+
+  // 도전경기(5경기)
+  const a5All=done.flatMap(d=>(d.allFiveBets||[]).filter(b=>b.betResult!=='cancel'&&b.betResult!=='pending'));
+  const a5Hit=a5All.filter(b=>b.betResult==='hit').length;
+  const a5Rate=a5All.length?Math.round(a5Hit/a5All.length*100):0;
+
+  // 단독 (기존 방식 유지)
+  const sDayCount=done.filter(d=>(d.singleBets||[]).some(b=>b.betResult!=='cancel'&&b.betResult!=='pending')).length;
+  const sAll=done.flatMap(d=>(d.singleBets||[]).filter(b=>b.betResult!=='cancel'&&b.betResult!=='pending'));
+  const sHit=sAll.filter(b=>b.betResult==='hit').length;
+  const sRate=sAll.length?Math.round(sHit/sAll.length*100):0;
+
+  // 수익률 계산 함수
+  function calcRoi(bets){
+    const invest=bets.reduce((s,b)=>s+b.amount,0);
+    const profit=bets.reduce((s,b)=>s+(getProfit(b)||0),0);
+    return invest>0?(profit/invest*100).toFixed(1):null;
+  }
+  // 도전경기 수익률: 날짜별로 묶어서
+  const a5Invest=a5All.reduce((s,b)=>s+b.amount,0);
+  const a5Profit=a5All.reduce((s,b)=>s+(getProfit(b)||0),0);
+  const a5Roi=a5Invest>0?(a5Profit/a5Invest*100).toFixed(1):null;
+
+  const uRoi=calcRoi(uBets);
+  const sRoi=calcRoi(sAll);
+
+  function barColor(r){return r>=60?'var(--green)':r>=40?'var(--gold)':'var(--red)';}
+  function roiColor(v){return v===null?'var(--gray)':parseFloat(v)>=0?'var(--green)':'var(--red)';}
+  function roiText(v){return v===null?'-':(parseFloat(v)>=0?'+':'')+v+'%';}
+
+  document.getElementById('acc-rate-bars').innerHTML=[
+    {name:'🎯 만장일치',key:'unanimous',hit:uHit,total:uBets.length,rate:uRate,roi:uRoi,sub:`${uHit}회 적중 / 총 ${uBets.length}회`},
+    {name:'⚡ 도전경기',key:'allfive',hit:a5Hit,total:a5All.length,rate:a5Rate,roi:a5Roi,sub:`${a5Hit}회 적중 / 총 ${a5All.length}회`},
+    {name:'1️⃣ 단독베팅',key:'single',hit:sHit,total:sAll.length,rate:sRate,roi:sRoi,sub:`${sHit}회 적중 / 총 ${sAll.length}회 (${sDayCount}일)`},
+  ].map(r=>`<div class="rate-bar-wrap" onclick="showAccDetail('${r.key}')" style="cursor:pointer;">
+    <div class="rate-bar-label">
+      <span class="rate-bar-name">${r.name}</span>
+      <div style="display:flex;align-items:center;gap:8px;">
+        <span class="rate-bar-pct" style="color:${barColor(r.rate)}">${r.rate}%</span>
+        <span style="font-size:11px;color:${roiColor(r.roi)};font-weight:700;">수익률 ${roiText(r.roi)}</span>
+        <span style="font-size:11px;color:var(--gray);">›</span>
+      </div>
+    </div>
+    <div class="rate-bar-bg"><div class="rate-bar-fill" style="width:${r.rate}%;background:${barColor(r.rate)}"></div></div>
+    <div class="rate-bar-sub">${r.sub}</div>
+  </div>`).join('');
+
+  // AI 적중률
+  const doneGames=done.flatMap(d=>d.games.filter(g=>g.result&&g.result!=='취소'));
+  function aiRate(key){
+    const t=doneGames.filter(g=>g[key]);
+    const h=t.filter(g=>g[key]===g.result);
+    return{hit:h.length,total:t.length,rate:t.length?Math.round(h.length/t.length*100):0};
+  }
+  const a1=aiRate('ai1'),a2=aiRate('ai2'),a3=aiRate('ai3');
+  document.getElementById('acc-ai-cards').innerHTML=[
+    {name:'반짝이',d:a1,color:'#7ec8ff'},
+    {name:'별이',d:a2,color:'#5ba8ff'},
+    {name:'초롱이',d:a3,color:'#a29bfe'},
+  ].map(a=>`<div class="ai-card">
+    <div class="ai-name" style="color:${a.color}">${a.name}</div>
+    <div class="ai-pct" style="color:${barColor(a.d.rate)}">${a.d.rate}%</div>
+    <div class="ai-sub">${a.d.hit}/${a.d.total}경기</div>
+  </div>`).join('');
+
+  // 전체 수익률
+  const allBets=[...uBets,...a5All,...sAll];
+  const totalInvest=allBets.reduce((s,b)=>s+b.amount,0);
+  const totalProfit=allBets.reduce((s,b)=>s+(getProfit(b)||0),0);
+  const roi=totalInvest>0?(totalProfit/totalInvest*100).toFixed(1):0;
+  document.getElementById('acc-kpi').innerHTML=`
+    <div class="kpi-card"><div class="kpi-label">💰 총 투자</div><div class="kpi-val gold">${totalInvest.toLocaleString()}원</div></div>
+    <div class="kpi-card"><div class="kpi-label">📈 누적 손익</div><div class="kpi-val ${totalProfit>=0?'green':'red'}">${fmt(totalProfit)}</div></div>
+    <div class="kpi-card"><div class="kpi-label">💹 ROI</div><div class="kpi-val ${roi>=0?'green':'red'}">${roi}%</div></div>
+    <div class="kpi-card"><div class="kpi-label">🏆 총 적중</div><div class="kpi-val blue">${uHit+a5Hit+sHit}회</div></div>
+  `;
+}
+
+// ── 2. 수익 관련 ──
+function renderProfit(){
+  const done=DATA.filter(d=>d.allFiveBets&&d.allFiveBets.some(b=>b.betResult!=='pending'));
+  const allBets=done.flatMap(d=>{
+    const bets=[];
+    if(d.unanimousBet&&d.unanimousBet.betResult!=='cancel')bets.push(d.unanimousBet);
+    (d.allFiveBets||[]).filter(b=>b.betResult!=='cancel').forEach(b=>bets.push(b));
+    (d.singleBets||[]).filter(b=>b.betResult!=='cancel').forEach(b=>bets.push(b));
+    return bets;
+  });
+  const totalInvest=allBets.reduce((s,b)=>s+b.amount,0);
+  const totalProfit=allBets.reduce((s,b)=>s+(getProfit(b)||0),0);
+  const roi=totalInvest>0?(totalProfit/totalInvest*100).toFixed(1):0;
+  const hitCount=allBets.filter(b=>b.betResult==='hit').length;
+
+  document.getElementById('profit-kpi').innerHTML=`
+    <div class="kpi-card"><div class="kpi-label">💰 총 투자금액</div><div class="kpi-val gold">${totalInvest.toLocaleString()}원</div></div>
+    <div class="kpi-card"><div class="kpi-label">📈 누적 손익</div><div class="kpi-val ${totalProfit>=0?'green':'red'}">${fmt(totalProfit)}</div></div>
+    <div class="kpi-card"><div class="kpi-label">💹 수익률(ROI)</div><div class="kpi-val ${roi>=0?'green':'red'}">${roi}%</div></div>
+    <div class="kpi-card"><div class="kpi-label">🏆 총 적중횟수</div><div class="kpi-val blue">${hitCount}회</div></div>
+  `;
+
+  // 날짜별 수익 정렬
+  const dayProfits=done.map(d=>{
+    const p=(getProfit(d.unanimousBet)||0)+
+      (d.allFiveBets||[]).reduce((s,b)=>s+(getProfit(b)||0),0)+
+      (d.singleBets||[]).reduce((s,b)=>s+(getProfit(b)||0),0);
+    return{date:d.date,profit:p};
+  }).filter(d=>d.profit!==0).sort((a,b)=>b.profit-a.profit);
+  const best=dayProfits[0]||null;
+  const worst=dayProfits[dayProfits.length-1]||null;
+
+  document.getElementById('profit-detail').innerHTML=`
+    <div class="profit-row"><span class="profit-label">📅 경기 진행일수</span><span class="profit-val">${done.length}일</span></div>
+    <div class="profit-row"><span class="profit-label">🏆 최고 수익일</span><span class="profit-val pos">${best?best.date+' '+fmt(best.profit):'-'}</span></div>
+    <div class="profit-row"><span class="profit-label">💸 최저 수익일</span><span class="profit-val neg">${worst?worst.date+' '+fmt(worst.profit):'-'}</span></div>
+    <div class="profit-row"><span class="profit-label">💰 평균 일일 투자</span><span class="profit-val">${done.length?Math.round(totalInvest/done.length).toLocaleString()+'원':'-'}</span></div>
+    <div class="profit-row"><span class="profit-label">📊 평균 일일 손익</span><span class="profit-val ${totalProfit>=0?'pos':'neg'}">${done.length?fmt(Math.round(totalProfit/done.length)):'-'}</span></div>
+  `;
+  renderChart();
+}
+
+function renderChart(){
+  const canvas=document.getElementById('chart');if(!canvas)return;
+  const ctx=canvas.getContext('2d');
+  canvas.width=canvas.offsetWidth*devicePixelRatio;
+  canvas.height=160*devicePixelRatio;
+  ctx.scale(devicePixelRatio,devicePixelRatio);
+  const W=canvas.offsetWidth,H=160;
+  ctx.clearRect(0,0,W,H);
+  const done=DATA.filter(d=>d.allFiveBets&&d.allFiveBets.some(b=>b.betResult!=='pending'));
+  if(!done.length){ctx.fillStyle='#6b7280';ctx.font='13px sans-serif';ctx.textAlign='center';ctx.fillText('데이터 없음',W/2,H/2);return;}
+  let cum=0;const pts=[];
+  done.forEach(d=>{
+    cum+=(getProfit(d.unanimousBet)||0)+(d.allFiveBets||[]).reduce((s,b)=>s+(getProfit(b)||0),0)+(d.singleBets||[]).reduce((s,b)=>s+(getProfit(b)||0),0);
+    pts.push({time:new Date(d.date).getTime(),y:cum});
+  });
+  const minTime=pts[0].time,maxTime=pts[pts.length-1].time,timeRange=maxTime-minTime||86400000;
+  const pad={l:56,r:16,t:16,b:28},cW=W-pad.l-pad.r,cH=H-pad.t-pad.b;
+  const maxY=Math.max(...pts.map(p=>p.y),50),minY=Math.min(...pts.map(p=>p.y),-50),rY=maxY-minY||1;
+  const toY=v=>pad.t+(1-(v-minY)/rY)*cH,toX=t=>pad.l+((t-minTime)/timeRange)*cW;
+  ctx.strokeStyle='rgba(255,255,255,0.08)';ctx.lineWidth=1;ctx.setLineDash([4,4]);
+  ctx.beginPath();ctx.moveTo(pad.l,toY(0));ctx.lineTo(W-pad.r,toY(0));ctx.stroke();ctx.setLineDash([]);
+  const isPos=pts[pts.length-1].y>=0,col=isPos?'#06d6a0':'#ef476f';
+  const grad=ctx.createLinearGradient(0,pad.t,0,H-pad.b);
+  grad.addColorStop(0,isPos?'rgba(6,214,160,.25)':'rgba(239,71,111,.25)');grad.addColorStop(1,'rgba(0,0,0,0)');
+  ctx.beginPath();ctx.moveTo(toX(pts[0].time),toY(0));
+  pts.forEach(p=>ctx.lineTo(toX(p.time),toY(p.y)));
+  ctx.lineTo(toX(pts[pts.length-1].time),toY(0));ctx.closePath();ctx.fillStyle=grad;ctx.fill();
+  ctx.beginPath();ctx.strokeStyle=col;ctx.lineWidth=2.5;ctx.lineJoin='round';
+  pts.forEach((p,i)=>i===0?ctx.moveTo(toX(p.time),toY(p.y)):ctx.lineTo(toX(p.time),toY(p.y)));ctx.stroke();
+  pts.forEach(p=>{ctx.beginPath();ctx.arc(toX(p.time),toY(p.y),3.5,0,Math.PI*2);ctx.fillStyle=p.y>=0?'#06d6a0':'#ef476f';ctx.fill();});
+  ctx.fillStyle='#6b7280';ctx.font='10px sans-serif';ctx.textAlign='right';
+  [maxY,0,minY].forEach(v=>ctx.fillText(v.toLocaleString(),pad.l-4,toY(v)+4));
+  ctx.textAlign='center';ctx.font='9px sans-serif';
+  pts.forEach(p=>{const d=new Date(p.time);ctx.fillText(`${d.getMonth()+1}/${d.getDate()}`,toX(p.time),H-pad.b+14);});
+}
+
+// ── 3. 패턴 분석 ──
+function renderPattern(){
+  const done=DATA.filter(d=>d.allFiveBets&&d.allFiveBets.some(b=>b.betResult!=='pending'));
+  const dayNames=['일','월','화','수','목','금','토'];
+  const dayMap={};
+  done.forEach(d=>{
+    const day=new Date(d.date).getDay();
+    if(!dayMap[day])dayMap[day]={hit:0,total:0};
+    const games=d.games.filter(g=>g.result&&g.result!=='취소');
+    games.forEach(g=>{dayMap[day].total++;if(g.pick===g.result)dayMap[day].hit++;});
+  });
+  const dayBars=Object.entries(dayMap).map(([d,v])=>({
+    label:dayNames[d],rate:v.total?Math.round(v.hit/v.total*100):0,hit:v.hit,total:v.total
+  })).sort((a,b)=>b.rate-a.rate);
+
+  function barC(r){return r>=60?'var(--green)':r>=40?'var(--gold)':'var(--red)';}
+
+  document.getElementById('pattern-day').innerHTML=`
+    <div class="pattern-title">📅 요일별 예측 적중률</div>
+    ${dayBars.map(d=>`<div class="pattern-row">
+      <span class="pattern-label">${d.label}요일</span>
+      <div class="pattern-bar-bg"><div class="pattern-bar-fill" style="width:${d.rate}%;background:${barC(d.rate)}"></div></div>
+      <span class="pattern-pct" style="color:${barC(d.rate)}">${d.rate}%</span>
+    </div><div style="font-size:10px;color:var(--gray);padding:0 0 4px 60px">${d.hit}/${d.total}경기</div>`).join('')}
+  `;
+
+  // 팀별 픽 성공률
+  const teamMap={};
+  done.forEach(d=>{
+    d.games.filter(g=>g.result&&g.result!=='취소').forEach(g=>{
+      if(!teamMap[g.pick])teamMap[g.pick]={hit:0,total:0};
+      teamMap[g.pick].total++;
+      if(g.pick===g.result)teamMap[g.pick].hit++;
+    });
+  });
+  const teamList=Object.entries(teamMap).map(([t,v])=>({
+    team:t,rate:v.total?Math.round(v.hit/v.total*100):0,hit:v.hit,total:v.total
+  })).filter(t=>t.total>=2).sort((a,b)=>b.rate-a.rate);
+
+  document.getElementById('pattern-team').innerHTML=`
+    <div class="pattern-title">⚾ 팀별 픽 성공률 (2회 이상)</div>
+    <div class="team-grid">
+      ${teamList.map(t=>`<div class="team-item">
+        <span class="team-name">${t.team}</span>
+        <span class="team-rate" style="color:${barC(t.rate)}">${t.rate}% <span style="font-size:10px;color:var(--gray);font-weight:400">${t.hit}/${t.total}</span></span>
+      </div>`).join('')}
+    </div>
+  `;
+
+  // 연속 기록
+  const results=done.map(d=>{
+    const games=d.games.filter(g=>g.result&&g.result!=='취소');
+    const hit=games.filter(g=>g.pick===g.result).length;
+    const total=games.length;
+    return total>0?hit/total>=0.6:'skip';
+  }).filter(r=>r!=='skip');
+  let maxStreak=0,curStreak=0,maxLose=0,curLose=0;
+  results.forEach(r=>{
+    if(r){curStreak++;maxStreak=Math.max(maxStreak,curStreak);curLose=0;}
+    else{curLose++;maxLose=Math.max(maxLose,curLose);curStreak=0;}
+  });
+  document.getElementById('pattern-streak').innerHTML=`
+    <div class="kpi-card"><div class="kpi-label">🔥 최대 연속 호일</div><div class="kpi-val green">${maxStreak}일</div></div>
+    <div class="kpi-card"><div class="kpi-label">❄️ 최대 연속 부진</div><div class="kpi-val red">${maxLose}일</div></div>
+    <div class="kpi-card"><div class="kpi-label">✅ 현재 연속 호일</div><div class="kpi-val ${curStreak>0?'green':'gray'}">${curStreak}일</div></div>
+    <div class="kpi-card"><div class="kpi-label">❌ 현재 연속 부진</div><div class="kpi-val ${curLose>0?'red':'gray'}">${curLose}일</div></div>
+  `;
+}
+
+// ── 4. 오늘 현황 ──
+function renderToday(){
+  const today=new Date().toISOString().slice(0,10);
+  const todayData=DATA.find(d=>d.date===today)||DATA[DATA.length-1];
+  const el=document.getElementById('today-content');
+  if(!todayData){el.innerHTML='<div class="empty">오늘 경기 데이터가 없습니다</div>';return;}
+
+  const uBet=todayData.unanimousBet;
+  const a5Bets=todayData.allFiveBets||[];
+  const sBets=todayData.singleBets||[];
+  const totalBet=(uBet?uBet.amount:0)+(a5Bets.reduce((s,b)=>s+b.amount,0))+(sBets.reduce((s,b)=>s+b.amount,0));
+
+  let html=`<div class="today-bet-summary">
+    <div class="today-bet-title">💰 오늘 베팅 현황 (${todayData.date})</div>
+    <div class="today-bet-row"><span class="today-bet-label">총 베팅금액</span><span class="today-bet-val">${totalBet.toLocaleString()}원</span></div>
+    <div class="today-bet-row"><span class="today-bet-label">만장일치</span><span class="today-bet-val">${uBet?`${uBet.amount.toLocaleString()}원 / 배당 ${uBet.odds}배 → 예상 ${Math.round(uBet.amount*uBet.odds).toLocaleString()}원`:'해당없음'}</span></div>
+    ${a5Bets.map(b=>`<div class="today-bet-row"><span class="today-bet-label">⚡ ${b.label}</span><span class="today-bet-val">${b.amount.toLocaleString()}원 / ${b.odds}배 → ${Math.round(b.amount*b.odds).toLocaleString()}원</span></div>`).join('')}
+    ${sBets.length?`<div class="today-bet-row"><span class="today-bet-label">1️⃣ 단독(각)</span><span class="today-bet-val">${sBets[0].amount.toLocaleString()}원 × ${sBets.length}경기</span></div>`:''}
+  </div>`;
+
+  html+=`<div class="sec" style="margin-top:0;">⚾ 경기별 현황</div>`;
+  todayData.games.forEach(g=>{
+    const rs=g.result===null?'pending':g.result==='취소'||g.result==='무승부'?'cancel':g.pick===g.result?'hit':'miss';
+    const rsText={'pending':'⏳ 대기','hit':'✅ 적중','miss':'❌ 미적중','cancel':'취소'}[rs];
+    const rsColor={'pending':'var(--gray)','hit':'var(--green)','miss':'var(--red)','cancel':'var(--gold)'}[rs];
+    html+=`<div class="today-game-card">
+      <div class="today-game-header">
+        <span class="today-matchup">${g.matchup}</span>
+        <span class="today-pick-chip">${g.pick} 픽</span>
+      </div>
+      <div class="today-game-body">
+        <div class="today-ai-row">
+          <span class="today-ai-item">반짝이 <span>${g.ai1}</span></span>
+          <span class="today-ai-item">별이 <span>${g.ai2}</span></span>
+          <span class="today-ai-item">초롱이 <span>${g.ai3}</span></span>
+        </div>
+        <div class="today-result" style="color:${rsColor}">${rsText}</div>
+      </div>
+    </div>`;
+  });
+  el.innerHTML=html;
+}
+
+// ── 편집 기능 ──
+let editTarget = null; // {type, dayIdx, subIdx}
+
+function openEditModal(type, dayIdx, subIdx) {
+  const d = DATA[dayIdx];
+  editTarget = {type, dayIdx, subIdx};
+  const modal = document.getElementById('edit-modal');
+  let html = '';
+
+  if (type === 'game') {
+    // 경기기록 전체 날짜 편집
+    document.getElementById('modal-title-text').textContent = `✏️ ${d.date} 경기 수정`;
+    html = d.games.map((g, gi) => `
+      <div class="modal-game-row">
+        <div class="modal-game-title">${g.matchup}</div>
+        <div class="modal-field">
+          <span class="modal-label">반짝이</span>
+          <input class="modal-input" id="edit-ai1-${gi}" value="${g.ai1||''}">
+        </div>
+        <div class="modal-field">
+          <span class="modal-label">별이</span>
+          <input class="modal-input" id="edit-ai2-${gi}" value="${g.ai2||''}">
+        </div>
+        <div class="modal-field">
+          <span class="modal-label">초롱이</span>
+          <input class="modal-input" id="edit-ai3-${gi}" value="${g.ai3||''}">
+        </div>
+        <div class="modal-field">
+          <span class="modal-label">최종픽</span>
+          <input class="modal-input" id="edit-pick-${gi}" value="${g.pick||''}">
+        </div>
+        <div class="modal-field">
+          <span class="modal-label">결과</span>
+          <input class="modal-input" id="edit-result-${gi}" value="${g.result||''}">
+        </div>
+      </div>`).join('');
+
+  } else if (type === 'unanimous') {
+    const item = d.unanimousBet;
+    const games = item.customGames || getUnanimousGames(d);
+    document.getElementById('modal-title-text').textContent = `✏️ ${d.date} 만장일치 수정`;
+    html = `
+      <div class="modal-field">
+        <span class="modal-label">배당</span>
+        <input class="modal-input" id="edit-odds" type="number" step="0.1" value="${item.odds}">
+      </div>
+      <div class="modal-field">
+        <span class="modal-label">베팅금액</span>
+        <input class="modal-input" id="edit-amount" type="number" value="${item.amount}">
+      </div>
+      <div class="modal-field">
+        <span class="modal-label">결과</span>
+        <select class="modal-select" id="edit-betresult">
+          <option value="hit" ${item.betResult==='hit'?'selected':''}>✅ 적중</option>
+          <option value="miss" ${item.betResult==='miss'?'selected':''}>❌ 미적중</option>
+          <option value="cancel" ${item.betResult==='cancel'?'selected':''}>취소</option>
+          <option value="pending" ${item.betResult==='pending'?'selected':''}>⏳ 대기중</option>
+        </select>
+      </div>
+      <div class="modal-section">경기 픽 / 결과</div>
+      ${games.map((g,gi)=>`
+      <div class="modal-game-row">
+        <div class="modal-game-title">${g.matchup}</div>
+        <div class="modal-field">
+          <span class="modal-label">픽</span>
+          <input class="modal-input" id="edit-upick-${gi}" value="${g.pick||''}">
+        </div>
+        <div class="modal-field">
+          <span class="modal-label">결과</span>
+          <input class="modal-input" id="edit-uresult-${gi}" value="${g.result||''}">
+        </div>
+      </div>`).join('')}`;
+
+  } else if (type === 'allfive') {
+    const item = d.allFiveBets[subIdx];
+    const dg = item.customGames || d.games;
+    const labels = item.pickLabels || dg.map(g=>g.pick);
+    document.getElementById('modal-title-text').textContent = `✏️ ${d.date} 도전경기 수정`;
+    html = `
+      <div class="modal-field">
+        <span class="modal-label">이름</span>
+        <input class="modal-input" id="edit-label" value="${item.label||''}">
+      </div>
+      <div class="modal-field">
+        <span class="modal-label">배당</span>
+        <input class="modal-input" id="edit-odds" type="number" step="0.1" value="${item.odds}">
+      </div>
+      <div class="modal-field">
+        <span class="modal-label">베팅금액</span>
+        <input class="modal-input" id="edit-amount" type="number" value="${item.amount}">
+      </div>
+      <div class="modal-field">
+        <span class="modal-label">결과</span>
+        <select class="modal-select" id="edit-betresult">
+          <option value="hit" ${item.betResult==='hit'?'selected':''}>✅ 적중</option>
+          <option value="miss" ${item.betResult==='miss'?'selected':''}>❌ 미적중</option>
+          <option value="cancel" ${item.betResult==='cancel'?'selected':''}>취소</option>
+          <option value="pending" ${item.betResult==='pending'?'selected':''}>⏳ 대기중</option>
+        </select>
+      </div>
+      <div class="modal-section">픽 레이블</div>
+      ${labels.map((lb,li)=>`
+      <div class="modal-field">
+        <span class="modal-label">${dg[li]?dg[li].matchup.split(' vs ')[0]:'픽'+(li+1)}</span>
+        <input class="modal-input" id="edit-label-${li}" value="${lb}">
+      </div>`).join('')}`;
+
+  } else if (type === 'single') {
+    const item = d.singleBets[subIdx];
+    document.getElementById('modal-title-text').textContent = `✏️ ${d.date} 단독베팅 수정`;
+    html = `
+      <div class="modal-field">
+        <span class="modal-label">매치업</span>
+        <input class="modal-input" id="edit-matchup" value="${item.matchup||''}">
+      </div>
+      <div class="modal-field">
+        <span class="modal-label">픽</span>
+        <input class="modal-input" id="edit-pick" value="${item.pick||''}">
+      </div>
+      <div class="modal-field">
+        <span class="modal-label">배당</span>
+        <input class="modal-input" id="edit-odds" type="number" step="0.01" value="${item.odds}">
+      </div>
+      <div class="modal-field">
+        <span class="modal-label">베팅금액</span>
+        <input class="modal-input" id="edit-amount" type="number" value="${item.amount}">
+      </div>
+      <div class="modal-field">
+        <span class="modal-label">결과</span>
+        <input class="modal-input" id="edit-result" value="${item.result||''}">
+      </div>
+      <div class="modal-field">
+        <span class="modal-label">베팅결과</span>
+        <select class="modal-select" id="edit-betresult">
+          <option value="hit" ${item.betResult==='hit'?'selected':''}>✅ 적중</option>
+          <option value="miss" ${item.betResult==='miss'?'selected':''}>❌ 미적중</option>
+          <option value="cancel" ${item.betResult==='cancel'?'selected':''}>취소</option>
+          <option value="pending" ${item.betResult==='pending'?'selected':''}>⏳ 대기중</option>
+        </select>
+      </div>`;
+  }
+
+  document.getElementById('modal-body').innerHTML = html;
+  modal.classList.add('active');
+}
+
+function closeModal() {
+  document.getElementById('edit-modal').classList.remove('active');
+  editTarget = null;
+}
+
+function saveModal() {
+  if (!editTarget) return;
+  const {type, dayIdx, subIdx} = editTarget;
+  const d = DATA[dayIdx];
+  const v = id => document.getElementById(id)?.value?.trim();
+  const n = id => parseFloat(document.getElementById(id)?.value) || 0;
+  const ni = id => parseInt(document.getElementById(id)?.value) || 0;
+
+  if (type === 'game') {
+    d.games.forEach((g, gi) => {
+      g.ai1 = v(`edit-ai1-${gi}`) || g.ai1;
+      g.ai2 = v(`edit-ai2-${gi}`) || g.ai2;
+      g.ai3 = v(`edit-ai3-${gi}`) || g.ai3;
+      g.pick = v(`edit-pick-${gi}`) || g.pick;
+      const r = v(`edit-result-${gi}`);
+      g.result = r === '' ? null : r;
+    });
+    closeModal();
+    renderRecords();
+
+  } else if (type === 'unanimous') {
+    const item = d.unanimousBet;
+    item.odds = n('edit-odds');
+    item.amount = ni('edit-amount');
+    item.betResult = v('edit-betresult');
+    const games = item.customGames || getUnanimousGames(d);
+    games.forEach((g, gi) => {
+      g.pick = v(`edit-upick-${gi}`) || g.pick;
+      const r = v(`edit-uresult-${gi}`);
+      g.result = r === '' ? null : r;
+    });
+    closeModal();
+    renderBetting();
+
+  } else if (type === 'allfive') {
+    const item = d.allFiveBets[subIdx];
+    item.label = v('edit-label') || item.label;
+    item.odds = n('edit-odds');
+    item.amount = ni('edit-amount');
+    item.betResult = v('edit-betresult');
+    const dg = item.customGames || d.games;
+    const labels = item.pickLabels || dg.map(g=>g.pick);
+    labels.forEach((_, li) => { labels[li] = v(`edit-label-${li}`) || labels[li]; });
+    if (item.pickLabels) item.pickLabels = labels;
+    closeModal();
+    renderBetting();
+
+  } else if (type === 'single') {
+    const item = d.singleBets[subIdx];
+    item.matchup = v('edit-matchup') || item.matchup;
+    item.pick = v('edit-pick') || item.pick;
+    item.odds = n('edit-odds');
+    item.amount = ni('edit-amount');
+    const r = v('edit-result');
+    item.result = r === '' ? null : r;
+    item.betResult = v('edit-betresult');
+    closeModal();
+    renderBetting();
+  }
+}
+
+// ── 경기기록 렌더 ──
+function renderRecords(){
+  const el=document.getElementById('records-list');
+  const days=[...DATA].sort((a,b)=>b.date.localeCompare(a.date));
+  if(!days.length){el.innerHTML='<div class="empty">📝 기록 없음</div>';return;}
+  el.innerHTML=days.map(d=>{
+    const dayIdx=DATA.indexOf(d);
+    const rows=d.games.map(g=>{
+      const unani=isUnanimous(g);
+      const rs=g.result===null?'pending':g.result==='취소'||g.result==='무승부'?'cancel':g.pick===g.result?'hit':'miss';
+      return`<tr><td class="col-match">${g.matchup}${unani?'<span class="unani-dot"></span>':''}</td><td class="col-ai1">${g.ai1}</td><td class="col-ai2">${g.ai2}</td><td class="col-ai3">${g.ai3}</td><td class="col-pick">${g.pick}</td><td class="col-result td-result-${rs}">${g.result||'대기'}</td></tr>`;
+    }).join('');
+    return`<div class="day-card"><div class="day-header">
+        <span class="day-date">📅 ${d.date}</span>
+        <button class="edit-btn" onclick="openEditModal('game',${dayIdx})" title="수정">✏️</button>
+      </div>
+      <div class="table-scroll-wrap"><table class="games-table">
+        <thead><tr><th class="th-group group-match"></th><th class="th-group group-ai" colspan="3">🦾 AI 예측</th><th class="th-group group-pick">🎯</th><th class="th-group group-result">🏆</th></tr>
+        <tr><th class="col-match">매치업</th><th class="col-ai1">스탯티즈</th><th class="col-ai2">예측확률</th><th class="col-ai3">-</th><th class="col-pick">최종픽</th><th class="col-result">결과</th></tr></thead>
+        <tbody>${rows}</tbody></table></div></div>`;
+  }).join('');
+}
+
+// ── 베팅내역 렌더 ──
+function renderBetting(){
+  const uHtml=[...DATA.keys()].sort((a,b)=>DATA[b].date.localeCompare(DATA[a].date)).map(i=>{
+    const d=DATA[i],item=d.unanimousBet;
+    if(!item)return'';
+    const games=item.customGames||getUnanimousGames(d);
+    if(!games.length)return'';
+    const status=calcBetStatus(games,item);
+    return`<div class="day-card" style="margin-bottom:14px"><div class="day-header" style="flex-direction:column;align-items:stretch;gap:4px;">
+      <div class="bet-card-header-row1">
+        <span class="day-date">📅 ${d.date}</span>
+        <div style="display:flex;align-items:center;gap:8px;">
+          <span class="day-badge ${status}">${status==='hit'?'✅ 적중':status==='miss'?'❌ 미적중':status==='cancel'?'취소':'⏳ 대기중'}</span>
+          <button class="edit-btn" onclick="openEditModal('unanimous',${i})">✏️</button>
+        </div>
+      </div>
+      <div class="bet-card-summary-row"><span class="bet-header-summary" style="margin-left:0;">${games.length}경기 / 배당 <strong>${item.odds}배</strong> / 베팅 ${item.amount.toLocaleString()}원 ${status==='hit'?`/ <strong style="color:var(--green)">📈 +${Math.round(item.amount*(item.odds-1)).toLocaleString()}원</strong>`:`/ <span style="color:#6b9fce">예상 ${Math.round(item.amount*item.odds).toLocaleString()}원</span>`}</span></div>
+      </div><div class="day-body"><div class="game-list-header"><span class="col-match">매치업</span><span class="col-pick">최종픽</span><span class="col-result">결과</span></div>
+      ${games.map(g=>{const rs=g.result===null?'pending':g.result==='취소'||g.result==='무승부'?'cancel':g.pick===g.result?'hit':'miss';return`<div class="game-row"><span class="game-matchup">${g.matchup}</span><span class="col-pick-cell"><span class="pick-chip">${g.pick}</span></span><span class="col-result-cell game-result ${rs}">${g.result||'대기'}</span></div>`;}).join('')}
+      ${status!=='hit'?`<div style="display:flex;justify-content:flex-end;margin-top:8px;padding-top:8px;border-top:1px solid var(--border)"><span class="${status==='pending'?'neu':'neg'}" style="font-weight:900;font-size:13px">${status==='pending'?'-':fmt(-item.amount)}</span></div>`:''}
+      </div></div>`;
+  }).join('');
+
+  const a5Html=[...DATA.keys()].sort((a,b)=>DATA[b].date.localeCompare(DATA[a].date)).map(i=>{
+    const d=DATA[i],bets=d.allFiveBets||[];
+    if(!bets.length)return'';
+    return bets.map((item,bi)=>{
+      const dg=item.customGames||d.games;
+      const status=calcBetStatus(dg,item);
+      const labels=item.pickLabels||dg.map(g=>g.pick);
+      return`<div class="day-card" style="margin-bottom:14px"><div class="day-header" style="flex-direction:column;align-items:stretch;gap:4px;">
+        <div class="bet-card-header-row1">
+          <span class="day-date">📅 ${d.date} <span style="font-size:10px;font-weight:700;color:#5ba8ff;background:rgba(91,168,255,0.10);border-radius:6px;padding:2px 8px;">${item.label||'조합'+(bi+1)}</span></span>
+          <div style="display:flex;align-items:center;gap:8px;">
+            <span class="day-badge ${status}">${status==='hit'?'✅ 적중':status==='miss'?'❌ 미적중':status==='cancel'?'취소':'⏳ 대기중'}</span>
+            <button class="edit-btn" onclick="openEditModal('allfive',${i},${bi})">✏️</button>
+          </div>
+        </div>
+        <div class="bet-card-summary-row"><span class="bet-header-summary" style="margin-left:0;">${dg.length}경기 / 배당 <strong>${item.odds}배</strong> / 베팅 ${item.amount.toLocaleString()}원 ${status==='hit'?`/ <strong style="color:var(--green)">📈 +${Math.round(item.amount*(item.odds-1)).toLocaleString()}원</strong>`:`/ <span style="color:#6b9fce">예상 ${Math.round(item.amount*item.odds).toLocaleString()}원</span>`}</span></div>
+        </div><div class="day-body"><div class="game-list-header"><span class="col-match">매치업</span><span class="col-pick">최종픽</span><span class="col-result">결과</span></div>
+        ${dg.map((g,gi)=>{const rs=g.result===null?'pending':g.result==='취소'||g.result==='무승부'?'cancel':g.pick===g.result?'hit':'miss';return`<div class="game-row"><span class="game-matchup">${g.matchup}</span><span class="col-pick-cell"><span class="pick-chip">${labels[gi]||g.pick}</span></span><span class="col-result-cell game-result ${rs}">${g.result||'대기'}</span></div>`;}).join('')}
+        ${status!=='hit'?`<div style="display:flex;justify-content:flex-end;margin-top:8px;padding-top:8px;border-top:1px solid var(--border)"><span class="${status==='pending'?'neu':'neg'}" style="font-weight:900;font-size:13px">${status==='pending'?'-':fmt(-item.amount)}</span></div>`:''}
+        </div></div>`;
+    }).join('');
+  }).join('');
+
+  const sHtml=[...DATA.keys()].sort((a,b)=>DATA[b].date.localeCompare(DATA[a].date)).map(i=>{
+    const d=DATA[i],bets=d.singleBets||[];
+    if(!bets.length)return'';
+    const pending=bets.some(b=>b.betResult==='pending');
+    const hitCount=bets.filter(b=>b.betResult==='hit').length;
+    const doneCount=bets.filter(b=>b.betResult!=='pending'&&b.betResult!=='cancel').length;
+    const dayProfit=bets.reduce((s,b)=>s+(getProfit(b)||0),0);
+    const badgeColor=pending?'pending':hitCount===doneCount&&doneCount>0?'hit':hitCount===0&&doneCount>0?'miss':'hit';
+    const badgeText=pending?'⏳ 대기중':`${hitCount}/${doneCount} 적중`;
+    const profitColor=dayProfit>=0?'var(--green)':'var(--red)';
+    return`<div class="day-card" style="margin-bottom:14px"><div class="day-header" style="flex-direction:column;align-items:stretch;gap:4px;">
+      <div class="bet-card-header-row1">
+        <span class="day-date">📅 ${d.date}</span>
+        <div style="display:flex;align-items:center;gap:8px;">
+          <span class="day-badge ${badgeColor}">${badgeText}</span>
+          <button class="edit-btn" onclick="openEditModal('single',${i},0)">✏️ 전체수정</button>
+        </div>
+      </div>
+      <div class="bet-card-summary-row"><span class="bet-header-summary" style="margin-left:0;">${bets.length}경기 / 베팅 ${(bets.length*100).toLocaleString()}원${!pending?` / <strong style="color:${profitColor}">${fmt(dayProfit)}</strong>`:`/ <span style="color:#6b9fce">예상 ${bets.reduce((s,b)=>s+Math.round(b.amount*b.odds),0).toLocaleString()}원</span>`}</span></div>
+    </div>
+      <div class="day-body"><div class="game-list-header"><span class="col-match">매치업 / 픽</span><span class="col-pick">배당</span><span class="col-result">결과</span></div>
+      ${bets.map((b,bi)=>{
+        const rs=b.result===null?'pending':b.result==='취소'?'cancel':b.pick===b.result?'hit':'miss';
+        const st=b.betResult!=='pending'?b.betResult:rs;
+        const profit=st==='hit'?Math.round(b.amount*(b.odds-1)):st==='cancel'?0:-b.amount;
+        return`<div class="game-row" style="position:relative;">
+          <span class="game-matchup">${b.matchup} <span class="pick-chip">${b.pick}</span></span>
+          <span class="col-pick-cell" style="color:var(--gold2);font-weight:700;">${b.odds}배</span>
+          <span class="col-result-cell game-result ${rs}">${b.result||'대기'}</span>
+          <button class="edit-btn" onclick="openEditModal('single',${i},${bi})" style="font-size:12px;">✏️</button>
+        </div>
+        <div style="display:flex;justify-content:space-between;padding:2px 20px 6px;font-size:11px;border-bottom:1px solid rgba(255,255,255,0.04);"><span style="color:var(--gray);">베팅 ${st==='cancel'?'0(환불)':b.amount.toLocaleString()}원</span><span class="${st==='hit'?'pos':st==='cancel'?'neu':'neg'}" style="font-weight:700;">${st==='cancel'?'취소(환불)':fmt(profit)}</span></div>`;
+      }).join('')}</div></div>`;
+  }).join('');
+
+  document.getElementById('unanimous-list').innerHTML=uHtml||'<div class="empty">📝 만장일치 베팅 내역이 없습니다.</div>';
+  document.getElementById('allfive-list').innerHTML=a5Html||'<div class="empty">📝 도전경기 베팅 내역이 없습니다.</div>';
+  document.getElementById('single-list').innerHTML=sHtml||'<div class="empty">📝 단독베팅 내역이 없습니다.</div>';
+}
+
+function filterBetType(type){
+  ['unanimous','allfive','single'].forEach(t=>{
+    document.getElementById('btn-'+t).classList.toggle('active',t===type);
+    document.getElementById('panel-'+t).classList.toggle('active',t===type);
+  });
+}
+
+function showTab(id){
+  document.querySelectorAll('.tab').forEach((t,i)=>t.classList.toggle('active',['dashboard','records','betting'][i]===id));
+  document.querySelectorAll('.panel').forEach(p=>p.classList.toggle('active',p.id==='tab-'+id));
+  document.getElementById('bet-filter-sticky').style.display=id==='betting'?'block':'none';
+  if(id==='records')renderRecords();
+  if(id==='betting')renderBetting();
+  if(id==='dashboard'){showMain();}
+}
+
+// 초기화
+showMain();
+renderRecords();
+</script>
+</body>
+</html>
+<!-- ✅ 정말 완벽한 파일 - 2026.06.25 백업 기준점 -->
