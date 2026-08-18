@@ -1,0 +1,116 @@
+{
+  "date": "2026-08-18",
+  "based_on_games_through": "2026-08-16",
+  "teams": [
+    {
+      "team": "KT",
+      "recent10_pct": 70,
+      "recent10_record": "7승 3패",
+      "recent30_pct": 63.3,
+      "recent30_record": "19승 11패",
+      "all_pct": 64.3,
+      "all_record": "27승 15패",
+      "gap_10_vs_30": 6.7,
+      "status": "혼조"
+    },
+    {
+      "team": "삼성",
+      "recent10_pct": 50,
+      "recent10_record": "5승 5패",
+      "recent30_pct": 66.7,
+      "recent30_record": "20승 10패",
+      "all_pct": 62.2,
+      "all_record": "28승 17패",
+      "gap_10_vs_30": -16.7,
+      "status": "하락전환"
+    },
+    {
+      "team": "LG",
+      "recent10_pct": 30,
+      "recent10_record": "3승 7패",
+      "recent30_pct": 33.3,
+      "recent30_record": "10승 20패",
+      "all_pct": 43.5,
+      "all_record": "20승 26패",
+      "gap_10_vs_30": -3.3,
+      "status": "안정"
+    },
+    {
+      "team": "두산",
+      "recent10_pct": 60,
+      "recent10_record": "6승 4패",
+      "recent30_pct": 63.3,
+      "recent30_record": "19승 11패",
+      "all_pct": 55.8,
+      "all_record": "24승 19패",
+      "gap_10_vs_30": -3.3,
+      "status": "혼조"
+    },
+    {
+      "team": "KIA",
+      "recent10_pct": 50,
+      "recent10_record": "5승 5패",
+      "recent30_pct": 50,
+      "recent30_record": "15승 15패",
+      "all_pct": 52.3,
+      "all_record": "23승 21패",
+      "gap_10_vs_30": 0,
+      "status": "안정"
+    },
+    {
+      "team": "한화",
+      "recent10_pct": 40,
+      "recent10_record": "4승 6패",
+      "recent30_pct": 46.7,
+      "recent30_record": "14승 16패",
+      "all_pct": 44.2,
+      "all_record": "19승 24패",
+      "gap_10_vs_30": -6.7,
+      "status": "혼조"
+    },
+    {
+      "team": "NC",
+      "recent10_pct": 40,
+      "recent10_record": "4승 6패",
+      "recent30_pct": 46.7,
+      "recent30_record": "14승 16패",
+      "all_pct": 52.5,
+      "all_record": "21승 19패",
+      "gap_10_vs_30": -6.7,
+      "status": "안정"
+    },
+    {
+      "team": "롯데",
+      "recent10_pct": 50,
+      "recent10_record": "5승 5패",
+      "recent30_pct": 46.7,
+      "recent30_record": "14승 16패",
+      "all_pct": 51.1,
+      "all_record": "23승 22패",
+      "gap_10_vs_30": 3.3,
+      "status": "혼조"
+    },
+    {
+      "team": "SSG",
+      "recent10_pct": 50,
+      "recent10_record": "5승 5패",
+      "recent30_pct": 40,
+      "recent30_record": "12승 18패",
+      "all_pct": 34.8,
+      "all_record": "16승 30패",
+      "gap_10_vs_30": 10,
+      "status": "상승전환"
+    },
+    {
+      "team": "키움",
+      "recent10_pct": 40,
+      "recent10_record": "4승 6패",
+      "recent30_pct": 46.7,
+      "recent30_record": "14승 16패",
+      "all_pct": 41.3,
+      "all_record": "19승 27패",
+      "gap_10_vs_30": -6.7,
+      "status": "혼조"
+    }
+  ]
+}
