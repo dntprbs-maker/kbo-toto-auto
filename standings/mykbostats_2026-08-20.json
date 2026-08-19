@@ -1,0 +1,86 @@
+{
+  "source": "mykbostats.com",
+  "date": "2026-08-20",
+  "teams": [
+    {
+      "team": "KT",
+      "wins": 62,
+      "losses": 41,
+      "win_pct": 0.602,
+      "last10": "5W 0D 5L",
+      "games_behind": 0
+    },
+    {
+      "team": "삼성",
+      "wins": 63,
+      "losses": 42,
+      "win_pct": 0.6,
+      "last10": "5W 0D 5L",
+      "games_behind": 0
+    },
+    {
+      "team": "LG",
+      "wins": 60,
+      "losses": 48,
+      "win_pct": 0.556,
+      "last10": "5W 0D 5L",
+      "games_behind": 4.5
+    },
+    {
+      "team": "KIA",
+      "wins": 58,
+      "losses": 48,
+      "win_pct": 0.547,
+      "last10": "7W 0D 3L",
+      "games_behind": 5.5
+    },
+    {
+      "team": "두산",
+      "wins": 57,
+      "losses": 48,
+      "win_pct": 0.543,
+      "last10": "6W 1D 3L",
+      "games_behind": 6
+    },
+    {
+      "team": "한화",
+      "wins": 48,
+      "losses": 55,
+      "win_pct": 0.466,
+      "last10": "2W 0D 8L",
+      "games_behind": 14
+    },
+    {
+      "team": "NC",
+      "wins": 46,
+      "losses": 54,
+      "win_pct": 0.46,
+      "last10": "4W 0D 6L",
+      "games_behind": 14.5
+    },
+    {
+      "team": "롯데",
+      "wins": 48,
+      "losses": 57,
+      "win_pct": 0.457,
+      "last10": "6W 0D 4L",
+      "games_behind": 15
+    },
+    {
+      "team": "SSG",
+      "wins": 44,
+      "losses": 63,
+      "win_pct": 0.411,
+      "last10": "6W 0D 4L",
+      "games_behind": 20
+    },
+    {
+      "team": "키움",
+      "wins": 40,
+      "losses": 70,
+      "win_pct": 0.364,
+      "last10": "3W 0D 7L",
+      "games_behind": 25.5
+    }
+  ]
+}
