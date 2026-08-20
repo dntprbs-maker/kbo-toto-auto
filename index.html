@@ -7568,7 +7568,11 @@ const DATA=[
         "result": "KIA"
       }
     ],
-    "unanimousBet": null,
+    "unanimousBet": {
+      "odds": 0,
+      "amount": 0,
+      "betResult": "cancel"
+    },
     "allFiveBets": [
       {
         "label": "도전경기",
@@ -8555,7 +8559,20 @@ function renderBetting(){
     const d=DATA[i],item=d.unanimousBet;
     if(!item)return'';
     const games=item.customGames||getUnanimousGames(d);
-    if(!games.length)return'';
+    if(!games.length){
+      if(item.betResult==='cancel'){
+        return`<div class="day-card" style="margin-bottom:14px"><div class="day-header" style="flex-direction:column;align-items:stretch;gap:4px;">
+      <div class="bet-card-header-row1">
+        <span class="day-date">📅 ${d.date}</span>
+        <div style="display:flex;align-items:center;gap:8px;">
+          <span class="day-badge cancel">해당없음</span>
+        </div>
+      </div>
+      <div class="bet-card-summary-row"><span class="bet-header-summary" style="margin-left:0;">이날은 3AI 만장일치 경기가 없었습니다.</span></div>
+      </div></div>`;
+      }
+      return'';
+    }
     const status=calcBetStatus(games,item);
     return`<div class="day-card" style="margin-bottom:14px"><div class="day-header" style="flex-direction:column;align-items:stretch;gap:4px;">
       <div class="bet-card-header-row1">
