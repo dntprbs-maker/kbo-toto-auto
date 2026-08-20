@@ -14,6 +14,7 @@
 
 ## ✅ 완료 로그
 
+- [x] **Vercel 배포 잔재 정리 — 안 쓰는 서버 함수·React 앱 삭제** — n8n 전환 후 아무도 호출하지 않던 `api/` 15개(각 회사 API 직접 호출 경로 포함)와 배포되지 않던 `src/` React 관리자 앱, 빌드 설정을 전부 삭제. Vercel Framework Preset을 Vite → Other, Output Directory를 루트로 변경해 빌드 없이 정적 서빙. — 완료: 2026-08-20, 커밋 bbf8711
 - [x] **매일 15:00 예측 병합 후 index.html·statiz.html·odds.html 자동 입력 구성 및 실행 확인** — 완료: 2026-08-20, 커밋 15fe4e1
 - [x] **반짝이·초롱이 AI 예측을 12:00 순차 실행하고 각각 저장하도록 구성** — 완료: 2026-08-20, 커밋 efee806
 - [x] **STATIZ 팀별 선발 WAR·불펜 WAR 10개 구단 자동 수집 및 team_war 저장 구성** — 완료: 2026-08-20, 커밋 db455f6
