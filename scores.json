@@ -1259,6 +1259,35 @@
           "winner": "NC"
         }
       ]
+    },
+    {
+      "date": "2026-08-22",
+      "scores": [
+        {
+          "matchup": "KIA vs 키움",
+          "score": "1-3"
+        },
+        {
+          "matchup": "삼성 vs NC",
+          "score": "8-6"
+        }
+      ],
+      "odds": [
+        {
+          "home": "키움",
+          "ho": 2.13,
+          "away": "KIA",
+          "ao": 1.5,
+          "winner": "키움"
+        },
+        {
+          "home": "NC",
+          "ho": 2.07,
+          "away": "삼성",
+          "ao": 1.53,
+          "winner": "삼성"
+        }
+      ]
     }
   ]
 }
