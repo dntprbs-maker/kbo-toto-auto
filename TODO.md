@@ -1,9 +1,13 @@
 # 📋 자동토토 작업 목록
 
-> 관리 기준
-> - 작업일은 한국시간 오전 09:00부터 다음 날 오전 08:59까지입니다.
-> - n8n 작업 내역은 [n8n KBO 노드별 작업시간표](https://docs.google.com/spreadsheets/d/1qWIxn_CRuJ6VelGgCvroGopcvvqR2tCrX0wUG2RT4UU/edit)와 대조합니다.
-> - 새 항목은 미해결 맨 위에 추가하고, 완료되면 완료 로그 맨 위로 옮깁니다.
+> **관리 기준** — 전 저장소 공통 TODO 관리 규칙 v2를 따릅니다. 전문은 `CLAUDE.md` / `AGENTS.md` 참고.
+> - 섹션은 `🔴 미해결`, `✅ 완료 로그` 두 개만 사용합니다. 날짜별 섹션 헤더는 만들지 않습니다
+> - 새 항목은 `🔴 미해결` 맨 위에 추가: `(등록: YYYY-MM-DD)`
+> - 완료 항목은 **지우지 말고** `✅ 완료 로그` 맨 위로: `- [x] 항목 내용 — 완료: YYYY-MM-DD, 커밋 abc1234`
+> - 완료 로그는 다른 파일로 옮기지 않고 무기한 누적합니다
+> - 작업일은 한국시간 오전 09:00부터 다음 날 오전 08:59까지입니다
+> - n8n 작업 내역은 [n8n KBO 노드별 작업시간표](https://docs.google.com/spreadsheets/d/1qWIxn_CRuJ6VelGgCvroGopcvvqR2tCrX0wUG2RT4UU/edit)와 대조합니다
+> - 예전 `작업해야할_항목.md`는 이 파일로 통합돼 제거됐습니다(커밋 `c9e0969`). 코덱스도 이 파일을 씁니다
 
 ## 🔴 미해결
 

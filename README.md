@@ -8,6 +8,14 @@
 
 
 
+## 작업 관리
+
+할 일은 `TODO.md` 하나로만 관리합니다. 예전 `작업해야할_항목.md`는 통합돼 제거됐습니다.
+관리 규칙(전 저장소 공통 v2)은 `CLAUDE.md` / `AGENTS.md`에 있습니다 — **완료 항목은 지우지 말고**
+`✅ 완료 로그` 섹션으로 옮기세요.
+
+---
+
 # React + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
