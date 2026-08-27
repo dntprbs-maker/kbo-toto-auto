@@ -1474,6 +1474,57 @@
           "winner": "삼성"
         }
       ]
+    },
+    {
+      "date": "2026-08-27",
+      "scores": [
+        {
+          "matchup": "한화 vs SSG",
+          "score": "6-13"
+        },
+        {
+          "matchup": "NC vs LG",
+          "score": "13-3"
+        },
+        {
+          "matchup": "두산 vs KT",
+          "score": "4-5"
+        },
+        {
+          "matchup": "삼성 vs 키움",
+          "score": "15-2"
+        }
+      ],
+      "odds": [
+        {
+          "home": "SSG",
+          "ho": 2.09,
+          "away": "한화",
+          "ao": 1.52,
+          "winner": "SSG"
+        },
+        {
+          "home": "LG",
+          "ho": 1.65,
+          "away": "NC",
+          "ao": 1.89,
+          "winner": "NC"
+        },
+        {
+          "home": "KT",
+          "ho": 1.38,
+          "away": "두산",
+          "ao": 2.43,
+          "winner": "KT"
+        },
+        {
+          "home": "키움",
+          "ho": 2.49,
+          "away": "삼성",
+          "ao": 1.36,
+          "winner": "삼성"
+        }
+      ]
     }
   ]
 }
