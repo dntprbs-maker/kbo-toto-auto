@@ -1412,6 +1412,68 @@
           "winner": "무승부"
         }
       ]
+    },
+    {
+      "date": "2026-08-26",
+      "scores": [
+        {
+          "matchup": "한화 vs SSG",
+          "score": "1-6"
+        },
+        {
+          "matchup": "롯데 vs KIA",
+          "score": "11-16"
+        },
+        {
+          "matchup": "NC vs LG",
+          "score": "0-8"
+        },
+        {
+          "matchup": "두산 vs KT",
+          "score": "4-5"
+        },
+        {
+          "matchup": "삼성 vs 키움",
+          "score": "12-2"
+        }
+      ],
+      "odds": [
+        {
+          "home": "SSG",
+          "ho": 2.26,
+          "away": "한화",
+          "ao": 1.44,
+          "winner": "SSG"
+        },
+        {
+          "home": "KIA",
+          "ho": 1.8,
+          "away": "롯데",
+          "ao": 1.72,
+          "winner": "KIA"
+        },
+        {
+          "home": "LG",
+          "ho": 1.66,
+          "away": "NC",
+          "ao": 1.87,
+          "winner": "LG"
+        },
+        {
+          "home": "KT",
+          "ho": 1.7,
+          "away": "두산",
+          "ao": 1.82,
+          "winner": "KT"
+        },
+        {
+          "home": "키움",
+          "ho": 2.6,
+          "away": "삼성",
+          "ao": 1.33,
+          "winner": "삼성"
+        }
+      ]
     }
   ]
 }
