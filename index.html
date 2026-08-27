@@ -8640,7 +8640,7 @@ const DATA=[
         "ai2": "LG",
         "ai3": "LG",
         "pick": "LG",
-        "result": null
+        "result": "NC"
       },
       {
         "matchup": "한화 vs SSG",
@@ -8648,7 +8648,7 @@ const DATA=[
         "ai2": "한화",
         "ai3": "SSG",
         "pick": "SSG",
-        "result": null
+        "result": "SSG"
       },
       {
         "matchup": "롯데 vs KIA",
@@ -8656,7 +8656,7 @@ const DATA=[
         "ai2": "KIA",
         "ai3": "KIA",
         "pick": "KIA",
-        "result": null
+        "result": "취소"
       },
       {
         "matchup": "두산 vs KT",
@@ -8664,7 +8664,7 @@ const DATA=[
         "ai2": "KT",
         "ai3": "KT",
         "pick": "KT",
-        "result": null
+        "result": "KT"
       },
       {
         "matchup": "삼성 vs 키움",
@@ -8672,80 +8672,88 @@ const DATA=[
         "ai2": "키움",
         "ai3": "삼성",
         "pick": "삼성",
-        "result": null
+        "result": "삼성"
       }
     ],
     "unanimousBet": {
-      "odds": 3.4,
+      "odds": 2.3,
       "amount": 100,
-      "betResult": "pending",
+      "betResult": "miss",
       "customGames": [
         {
           "matchup": "NC vs LG",
-          "pick": "LG"
+          "pick": "LG",
+          "result": "NC"
         },
         {
           "matchup": "롯데 vs KIA",
-          "pick": "KIA"
+          "pick": "KIA",
+          "result": "취소"
         },
         {
           "matchup": "두산 vs KT",
-          "pick": "KT"
+          "pick": "KT",
+          "result": "KT"
         }
-      ]
+      ],
+      "note": "롯데 vs KIA 취소/무승부, 나머지 경기만으로 배당 재계산"
     },
     "allFiveBets": [
       {
         "label": "도전경기",
-        "odds": 9.6,
+        "odds": 6.5,
         "amount": 100,
-        "betResult": "pending",
+        "betResult": "miss",
         "pickLabels": [
           "LG",
           "SSG",
           "KIA",
           "KT",
           "삼성"
-        ]
+        ],
+        "note": "롯데 vs KIA 취소/무승부, 나머지 경기만으로 배당 재계산"
       },
       {
         "label": "도전경기(반짝이)",
-        "odds": 9.6,
+        "odds": 6.5,
         "amount": 100,
-        "betResult": "pending",
+        "betResult": "miss",
         "pickLabels": [
           "LG",
           "SSG",
           "KIA",
           "KT",
           "삼성"
-        ]
+        ],
+        "note": "롯데 vs KIA 취소/무승부, 나머지 경기만으로 배당 재계산"
       },
       {
         "label": "도전경기(별이)",
-        "odds": 12.7,
+        "odds": 8.7,
         "amount": 100,
-        "betResult": "pending",
+        "betResult": "miss",
         "pickLabels": [
           "LG",
           "한화",
           "KIA",
           "KT",
           "키움"
-        ]
+        ],
+        "note": "롯데 vs KIA 취소/무승부, 나머지 경기만으로 배당 재계산"
       },
       {
         "label": "도전경기(초롱이)",
-        "odds": 9.6,
+        "odds": 6.5,
         "amount": 100,
-        "betResult": "pending",
+        "betResult": "miss",
         "pickLabels": [
           "LG",
           "SSG",
           "KIA",
           "KT",
           "삼성"
-        ]
+        ],
+        "note": "롯데 vs KIA 취소/무승부, 나머지 경기만으로 배당 재계산"
       }
     ],
     "singleBets": [
@@ -8754,35 +8762,40 @@ const DATA=[
         "pick": "LG",
         "odds": 1.65,
         "amount": 100,
-        "betResult": "pending"
+        "betResult": "miss",
+        "result": "NC"
       },
       {
         "matchup": "한화 vs SSG",
         "pick": "SSG",
         "odds": 2.09,
         "amount": 100,
-        "betResult": "pending"
+        "betResult": "hit",
+        "result": "SSG"
       },
       {
         "matchup": "롯데 vs KIA",
         "pick": "KIA",
         "odds": 1.47,
         "amount": 100,
-        "betResult": "pending"
+        "betResult": "cancel",
+        "result": "취소"
       },
       {
         "matchup": "두산 vs KT",
         "pick": "KT",
         "odds": 1.38,
         "amount": 100,
-        "betResult": "pending"
+        "betResult": "hit",
+        "result": "KT"
       },
       {
         "matchup": "삼성 vs 키움",
         "pick": "삼성",
         "odds": 1.36,
         "amount": 100,
-        "betResult": "pending"
+        "betResult": "hit",
+        "result": "삼성"
       }
     ]
   }
