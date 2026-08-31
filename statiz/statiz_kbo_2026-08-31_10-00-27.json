@@ -1,0 +1,245 @@
+{
+  "source": "STATIZ",
+  "collected_at": "2026-08-31T01:00:27.817Z",
+  "target_date": "2026-08-31",
+  "status": "ok",
+  "prediction_games": [],
+  "team_standings": [
+    {
+      "rank": 1,
+      "team": "삼성",
+      "games": 115,
+      "wins": 68,
+      "draws": 3,
+      "losses": 44,
+      "games_behind": 0,
+      "win_pct": 0.607,
+      "runs": 672,
+      "runs_allowed": 522
+    },
+    {
+      "rank": 2,
+      "team": "KT",
+      "games": 112,
+      "wins": 66,
+      "draws": 3,
+      "losses": 43,
+      "games_behind": 0.5,
+      "win_pct": 0.606,
+      "runs": 611,
+      "runs_allowed": 521
+    },
+    {
+      "rank": 3,
+      "team": "KIA",
+      "games": 115,
+      "wins": 63,
+      "draws": 2,
+      "losses": 50,
+      "games_behind": 5.5,
+      "win_pct": 0.558,
+      "runs": 632,
+      "runs_allowed": 552
+    },
+    {
+      "rank": 4,
+      "team": "LG",
+      "games": 116,
+      "wins": 64,
+      "draws": 1,
+      "losses": 51,
+      "games_behind": 5.5,
+      "win_pct": 0.557,
+      "runs": 603,
+      "runs_allowed": 596
+    },
+    {
+      "rank": 5,
+      "team": "두산",
+      "games": 117,
+      "wins": 61,
+      "draws": 4,
+      "losses": 52,
+      "games_behind": 7.5,
+      "win_pct": 0.54,
+      "runs": 555,
+      "runs_allowed": 498
+    },
+    {
+      "rank": 6,
+      "team": "NC",
+      "games": 111,
+      "wins": 51,
+      "draws": 2,
+      "losses": 58,
+      "games_behind": 15.5,
+      "win_pct": 0.468,
+      "runs": 574,
+      "runs_allowed": 596
+    },
+    {
+      "rank": 7,
+      "team": "롯데",
+      "games": 113,
+      "wins": 50,
+      "draws": 2,
+      "losses": 61,
+      "games_behind": 17.5,
+      "win_pct": 0.45,
+      "runs": 542,
+      "runs_allowed": 575
+    },
+    {
+      "rank": 8,
+      "team": "한화",
+      "games": 114,
+      "wins": 49,
+      "draws": 3,
+      "losses": 62,
+      "games_behind": 18.5,
+      "win_pct": 0.441,
+      "runs": 651,
+      "runs_allowed": 650
+    },
+    {
+      "rank": 9,
+      "team": "SSG",
+      "games": 118,
+      "wins": 48,
+      "draws": 5,
+      "losses": 65,
+      "games_behind": 20.5,
+      "win_pct": 0.425,
+      "runs": 590,
+      "runs_allowed": 691
+    },
+    {
+      "rank": 10,
+      "team": "키움",
+      "games": 121,
+      "wins": 42,
+      "draws": 3,
+      "losses": 76,
+      "games_behind": 29,
+      "win_pct": 0.356,
+      "runs": 470,
+      "runs_allowed": 699
+    }
+  ],
+  "yesterday_results": [
+    {
+      "index": 1,
+      "date": "08.30",
+      "away_team": "NC",
+      "away_score": 10,
+      "home_team": "한화",
+      "home_score": 7
+    },
+    {
+      "index": 2,
+      "date": "08.30",
+      "away_team": "키움",
+      "away_score": 1,
+      "home_team": "두산",
+      "home_score": 15
+    },
+    {
+      "index": 3,
+      "date": "08.29",
+      "away_team": "LG",
+      "away_score": 8,
+      "home_team": "롯데",
+      "home_score": 3
+    },
+    {
+      "index": 4,
+      "date": "08.29",
+      "away_team": "SSG",
+      "away_score": 1,
+      "home_team": "KIA",
+      "home_score": 2
+    },
+    {
+      "index": 5,
+      "date": "08.29",
+      "away_team": "KT",
+      "away_score": 2,
+      "home_team": "삼성",
+      "home_score": 4
+    }
+  ],
+  "today_schedule": [
+    {
+      "index": 6,
+      "away_team": "LG",
+      "home_team": "두산",
+      "venue": "잠실",
+      "time": "18:30"
+    },
+    {
+      "index": 7,
+      "away_team": "SSG",
+      "home_team": "키움",
+      "venue": "고척",
+      "time": "18:30"
+    },
+    {
+      "index": 8,
+      "away_team": "한화",
+      "home_team": "KT",
+      "venue": "수원",
+      "time": "18:30"
+    },
+    {
+      "index": 9,
+      "away_team": "롯데",
+      "home_team": "삼성",
+      "venue": "대구",
+      "time": "18:30"
+    },
+    {
+      "index": 10,
+      "away_team": "KIA",
+      "home_team": "NC",
+      "venue": "창원",
+      "time": "18:30"
+    }
+  ],
+  "pitcher_rankings": {
+    "ERA": [
+      {
+        "rank": 1,
+        "player": "곽빈",
+        "value": 2.36
+      },
+      {
+        "rank": 2,
+        "player": "최민석",
+        "value": 2.61
+      },
+      {
+        "rank": 3,
+        "player": "올러",
+        "value": 3.01
+      }
+    ],
+    "WHIP": [
+      {
+        "rank": 1,
+        "player": "올러",
+        "value": 1.06
+      },
+      {
+        "rank": 2,
+        "player": "곽빈",
+        "value": 1.09
+      },
+      {
+        "rank": 3,
+        "player": "알칸타라",
+        "value": 1.09
+      }
+    ]
+  },
+  "errors": []
+}
