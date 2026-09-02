@@ -1,0 +1,56 @@
+{
+  "collected_date": "2026-09-02",
+  "source": "STATIZ (statiz.co.kr)",
+  "teams": [
+    {
+      "team": "삼성",
+      "starter_war": 14.9,
+      "bullpen_war": 9.21
+    },
+    {
+      "team": "KIA",
+      "starter_war": 12.9,
+      "bullpen_war": 3.77
+    },
+    {
+      "team": "kt",
+      "starter_war": 16.12,
+      "bullpen_war": 6.15
+    },
+    {
+      "team": "LG",
+      "starter_war": 9.69,
+      "bullpen_war": 3.47
+    },
+    {
+      "team": "두산",
+      "starter_war": 16.16,
+      "bullpen_war": 5.71
+    },
+    {
+      "team": "NC",
+      "starter_war": 12.25,
+      "bullpen_war": 0.21
+    },
+    {
+      "team": "한화",
+      "starter_war": 10.23,
+      "bullpen_war": -0.1
+    },
+    {
+      "team": "롯데",
+      "starter_war": 14.63,
+      "bullpen_war": 2.4
+    },
+    {
+      "team": "SSG",
+      "starter_war": 6.69,
+      "bullpen_war": 1.57
+    },
+    {
+      "team": "키움",
+      "starter_war": 7.16,
+      "bullpen_war": -4.65
+    }
+  ]
+}
