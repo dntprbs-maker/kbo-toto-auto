@@ -110,7 +110,1917 @@
   <div class="swipe-hint">◀ 이전 날짜 · 다음 날짜 ▶</div>
 
 <script>
-const STATIC_DAYS=[{"date":"2026-09-06","games":[{"home":"키움","ho":1.89,"away":"NC","ao":1.65,"winner":null,"label":"대기","cls":"pending","homeFav":false,"awayFav":true},{"home":"LG","ho":1.97,"away":"삼성","ao":1.59,"winner":null,"label":"대기","cls":"pending","homeFav":false,"awayFav":true},{"home":"롯데","ho":1.85,"away":"한화","ao":1.68,"winner":null,"label":"대기","cls":"pending","homeFav":false,"awayFav":true},{"home":"SSG","ho":2.07,"away":"두산","ao":1.53,"winner":null,"label":"대기","cls":"pending","homeFav":false,"awayFav":true},{"home":"KIA","ho":1.68,"away":"KT","ao":1.85,"winner":null,"label":"대기","cls":"pending","homeFav":true,"awayFav":false}]},{"date":"2026-09-05","games":[{"home":"LG","ho":1.53,"away":"삼성","ao":2.07,"winner":"삼성","label":"삼성","cls":"away-win","homeFav":true,"awayFav":false},{"home":"롯데","ho":1.68,"away":"한화","ao":1.85,"winner":"한화","label":"한화","cls":"away-win","homeFav":true,"awayFav":false},{"home":"SSG","ho":1.86,"away":"두산","ao":1.67,"winner":"SSG","label":"SSG","cls":"home-win","homeFav":false,"awayFav":true},{"home":"KIA","ho":1.87,"away":"KT","ao":1.66,"winner":"KIA","label":"KIA","cls":"home-win","homeFav":false,"awayFav":true},{"home":"키움","ho":2.15,"away":"NC","ao":1.49,"winner":"NC","label":"NC","cls":"away-win","homeFav":false,"awayFav":true}]},{"date":"2026-09-04","games":[{"home":"LG","ho":1.82,"away":"삼성","ao":1.7,"winner":"LG","label":"LG","cls":"home-win","homeFav":false,"awayFav":true},{"home":"롯데","ho":1.64,"away":"한화","ao":1.9,"winner":"한화","label":"한화","cls":"away-win","homeFav":true,"awayFav":false},{"home":"SSG","ho":1.51,"away":"두산","ao":2.11,"winner":"SSG","label":"SSG","cls":"home-win","homeFav":true,"awayFav":false},{"home":"KIA","ho":1.47,"away":"KT","ao":2.19,"winner":"KIA","label":"KIA","cls":"home-win","homeFav":true,"awayFav":false},{"home":"키움","ho":2.05,"away":"NC","ao":1.54,"winner":"NC","label":"NC","cls":"away-win","homeFav":false,"awayFav":true}]},{"date":"2026-09-03","games":[{"home":"두산","ho":1.41,"away":"LG","ao":2.34,"winner":"LG","label":"LG","cls":"away-win","homeFav":true,"awayFav":false},{"home":"삼성","ho":1.35,"away":"롯데","ao":2.53,"winner":"롯데","label":"롯데","cls":"away-win","homeFav":true,"awayFav":false},{"home":"KT","ho":1.44,"away":"한화","ao":2.26,"winner":"KT","label":"KT","cls":"home-win","homeFav":true,"awayFav":false},{"home":"NC","ho":1.99,"away":"KIA","ao":1.58,"winner":"취소","label":"취소","cls":"cancel","homeFav":false,"awayFav":true},{"home":"키움","ho":2.07,"away":"SSG","ao":1.53,"winner":"키움","label":"키움","cls":"home-win","homeFav":false,"awayFav":true}]},{"date":"2026-09-02","games":[{"home":"두산","ho":1.99,"away":"LG","ao":1.58,"winner":"LG","label":"LG","cls":"away-win","homeFav":false,"awayFav":true},{"home":"삼성","ho":1.45,"away":"롯데","ao":2.24,"winner":"삼성","label":"삼성","cls":"home-win","homeFav":true,"awayFav":false},{"home":"KT","ho":1.7,"away":"한화","ao":1.82,"winner":"KT","label":"KT","cls":"home-win","homeFav":true,"awayFav":false},{"home":"NC","ho":1.82,"away":"KIA","ao":1.7,"winner":"NC","label":"NC","cls":"home-win","homeFav":false,"awayFav":true},{"home":"키움","ho":1.82,"away":"SSG","ao":1.7,"winner":"SSG","label":"SSG","cls":"away-win","homeFav":false,"awayFav":true}]},{"date":"2026-09-01","games":[{"home":"두산","ho":1.79,"away":"LG","ao":1.73,"winner":"LG","label":"LG","cls":"away-win","homeFav":false,"awayFav":true},{"home":"삼성","ho":1.49,"away":"롯데","ao":2.15,"winner":"삼성","label":"삼성","cls":"home-win","homeFav":true,"awayFav":false},{"home":"KT","ho":1.57,"away":"한화","ao":2,"winner":"KT","label":"KT","cls":"home-win","homeFav":true,"awayFav":false},{"home":"NC","ho":1.93,"away":"KIA","ao":1.62,"winner":"NC","label":"NC","cls":"home-win","homeFav":false,"awayFav":true},{"home":"키움","ho":1.7,"away":"SSG","ao":1.82,"winner":"SSG","label":"SSG","cls":"away-win","homeFav":true,"awayFav":false}]},{"date":"2026-08-30","games":[{"home":"두산","ho":1.36,"away":"키움","ao":2.49,"winner":"두산","label":"두산","cls":"home-win","homeFav":true,"awayFav":false},{"home":"삼성","ho":1.55,"away":"KT","ao":2.04,"winner":"취소","label":"취소","cls":"cancel","homeFav":true,"awayFav":false},{"home":"롯데","ho":2.24,"away":"LG","ao":1.45,"winner":"취소","label":"취소","cls":"cancel","homeFav":false,"awayFav":true},{"home":"KIA","ho":1.33,"away":"SSG","ao":2.6,"winner":"취소","label":"취소","cls":"cancel","homeFav":true,"awayFav":false},{"home":"한화","ho":1.86,"away":"NC","ao":1.67,"winner":"NC","label":"NC","cls":"away-win","homeFav":false,"awayFav":true}]},{"date":"2026-08-29","games":[{"home":"두산","ho":1.45,"away":"키움","ao":2.24,"winner":"두산","label":"두산","cls":"home-win","homeFav":true,"awayFav":false},{"home":"삼성","ho":1.6,"away":"KT","ao":1.96,"winner":"삼성","label":"삼성","cls":"home-win","homeFav":true,"awayFav":false},{"home":"롯데","ho":2.13,"away":"LG","ao":1.5,"winner":"LG","label":"LG","cls":"away-win","homeFav":false,"awayFav":true},{"home":"KIA","ho":1.5,"away":"SSG","ao":2.13,"winner":"KIA","label":"KIA","cls":"home-win","homeFav":true,"awayFav":false},{"home":"한화","ho":2.13,"away":"NC","ao":1.5,"winner":"NC","label":"NC","cls":"away-win","homeFav":false,"awayFav":true}]},{"date":"2026-08-28","games":[{"home":"두산","ho":1.7,"away":"키움","ao":1.82,"winner":"취소","label":"취소","cls":"cancel","homeFav":true,"awayFav":false},{"home":"삼성","ho":1.75,"away":"KT","ao":1.77,"winner":"취소","label":"취소","cls":"cancel","homeFav":true,"awayFav":false},{"home":"롯데","ho":2.22,"away":"LG","ao":1.46,"winner":"취소","label":"취소","cls":"cancel","homeFav":false,"awayFav":true},{"home":"KIA","ho":1.29,"away":"SSG","ao":2.77,"winner":"취소","label":"취소","cls":"cancel","homeFav":true,"awayFav":false},{"home":"한화","ho":1.75,"away":"NC","ao":1.77,"winner":"취소","label":"취소","cls":"cancel","homeFav":true,"awayFav":false}]},{"date":"2026-08-27","games":[{"home":"LG","ho":1.65,"away":"NC","ao":1.89,"winner":"NC","label":"NC","cls":"away-win","homeFav":true,"awayFav":false},{"home":"SSG","ho":2.09,"away":"한화","ao":1.52,"winner":"SSG","label":"SSG","cls":"home-win","homeFav":false,"awayFav":true},{"home":"KIA","ho":1.47,"away":"롯데","ao":2.19,"winner":"취소","label":"취소","cls":"cancel","homeFav":true,"awayFav":false},{"home":"KT","ho":1.38,"away":"두산","ao":2.43,"winner":"KT","label":"KT","cls":"home-win","homeFav":true,"awayFav":false},{"home":"키움","ho":2.49,"away":"삼성","ao":1.36,"winner":"삼성","label":"삼성","cls":"away-win","homeFav":false,"awayFav":true}]},{"date":"2026-08-26","games":[{"home":"LG","ho":1.66,"away":"NC","ao":1.87,"winner":"LG","label":"LG","cls":"home-win","homeFav":true,"awayFav":false},{"home":"SSG","ho":2.26,"away":"한화","ao":1.44,"winner":"SSG","label":"SSG","cls":"home-win","homeFav":false,"awayFav":true},{"home":"KIA","ho":1.8,"away":"롯데","ao":1.72,"winner":"KIA","label":"KIA","cls":"home-win","homeFav":false,"awayFav":true},{"home":"KT","ho":1.7,"away":"두산","ao":1.82,"winner":"KT","label":"KT","cls":"home-win","homeFav":true,"awayFav":false},{"home":"키움","ho":2.6,"away":"삼성","ao":1.33,"winner":"삼성","label":"삼성","cls":"away-win","homeFav":false,"awayFav":true}]},{"date":"2026-08-25","games":[{"home":"LG","ho":1.5,"away":"NC","ao":2.13,"winner":"LG","label":"LG","cls":"home-win","homeFav":true,"awayFav":false},{"home":"SSG","ho":2.11,"away":"한화","ao":1.51,"winner":"SSG","label":"SSG","cls":"home-win","homeFav":false,"awayFav":true},{"home":"KIA","ho":1.73,"away":"롯데","ao":1.79,"winner":"KIA","label":"KIA","cls":"home-win","homeFav":true,"awayFav":false},{"home":"KT","ho":1.55,"away":"두산","ao":2.04,"winner":"두산","label":"두산","cls":"away-win","homeFav":true,"awayFav":false},{"home":"키움","ho":2.13,"away":"삼성","ao":1.5,"winner":"무승부","label":"무승부","cls":"cancel","homeFav":false,"awayFav":true}]},{"date":"2026-08-23","games":[{"home":"키움","ho":2.92,"away":"KIA","ao":1.26,"winner":"키움","label":"키움","cls":"home-win","homeFav":false,"awayFav":true},{"home":"두산","ho":1.47,"away":"롯데","ao":2.19,"winner":"두산","label":"두산","cls":"home-win","homeFav":true,"awayFav":false},{"home":"SSG","ho":1.93,"away":"KT","ao":1.62,"winner":"KT","label":"KT","cls":"away-win","homeFav":false,"awayFav":true},{"home":"NC","ho":1.8,"away":"삼성","ao":1.72,"winner":"삼성","label":"삼성","cls":"away-win","homeFav":false,"awayFav":true},{"home":"한화","ho":2.09,"away":"LG","ao":1.52,"winner":"LG","label":"LG","cls":"away-win","homeFav":false,"awayFav":true}]},{"date":"2026-08-22","games":[{"home":"키움","ho":2.13,"away":"KIA","ao":1.5,"winner":"키움","label":"키움","cls":"home-win","homeFav":false,"awayFav":true},{"home":"두산","ho":1.47,"away":"롯데","ao":2.19,"winner":"취소","label":"취소","cls":"cancel","homeFav":true,"awayFav":false},{"home":"SSG","ho":1.86,"away":"KT","ao":1.67,"winner":"취소","label":"취소","cls":"cancel","homeFav":false,"awayFav":true},{"home":"NC","ho":2.07,"away":"삼성","ao":1.53,"winner":"삼성","label":"삼성","cls":"away-win","homeFav":false,"awayFav":true},{"home":"한화","ho":2.09,"away":"LG","ao":1.52,"winner":"취소","label":"취소","cls":"cancel","homeFav":false,"awayFav":true}]},{"date":"2026-08-21","games":[{"home":"두산","ho":1.87,"away":"롯데","ao":1.66,"winner":"롯데","label":"롯데","cls":"away-win","homeFav":false,"awayFav":true},{"home":"SSG","ho":2.29,"away":"KT","ao":1.43,"winner":"무승부","label":"무승부","cls":"cancel","homeFav":false,"awayFav":true},{"home":"NC","ho":2.53,"away":"삼성","ao":1.35,"winner":"NC","label":"NC","cls":"home-win","homeFav":false,"awayFav":true},{"home":"한화","ho":1.85,"away":"LG","ao":1.68,"winner":"한화","label":"한화","cls":"home-win","homeFav":false,"awayFav":true},{"home":"키움","ho":2.15,"away":"KIA","ao":1.49,"winner":"KIA","label":"KIA","cls":"away-win","homeFav":false,"awayFav":true}]},{"date":"2026-08-20","games":[{"home":"LG","ho":1.9,"away":"KT","ao":1.64,"winner":"KT","label":"KT","cls":"away-win","homeFav":false,"awayFav":true},{"home":"삼성","ho":1.42,"away":"SSG","ao":2.31,"winner":"SSG","label":"SSG","cls":"away-win","homeFav":true,"awayFav":false},{"home":"롯데","ho":1.66,"away":"키움","ao":1.87,"winner":"롯데","label":"롯데","cls":"home-win","homeFav":true,"awayFav":false},{"home":"NC","ho":1.75,"away":"두산","ao":1.77,"winner":"NC","label":"NC","cls":"home-win","homeFav":true,"awayFav":false},{"home":"한화","ho":1.54,"away":"KIA","ao":2.05,"winner":"KIA","label":"KIA","cls":"away-win","homeFav":true,"awayFav":false}]},{"date":"2026-08-19","games":[{"home":"LG","ho":1.72,"away":"KT","ao":1.8,"winner":"LG","label":"LG","cls":"home-win","homeFav":true,"awayFav":false},{"home":"삼성","ho":1.31,"away":"SSG","ao":2.68,"winner":"삼성","label":"삼성","cls":"home-win","homeFav":true,"awayFav":false},{"home":"롯데","ho":1.38,"away":"키움","ao":2.43,"winner":"롯데","label":"롯데","cls":"home-win","homeFav":true,"awayFav":false},{"home":"NC","ho":1.66,"away":"두산","ao":1.87,"winner":"두산","label":"두산","cls":"away-win","homeFav":true,"awayFav":false},{"home":"한화","ho":1.82,"away":"KIA","ao":1.7,"winner":"KIA","label":"KIA","cls":"away-win","homeFav":false,"awayFav":true}]},{"date":"2026-08-18","games":[{"home":"LG","ho":1.87,"away":"KT","ao":1.66,"winner":"LG","label":"LG","cls":"home-win","homeFav":false,"awayFav":true},{"home":"삼성","ho":1.31,"away":"SSG","ao":2.68,"winner":"SSG","label":"SSG","cls":"away-win","homeFav":true,"awayFav":false},{"home":"롯데","ho":1.38,"away":"키움","ao":2.43,"winner":"롯데","label":"롯데","cls":"home-win","homeFav":true,"awayFav":false},{"home":"NC","ho":1.81,"away":"두산","ao":1.71,"winner":"두산","label":"두산","cls":"away-win","homeFav":false,"awayFav":true},{"home":"한화","ho":1.77,"away":"KIA","ao":1.75,"winner":"KIA","label":"KIA","cls":"away-win","homeFav":false,"awayFav":true}]},{"date":"2026-07-08","games":[{"home":"두산","ho":1.39,"away":"SSG","ao":2.4,"winner":"두산","label":"정배당","cls":"jeong","homeFav":true,"awayFav":false},{"home":"삼성","ho":1.81,"away":"LG","ao":1.71,"winner":"LG","label":"정배당","cls":"jeong","homeFav":false,"awayFav":true},{"home":"롯데","ho":2.4,"away":"KIA","ao":1.39,"winner":"롯데","label":"역배당","cls":"yeok","homeFav":false,"awayFav":true},{"home":"KT","ho":1.34,"away":"키움","ao":2.56,"winner":"KT","label":"정배당","cls":"jeong","homeFav":true,"awayFav":false},{"home":"한화","ho":1.67,"away":"NC","ao":1.86,"winner":"취소","label":"취소","cls":"neu","homeFav":true,"awayFav":false}]},{"date":"2026-07-07","games":[{"home":"두산","ho":1.42,"away":"SSG","ao":2.31,"winner":"SSG","label":"역배당","cls":"yeok","homeFav":true,"awayFav":false},{"home":"삼성","ho":1.66,"away":"LG","ao":1.87,"winner":"삼성","label":"정배당","cls":"jeong","homeFav":true,"awayFav":false},{"home":"롯데","ho":1.69,"away":"KIA","ao":1.84,"winner":"롯데","label":"정배당","cls":"jeong","homeFav":true,"awayFav":false},{"home":"KT","ho":1.49,"away":"키움","ao":2.15,"winner":"KT","label":"정배당","cls":"jeong","homeFav":true,"awayFav":false},{"home":"한화","ho":1.73,"away":"NC","ao":1.79,"winner":"NC","label":"역배당","cls":"yeok","homeFav":true,"awayFav":false}]},{"date":"2026-07-05","games":[{"home":"LG","ho":1.72,"away":"한화","ao":1.8,"winner":"취소","label":"취소","cls":"neu","homeFav":true,"awayFav":false},{"home":"SSG","ho":2.13,"away":"삼성","ao":1.5,"winner":"삼성","label":"정배당","cls":"jeong","homeFav":false,"awayFav":true},{"home":"KIA","ho":1.85,"away":"NC","ao":1.68,"winner":"취소","label":"취소","cls":"neu","homeFav":false,"awayFav":true},{"home":"KT","ho":1.51,"away":"롯데","ao":2.11,"winner":"KT","label":"정배당","cls":"jeong","homeFav":true,"awayFav":false}]},{"date":"2026-07-04","games":[{"home":"LG","ho":1.73,"away":"한화","ao":1.79,"winner":"LG","label":"정배당","cls":"jeong","homeFav":true,"awayFav":false},{"home":"SSG","ho":2.04,"away":"삼성","ao":1.55,"winner":"삼성","label":"정배당","cls":"jeong","homeFav":false,"awayFav":true},{"home":"KIA","ho":2.07,"away":"NC","ao":1.53,"winner":"NC","label":"정배당","cls":"jeong","homeFav":false,"awayFav":true},{"home":"KT","ho":1.63,"away":"롯데","ao":1.91,"winner":"롯데","label":"역배당","cls":"yeok","homeFav":true,"awayFav":false},{"home":"키움","ho":2.15,"away":"두산","ao":1.49,"winner":"두산","label":"정배당","cls":"jeong","homeFav":false,"awayFav":true}]},{"date":"2026-07-03","games":[{"home":"LG","ho":1.5,"away":"한화","ao":2.13,"winner":"한화","label":"역배당","cls":"yeok","homeFav":true,"awayFav":false},{"home":"SSG","ho":2.46,"away":"삼성","ao":1.37,"winner":"삼성","label":"정배당","cls":"jeong","homeFav":false,"awayFav":true},{"home":"KIA","ho":2.04,"away":"NC","ao":1.55,"winner":"NC","label":"정배당","cls":"jeong","homeFav":false,"awayFav":true},{"home":"KT","ho":1.63,"away":"롯데","ao":1.91,"winner":"롯데","label":"역배당","cls":"yeok","homeFav":true,"awayFav":false},{"home":"키움","ho":2.6,"away":"두산","ao":1.33,"winner":"키움","label":"역배당","cls":"yeok","homeFav":false,"awayFav":true}]},{"date":"2026-07-02","games":[{"home":"두산","ho":1.56,"away":"롯데","ao":2.02,"winner":"두산","label":"정배당","cls":"jeong","homeFav":true,"awayFav":false},{"home":"KIA","ho":1.48,"away":"SSG","ao":2.17,"winner":"KIA","label":"정배당","cls":"jeong","homeFav":true,"awayFav":false},{"home":"NC","ho":1.78,"away":"삼성","ao":1.74,"winner":"삼성","label":"정배당","cls":"jeong","homeFav":false,"awayFav":true},{"home":"한화","ho":1.72,"away":"KT","ao":1.8,"winner":"한화","label":"정배당","cls":"jeong","homeFav":true,"awayFav":false},{"home":"키움","ho":2.72,"away":"LG","ao":1.3,"winner":"LG","label":"정배당","cls":"jeong","homeFav":false,"awayFav":true}]},{"date":"2026-07-01","games":[{"home":"두산","ho":1.56,"away":"롯데","ao":2.02,"winner":"롯데","label":"역배당","cls":"yeok","homeFav":true,"awayFav":false},{"home":"KIA","ho":1.55,"away":"SSG","ao":2.04,"winner":"무승부","label":"무승부","cls":"neu","homeFav":true,"awayFav":false},{"home":"NC","ho":2.49,"away":"삼성","ao":1.36,"winner":"NC","label":"역배당","cls":"yeok","homeFav":false,"awayFav":true},{"home":"한화","ho":2.15,"away":"KT","ao":1.49,"winner":"KT","label":"정배당","cls":"jeong","homeFav":false,"awayFav":true},{"home":"키움","ho":2.04,"away":"LG","ao":1.55,"winner":"LG","label":"정배당","cls":"jeong","homeFav":false,"awayFav":true}]},{"date":"2026-06-30","games":[{"home":"두산","ho":1.55,"away":"롯데","ao":2.04,"winner":"두산","label":"정배당","cls":"jeong","homeFav":true,"awayFav":false},{"home":"KIA","ho":1.44,"away":"SSG","ao":2.26,"winner":"KIA","label":"정배당","cls":"jeong","homeFav":true,"awayFav":false},{"home":"NC","ho":2.05,"away":"삼성","ao":1.54,"winner":"삼성","label":"정배당","cls":"jeong","homeFav":false,"awayFav":true},{"home":"한화","ho":1.72,"away":"KT","ao":1.8,"winner":"취소","label":"취소","cls":"neu","homeFav":true,"awayFav":false},{"home":"키움","ho":2.31,"away":"LG","ao":1.42,"winner":"키움","label":"역배당","cls":"yeok","homeFav":false,"awayFav":true}]},{"date":"2026-06-28","games":[{"home":"두산","ho":1.75,"away":"KIA","ao":1.77,"winner":"KIA","label":"역배당","cls":"yeok","homeFav":true,"awayFav":false},{"home":"삼성","ho":1.93,"away":"KT","ao":1.62,"winner":"삼성","label":"역배당","cls":"yeok","homeFav":false,"awayFav":true},{"home":"롯데","ho":1.89,"away":"LG","ao":1.65,"winner":"롯데","label":"역배당","cls":"yeok","homeFav":false,"awayFav":true},{"home":"SSG","ho":2.4,"away":"한화","ao":1.39,"winner":"한화","label":"정배당","cls":"jeong","homeFav":false,"awayFav":true},{"home":"NC","ho":1.29,"away":"키움","ao":2.77,"winner":"NC","label":"정배당","cls":"jeong","homeFav":true,"awayFav":false}]},{"date":"2026-06-27","games":[{"home":"두산","ho":1.54,"away":"KIA","ao":2.05,"winner":"두산","label":"정배당","cls":"jeong","homeFav":true,"awayFav":false},{"home":"삼성","ho":1.6,"away":"KT","ao":1.96,"winner":"삼성","label":"정배당","cls":"jeong","homeFav":true,"awayFav":false},{"home":"롯데","ho":2.53,"away":"LG","ao":1.35,"winner":"LG","label":"정배당","cls":"jeong","homeFav":false,"awayFav":true},{"home":"SSG","ho":1.97,"away":"한화","ao":1.59,"winner":"한화","label":"정배당","cls":"jeong","homeFav":false,"awayFav":true},{"home":"NC","ho":1.26,"away":"키움","ao":2.92,"winner":"키움","label":"역배당","cls":"yeok","homeFav":true,"awayFav":false}]},{"date":"2026-06-26","games":[{"home":"두산","ho":1.69,"away":"KIA","ao":1.84,"winner":"두산","label":"정배당","cls":"jeong","homeFav":true,"awayFav":false},{"home":"삼성","ho":1.71,"away":"KT","ao":1.81,"winner":"삼성","label":"정배당","cls":"jeong","homeFav":true,"awayFav":false},{"home":"롯데","ho":2.26,"away":"LG","ao":1.44,"winner":"롯데","label":"역배당","cls":"yeok","homeFav":false,"awayFav":true},{"home":"SSG","ho":1.86,"away":"한화","ao":1.67,"winner":"한화","label":"정배당","cls":"jeong","homeFav":false,"awayFav":true},{"home":"NC","ho":1.4,"away":"키움","ao":2.37,"winner":"NC","label":"정배당","cls":"jeong","homeFav":true,"awayFav":false}]},{"date":"2026-06-25","games":[{"home":"LG","ho":1.97,"away":"삼성","ao":1.59,"winner":"삼성","label":"정배당","cls":"jeong","homeFav":false,"awayFav":true},{"home":"롯데","ho":2.09,"away":"NC","ao":1.52,"winner":"NC","label":"정배당","cls":"jeong","homeFav":false,"awayFav":true},{"home":"KT","ho":1.6,"away":"SSG","ao":1.96,"winner":"KT","label":"정배당","cls":"jeong","homeFav":true,"awayFav":false},{"home":"한화","ho":2.22,"away":"두산","ao":1.46,"winner":"두산","label":"정배당","cls":"jeong","homeFav":false,"awayFav":true},{"home":"키움","ho":2.24,"away":"KIA","ao":1.45,"winner":"KIA","label":"정배당","cls":"jeong","homeFav":false,"awayFav":true}]},{"date":"2026-06-24","games":[{"home":"LG","ho":1.66,"away":"삼성","ao":1.87,"winner":"LG","label":"정배당","cls":"jeong","homeFav":true,"awayFav":false},{"home":"롯데","ho":1.78,"away":"NC","ao":1.74,"winner":"롯데","label":"역배당","cls":"yeok","homeFav":false,"awayFav":true},{"home":"KT","ho":1.51,"away":"SSG","ao":2.11,"winner":"SSG","label":"역배당","cls":"yeok","homeFav":true,"awayFav":false},{"home":"한화","ho":1.52,"away":"두산","ao":2.09,"winner":"두산","label":"역배당","cls":"yeok","homeFav":true,"awayFav":false},{"home":"키움","ho":2,"away":"KIA","ao":1.57,"winner":"KIA","label":"정배당","cls":"jeong","homeFav":false,"awayFav":true}]},{"date":"2026-06-23","games":[{"home":"LG","ho":1.67,"away":"삼성","ao":1.86,"winner":"LG","label":"정배당","cls":"jeong","homeFav":true,"awayFav":false},{"home":"롯데","ho":2.15,"away":"NC","ao":1.49,"winner":"롯데","label":"역배당","cls":"yeok","homeFav":false,"awayFav":true},{"home":"KT","ho":1.5,"away":"SSG","ao":2.13,"winner":"KT","label":"정배당","cls":"jeong","homeFav":true,"awayFav":false},{"home":"한화","ho":1.39,"away":"두산","ao":2.4,"winner":"한화","label":"정배당","cls":"jeong","homeFav":true,"awayFav":false},{"home":"키움","ho":3.09,"away":"KIA","ao":1.23,"winner":"KIA","label":"정배당","cls":"jeong","homeFav":false,"awayFav":true}]}];
+const STATIC_DAYS=[
+  {
+    "date": "2026-09-06",
+    "games": [
+      {
+        "home": "키움",
+        "ho": 1.89,
+        "away": "NC",
+        "ao": 1.65,
+        "winner": "키움",
+        "label": "키움",
+        "cls": "home-win",
+        "homeFav": false,
+        "awayFav": true
+      },
+      {
+        "home": "LG",
+        "ho": 1.97,
+        "away": "삼성",
+        "ao": 1.59,
+        "winner": "삼성",
+        "label": "삼성",
+        "cls": "away-win",
+        "homeFav": false,
+        "awayFav": true
+      },
+      {
+        "home": "롯데",
+        "ho": 1.85,
+        "away": "한화",
+        "ao": 1.68,
+        "winner": "한화",
+        "label": "한화",
+        "cls": "away-win",
+        "homeFav": false,
+        "awayFav": true
+      },
+      {
+        "home": "SSG",
+        "ho": 2.07,
+        "away": "두산",
+        "ao": 1.53,
+        "winner": "두산",
+        "label": "두산",
+        "cls": "away-win",
+        "homeFav": false,
+        "awayFav": true
+      },
+      {
+        "home": "KIA",
+        "ho": 1.68,
+        "away": "KT",
+        "ao": 1.85,
+        "winner": "KIA",
+        "label": "KIA",
+        "cls": "home-win",
+        "homeFav": true,
+        "awayFav": false
+      }
+    ]
+  },
+  {
+    "date": "2026-09-05",
+    "games": [
+      {
+        "home": "LG",
+        "ho": 1.53,
+        "away": "삼성",
+        "ao": 2.07,
+        "winner": "삼성",
+        "label": "삼성",
+        "cls": "away-win",
+        "homeFav": true,
+        "awayFav": false
+      },
+      {
+        "home": "롯데",
+        "ho": 1.68,
+        "away": "한화",
+        "ao": 1.85,
+        "winner": "한화",
+        "label": "한화",
+        "cls": "away-win",
+        "homeFav": true,
+        "awayFav": false
+      },
+      {
+        "home": "SSG",
+        "ho": 1.86,
+        "away": "두산",
+        "ao": 1.67,
+        "winner": "SSG",
+        "label": "SSG",
+        "cls": "home-win",
+        "homeFav": false,
+        "awayFav": true
+      },
+      {
+        "home": "KIA",
+        "ho": 1.87,
+        "away": "KT",
+        "ao": 1.66,
+        "winner": "KIA",
+        "label": "KIA",
+        "cls": "home-win",
+        "homeFav": false,
+        "awayFav": true
+      },
+      {
+        "home": "키움",
+        "ho": 2.15,
+        "away": "NC",
+        "ao": 1.49,
+        "winner": "NC",
+        "label": "NC",
+        "cls": "away-win",
+        "homeFav": false,
+        "awayFav": true
+      }
+    ]
+  },
+  {
+    "date": "2026-09-04",
+    "games": [
+      {
+        "home": "LG",
+        "ho": 1.82,
+        "away": "삼성",
+        "ao": 1.7,
+        "winner": "LG",
+        "label": "LG",
+        "cls": "home-win",
+        "homeFav": false,
+        "awayFav": true
+      },
+      {
+        "home": "롯데",
+        "ho": 1.64,
+        "away": "한화",
+        "ao": 1.9,
+        "winner": "한화",
+        "label": "한화",
+        "cls": "away-win",
+        "homeFav": true,
+        "awayFav": false
+      },
+      {
+        "home": "SSG",
+        "ho": 1.51,
+        "away": "두산",
+        "ao": 2.11,
+        "winner": "SSG",
+        "label": "SSG",
+        "cls": "home-win",
+        "homeFav": true,
+        "awayFav": false
+      },
+      {
+        "home": "KIA",
+        "ho": 1.47,
+        "away": "KT",
+        "ao": 2.19,
+        "winner": "KIA",
+        "label": "KIA",
+        "cls": "home-win",
+        "homeFav": true,
+        "awayFav": false
+      },
+      {
+        "home": "키움",
+        "ho": 2.05,
+        "away": "NC",
+        "ao": 1.54,
+        "winner": "NC",
+        "label": "NC",
+        "cls": "away-win",
+        "homeFav": false,
+        "awayFav": true
+      }
+    ]
+  },
+  {
+    "date": "2026-09-03",
+    "games": [
+      {
+        "home": "두산",
+        "ho": 1.41,
+        "away": "LG",
+        "ao": 2.34,
+        "winner": "LG",
+        "label": "LG",
+        "cls": "away-win",
+        "homeFav": true,
+        "awayFav": false
+      },
+      {
+        "home": "삼성",
+        "ho": 1.35,
+        "away": "롯데",
+        "ao": 2.53,
+        "winner": "롯데",
+        "label": "롯데",
+        "cls": "away-win",
+        "homeFav": true,
+        "awayFav": false
+      },
+      {
+        "home": "KT",
+        "ho": 1.44,
+        "away": "한화",
+        "ao": 2.26,
+        "winner": "KT",
+        "label": "KT",
+        "cls": "home-win",
+        "homeFav": true,
+        "awayFav": false
+      },
+      {
+        "home": "NC",
+        "ho": 1.99,
+        "away": "KIA",
+        "ao": 1.58,
+        "winner": "취소",
+        "label": "취소",
+        "cls": "cancel",
+        "homeFav": false,
+        "awayFav": true
+      },
+      {
+        "home": "키움",
+        "ho": 2.07,
+        "away": "SSG",
+        "ao": 1.53,
+        "winner": "키움",
+        "label": "키움",
+        "cls": "home-win",
+        "homeFav": false,
+        "awayFav": true
+      }
+    ]
+  },
+  {
+    "date": "2026-09-02",
+    "games": [
+      {
+        "home": "두산",
+        "ho": 1.99,
+        "away": "LG",
+        "ao": 1.58,
+        "winner": "LG",
+        "label": "LG",
+        "cls": "away-win",
+        "homeFav": false,
+        "awayFav": true
+      },
+      {
+        "home": "삼성",
+        "ho": 1.45,
+        "away": "롯데",
+        "ao": 2.24,
+        "winner": "삼성",
+        "label": "삼성",
+        "cls": "home-win",
+        "homeFav": true,
+        "awayFav": false
+      },
+      {
+        "home": "KT",
+        "ho": 1.7,
+        "away": "한화",
+        "ao": 1.82,
+        "winner": "KT",
+        "label": "KT",
+        "cls": "home-win",
+        "homeFav": true,
+        "awayFav": false
+      },
+      {
+        "home": "NC",
+        "ho": 1.82,
+        "away": "KIA",
+        "ao": 1.7,
+        "winner": "NC",
+        "label": "NC",
+        "cls": "home-win",
+        "homeFav": false,
+        "awayFav": true
+      },
+      {
+        "home": "키움",
+        "ho": 1.82,
+        "away": "SSG",
+        "ao": 1.7,
+        "winner": "SSG",
+        "label": "SSG",
+        "cls": "away-win",
+        "homeFav": false,
+        "awayFav": true
+      }
+    ]
+  },
+  {
+    "date": "2026-09-01",
+    "games": [
+      {
+        "home": "두산",
+        "ho": 1.79,
+        "away": "LG",
+        "ao": 1.73,
+        "winner": "LG",
+        "label": "LG",
+        "cls": "away-win",
+        "homeFav": false,
+        "awayFav": true
+      },
+      {
+        "home": "삼성",
+        "ho": 1.49,
+        "away": "롯데",
+        "ao": 2.15,
+        "winner": "삼성",
+        "label": "삼성",
+        "cls": "home-win",
+        "homeFav": true,
+        "awayFav": false
+      },
+      {
+        "home": "KT",
+        "ho": 1.57,
+        "away": "한화",
+        "ao": 2,
+        "winner": "KT",
+        "label": "KT",
+        "cls": "home-win",
+        "homeFav": true,
+        "awayFav": false
+      },
+      {
+        "home": "NC",
+        "ho": 1.93,
+        "away": "KIA",
+        "ao": 1.62,
+        "winner": "NC",
+        "label": "NC",
+        "cls": "home-win",
+        "homeFav": false,
+        "awayFav": true
+      },
+      {
+        "home": "키움",
+        "ho": 1.7,
+        "away": "SSG",
+        "ao": 1.82,
+        "winner": "SSG",
+        "label": "SSG",
+        "cls": "away-win",
+        "homeFav": true,
+        "awayFav": false
+      }
+    ]
+  },
+  {
+    "date": "2026-08-30",
+    "games": [
+      {
+        "home": "두산",
+        "ho": 1.36,
+        "away": "키움",
+        "ao": 2.49,
+        "winner": "두산",
+        "label": "두산",
+        "cls": "home-win",
+        "homeFav": true,
+        "awayFav": false
+      },
+      {
+        "home": "삼성",
+        "ho": 1.55,
+        "away": "KT",
+        "ao": 2.04,
+        "winner": "취소",
+        "label": "취소",
+        "cls": "cancel",
+        "homeFav": true,
+        "awayFav": false
+      },
+      {
+        "home": "롯데",
+        "ho": 2.24,
+        "away": "LG",
+        "ao": 1.45,
+        "winner": "취소",
+        "label": "취소",
+        "cls": "cancel",
+        "homeFav": false,
+        "awayFav": true
+      },
+      {
+        "home": "KIA",
+        "ho": 1.33,
+        "away": "SSG",
+        "ao": 2.6,
+        "winner": "취소",
+        "label": "취소",
+        "cls": "cancel",
+        "homeFav": true,
+        "awayFav": false
+      },
+      {
+        "home": "한화",
+        "ho": 1.86,
+        "away": "NC",
+        "ao": 1.67,
+        "winner": "NC",
+        "label": "NC",
+        "cls": "away-win",
+        "homeFav": false,
+        "awayFav": true
+      }
+    ]
+  },
+  {
+    "date": "2026-08-29",
+    "games": [
+      {
+        "home": "두산",
+        "ho": 1.45,
+        "away": "키움",
+        "ao": 2.24,
+        "winner": "두산",
+        "label": "두산",
+        "cls": "home-win",
+        "homeFav": true,
+        "awayFav": false
+      },
+      {
+        "home": "삼성",
+        "ho": 1.6,
+        "away": "KT",
+        "ao": 1.96,
+        "winner": "삼성",
+        "label": "삼성",
+        "cls": "home-win",
+        "homeFav": true,
+        "awayFav": false
+      },
+      {
+        "home": "롯데",
+        "ho": 2.13,
+        "away": "LG",
+        "ao": 1.5,
+        "winner": "LG",
+        "label": "LG",
+        "cls": "away-win",
+        "homeFav": false,
+        "awayFav": true
+      },
+      {
+        "home": "KIA",
+        "ho": 1.5,
+        "away": "SSG",
+        "ao": 2.13,
+        "winner": "KIA",
+        "label": "KIA",
+        "cls": "home-win",
+        "homeFav": true,
+        "awayFav": false
+      },
+      {
+        "home": "한화",
+        "ho": 2.13,
+        "away": "NC",
+        "ao": 1.5,
+        "winner": "NC",
+        "label": "NC",
+        "cls": "away-win",
+        "homeFav": false,
+        "awayFav": true
+      }
+    ]
+  },
+  {
+    "date": "2026-08-28",
+    "games": [
+      {
+        "home": "두산",
+        "ho": 1.7,
+        "away": "키움",
+        "ao": 1.82,
+        "winner": "취소",
+        "label": "취소",
+        "cls": "cancel",
+        "homeFav": true,
+        "awayFav": false
+      },
+      {
+        "home": "삼성",
+        "ho": 1.75,
+        "away": "KT",
+        "ao": 1.77,
+        "winner": "취소",
+        "label": "취소",
+        "cls": "cancel",
+        "homeFav": true,
+        "awayFav": false
+      },
+      {
+        "home": "롯데",
+        "ho": 2.22,
+        "away": "LG",
+        "ao": 1.46,
+        "winner": "취소",
+        "label": "취소",
+        "cls": "cancel",
+        "homeFav": false,
+        "awayFav": true
+      },
+      {
+        "home": "KIA",
+        "ho": 1.29,
+        "away": "SSG",
+        "ao": 2.77,
+        "winner": "취소",
+        "label": "취소",
+        "cls": "cancel",
+        "homeFav": true,
+        "awayFav": false
+      },
+      {
+        "home": "한화",
+        "ho": 1.75,
+        "away": "NC",
+        "ao": 1.77,
+        "winner": "취소",
+        "label": "취소",
+        "cls": "cancel",
+        "homeFav": true,
+        "awayFav": false
+      }
+    ]
+  },
+  {
+    "date": "2026-08-27",
+    "games": [
+      {
+        "home": "LG",
+        "ho": 1.65,
+        "away": "NC",
+        "ao": 1.89,
+        "winner": "NC",
+        "label": "NC",
+        "cls": "away-win",
+        "homeFav": true,
+        "awayFav": false
+      },
+      {
+        "home": "SSG",
+        "ho": 2.09,
+        "away": "한화",
+        "ao": 1.52,
+        "winner": "SSG",
+        "label": "SSG",
+        "cls": "home-win",
+        "homeFav": false,
+        "awayFav": true
+      },
+      {
+        "home": "KIA",
+        "ho": 1.47,
+        "away": "롯데",
+        "ao": 2.19,
+        "winner": "취소",
+        "label": "취소",
+        "cls": "cancel",
+        "homeFav": true,
+        "awayFav": false
+      },
+      {
+        "home": "KT",
+        "ho": 1.38,
+        "away": "두산",
+        "ao": 2.43,
+        "winner": "KT",
+        "label": "KT",
+        "cls": "home-win",
+        "homeFav": true,
+        "awayFav": false
+      },
+      {
+        "home": "키움",
+        "ho": 2.49,
+        "away": "삼성",
+        "ao": 1.36,
+        "winner": "삼성",
+        "label": "삼성",
+        "cls": "away-win",
+        "homeFav": false,
+        "awayFav": true
+      }
+    ]
+  },
+  {
+    "date": "2026-08-26",
+    "games": [
+      {
+        "home": "LG",
+        "ho": 1.66,
+        "away": "NC",
+        "ao": 1.87,
+        "winner": "LG",
+        "label": "LG",
+        "cls": "home-win",
+        "homeFav": true,
+        "awayFav": false
+      },
+      {
+        "home": "SSG",
+        "ho": 2.26,
+        "away": "한화",
+        "ao": 1.44,
+        "winner": "SSG",
+        "label": "SSG",
+        "cls": "home-win",
+        "homeFav": false,
+        "awayFav": true
+      },
+      {
+        "home": "KIA",
+        "ho": 1.8,
+        "away": "롯데",
+        "ao": 1.72,
+        "winner": "KIA",
+        "label": "KIA",
+        "cls": "home-win",
+        "homeFav": false,
+        "awayFav": true
+      },
+      {
+        "home": "KT",
+        "ho": 1.7,
+        "away": "두산",
+        "ao": 1.82,
+        "winner": "KT",
+        "label": "KT",
+        "cls": "home-win",
+        "homeFav": true,
+        "awayFav": false
+      },
+      {
+        "home": "키움",
+        "ho": 2.6,
+        "away": "삼성",
+        "ao": 1.33,
+        "winner": "삼성",
+        "label": "삼성",
+        "cls": "away-win",
+        "homeFav": false,
+        "awayFav": true
+      }
+    ]
+  },
+  {
+    "date": "2026-08-25",
+    "games": [
+      {
+        "home": "LG",
+        "ho": 1.5,
+        "away": "NC",
+        "ao": 2.13,
+        "winner": "LG",
+        "label": "LG",
+        "cls": "home-win",
+        "homeFav": true,
+        "awayFav": false
+      },
+      {
+        "home": "SSG",
+        "ho": 2.11,
+        "away": "한화",
+        "ao": 1.51,
+        "winner": "SSG",
+        "label": "SSG",
+        "cls": "home-win",
+        "homeFav": false,
+        "awayFav": true
+      },
+      {
+        "home": "KIA",
+        "ho": 1.73,
+        "away": "롯데",
+        "ao": 1.79,
+        "winner": "KIA",
+        "label": "KIA",
+        "cls": "home-win",
+        "homeFav": true,
+        "awayFav": false
+      },
+      {
+        "home": "KT",
+        "ho": 1.55,
+        "away": "두산",
+        "ao": 2.04,
+        "winner": "두산",
+        "label": "두산",
+        "cls": "away-win",
+        "homeFav": true,
+        "awayFav": false
+      },
+      {
+        "home": "키움",
+        "ho": 2.13,
+        "away": "삼성",
+        "ao": 1.5,
+        "winner": "무승부",
+        "label": "무승부",
+        "cls": "cancel",
+        "homeFav": false,
+        "awayFav": true
+      }
+    ]
+  },
+  {
+    "date": "2026-08-23",
+    "games": [
+      {
+        "home": "키움",
+        "ho": 2.92,
+        "away": "KIA",
+        "ao": 1.26,
+        "winner": "키움",
+        "label": "키움",
+        "cls": "home-win",
+        "homeFav": false,
+        "awayFav": true
+      },
+      {
+        "home": "두산",
+        "ho": 1.47,
+        "away": "롯데",
+        "ao": 2.19,
+        "winner": "두산",
+        "label": "두산",
+        "cls": "home-win",
+        "homeFav": true,
+        "awayFav": false
+      },
+      {
+        "home": "SSG",
+        "ho": 1.93,
+        "away": "KT",
+        "ao": 1.62,
+        "winner": "KT",
+        "label": "KT",
+        "cls": "away-win",
+        "homeFav": false,
+        "awayFav": true
+      },
+      {
+        "home": "NC",
+        "ho": 1.8,
+        "away": "삼성",
+        "ao": 1.72,
+        "winner": "삼성",
+        "label": "삼성",
+        "cls": "away-win",
+        "homeFav": false,
+        "awayFav": true
+      },
+      {
+        "home": "한화",
+        "ho": 2.09,
+        "away": "LG",
+        "ao": 1.52,
+        "winner": "LG",
+        "label": "LG",
+        "cls": "away-win",
+        "homeFav": false,
+        "awayFav": true
+      }
+    ]
+  },
+  {
+    "date": "2026-08-22",
+    "games": [
+      {
+        "home": "키움",
+        "ho": 2.13,
+        "away": "KIA",
+        "ao": 1.5,
+        "winner": "키움",
+        "label": "키움",
+        "cls": "home-win",
+        "homeFav": false,
+        "awayFav": true
+      },
+      {
+        "home": "두산",
+        "ho": 1.47,
+        "away": "롯데",
+        "ao": 2.19,
+        "winner": "취소",
+        "label": "취소",
+        "cls": "cancel",
+        "homeFav": true,
+        "awayFav": false
+      },
+      {
+        "home": "SSG",
+        "ho": 1.86,
+        "away": "KT",
+        "ao": 1.67,
+        "winner": "취소",
+        "label": "취소",
+        "cls": "cancel",
+        "homeFav": false,
+        "awayFav": true
+      },
+      {
+        "home": "NC",
+        "ho": 2.07,
+        "away": "삼성",
+        "ao": 1.53,
+        "winner": "삼성",
+        "label": "삼성",
+        "cls": "away-win",
+        "homeFav": false,
+        "awayFav": true
+      },
+      {
+        "home": "한화",
+        "ho": 2.09,
+        "away": "LG",
+        "ao": 1.52,
+        "winner": "취소",
+        "label": "취소",
+        "cls": "cancel",
+        "homeFav": false,
+        "awayFav": true
+      }
+    ]
+  },
+  {
+    "date": "2026-08-21",
+    "games": [
+      {
+        "home": "두산",
+        "ho": 1.87,
+        "away": "롯데",
+        "ao": 1.66,
+        "winner": "롯데",
+        "label": "롯데",
+        "cls": "away-win",
+        "homeFav": false,
+        "awayFav": true
+      },
+      {
+        "home": "SSG",
+        "ho": 2.29,
+        "away": "KT",
+        "ao": 1.43,
+        "winner": "무승부",
+        "label": "무승부",
+        "cls": "cancel",
+        "homeFav": false,
+        "awayFav": true
+      },
+      {
+        "home": "NC",
+        "ho": 2.53,
+        "away": "삼성",
+        "ao": 1.35,
+        "winner": "NC",
+        "label": "NC",
+        "cls": "home-win",
+        "homeFav": false,
+        "awayFav": true
+      },
+      {
+        "home": "한화",
+        "ho": 1.85,
+        "away": "LG",
+        "ao": 1.68,
+        "winner": "한화",
+        "label": "한화",
+        "cls": "home-win",
+        "homeFav": false,
+        "awayFav": true
+      },
+      {
+        "home": "키움",
+        "ho": 2.15,
+        "away": "KIA",
+        "ao": 1.49,
+        "winner": "KIA",
+        "label": "KIA",
+        "cls": "away-win",
+        "homeFav": false,
+        "awayFav": true
+      }
+    ]
+  },
+  {
+    "date": "2026-08-20",
+    "games": [
+      {
+        "home": "LG",
+        "ho": 1.9,
+        "away": "KT",
+        "ao": 1.64,
+        "winner": "KT",
+        "label": "KT",
+        "cls": "away-win",
+        "homeFav": false,
+        "awayFav": true
+      },
+      {
+        "home": "삼성",
+        "ho": 1.42,
+        "away": "SSG",
+        "ao": 2.31,
+        "winner": "SSG",
+        "label": "SSG",
+        "cls": "away-win",
+        "homeFav": true,
+        "awayFav": false
+      },
+      {
+        "home": "롯데",
+        "ho": 1.66,
+        "away": "키움",
+        "ao": 1.87,
+        "winner": "롯데",
+        "label": "롯데",
+        "cls": "home-win",
+        "homeFav": true,
+        "awayFav": false
+      },
+      {
+        "home": "NC",
+        "ho": 1.75,
+        "away": "두산",
+        "ao": 1.77,
+        "winner": "NC",
+        "label": "NC",
+        "cls": "home-win",
+        "homeFav": true,
+        "awayFav": false
+      },
+      {
+        "home": "한화",
+        "ho": 1.54,
+        "away": "KIA",
+        "ao": 2.05,
+        "winner": "KIA",
+        "label": "KIA",
+        "cls": "away-win",
+        "homeFav": true,
+        "awayFav": false
+      }
+    ]
+  },
+  {
+    "date": "2026-08-19",
+    "games": [
+      {
+        "home": "LG",
+        "ho": 1.72,
+        "away": "KT",
+        "ao": 1.8,
+        "winner": "LG",
+        "label": "LG",
+        "cls": "home-win",
+        "homeFav": true,
+        "awayFav": false
+      },
+      {
+        "home": "삼성",
+        "ho": 1.31,
+        "away": "SSG",
+        "ao": 2.68,
+        "winner": "삼성",
+        "label": "삼성",
+        "cls": "home-win",
+        "homeFav": true,
+        "awayFav": false
+      },
+      {
+        "home": "롯데",
+        "ho": 1.38,
+        "away": "키움",
+        "ao": 2.43,
+        "winner": "롯데",
+        "label": "롯데",
+        "cls": "home-win",
+        "homeFav": true,
+        "awayFav": false
+      },
+      {
+        "home": "NC",
+        "ho": 1.66,
+        "away": "두산",
+        "ao": 1.87,
+        "winner": "두산",
+        "label": "두산",
+        "cls": "away-win",
+        "homeFav": true,
+        "awayFav": false
+      },
+      {
+        "home": "한화",
+        "ho": 1.82,
+        "away": "KIA",
+        "ao": 1.7,
+        "winner": "KIA",
+        "label": "KIA",
+        "cls": "away-win",
+        "homeFav": false,
+        "awayFav": true
+      }
+    ]
+  },
+  {
+    "date": "2026-08-18",
+    "games": [
+      {
+        "home": "LG",
+        "ho": 1.87,
+        "away": "KT",
+        "ao": 1.66,
+        "winner": "LG",
+        "label": "LG",
+        "cls": "home-win",
+        "homeFav": false,
+        "awayFav": true
+      },
+      {
+        "home": "삼성",
+        "ho": 1.31,
+        "away": "SSG",
+        "ao": 2.68,
+        "winner": "SSG",
+        "label": "SSG",
+        "cls": "away-win",
+        "homeFav": true,
+        "awayFav": false
+      },
+      {
+        "home": "롯데",
+        "ho": 1.38,
+        "away": "키움",
+        "ao": 2.43,
+        "winner": "롯데",
+        "label": "롯데",
+        "cls": "home-win",
+        "homeFav": true,
+        "awayFav": false
+      },
+      {
+        "home": "NC",
+        "ho": 1.81,
+        "away": "두산",
+        "ao": 1.71,
+        "winner": "두산",
+        "label": "두산",
+        "cls": "away-win",
+        "homeFav": false,
+        "awayFav": true
+      },
+      {
+        "home": "한화",
+        "ho": 1.77,
+        "away": "KIA",
+        "ao": 1.75,
+        "winner": "KIA",
+        "label": "KIA",
+        "cls": "away-win",
+        "homeFav": false,
+        "awayFav": true
+      }
+    ]
+  },
+  {
+    "date": "2026-07-08",
+    "games": [
+      {
+        "home": "두산",
+        "ho": 1.39,
+        "away": "SSG",
+        "ao": 2.4,
+        "winner": "두산",
+        "label": "정배당",
+        "cls": "jeong",
+        "homeFav": true,
+        "awayFav": false
+      },
+      {
+        "home": "삼성",
+        "ho": 1.81,
+        "away": "LG",
+        "ao": 1.71,
+        "winner": "LG",
+        "label": "정배당",
+        "cls": "jeong",
+        "homeFav": false,
+        "awayFav": true
+      },
+      {
+        "home": "롯데",
+        "ho": 2.4,
+        "away": "KIA",
+        "ao": 1.39,
+        "winner": "롯데",
+        "label": "역배당",
+        "cls": "yeok",
+        "homeFav": false,
+        "awayFav": true
+      },
+      {
+        "home": "KT",
+        "ho": 1.34,
+        "away": "키움",
+        "ao": 2.56,
+        "winner": "KT",
+        "label": "정배당",
+        "cls": "jeong",
+        "homeFav": true,
+        "awayFav": false
+      },
+      {
+        "home": "한화",
+        "ho": 1.67,
+        "away": "NC",
+        "ao": 1.86,
+        "winner": "취소",
+        "label": "취소",
+        "cls": "neu",
+        "homeFav": true,
+        "awayFav": false
+      }
+    ]
+  },
+  {
+    "date": "2026-07-07",
+    "games": [
+      {
+        "home": "두산",
+        "ho": 1.42,
+        "away": "SSG",
+        "ao": 2.31,
+        "winner": "SSG",
+        "label": "역배당",
+        "cls": "yeok",
+        "homeFav": true,
+        "awayFav": false
+      },
+      {
+        "home": "삼성",
+        "ho": 1.66,
+        "away": "LG",
+        "ao": 1.87,
+        "winner": "삼성",
+        "label": "정배당",
+        "cls": "jeong",
+        "homeFav": true,
+        "awayFav": false
+      },
+      {
+        "home": "롯데",
+        "ho": 1.69,
+        "away": "KIA",
+        "ao": 1.84,
+        "winner": "롯데",
+        "label": "정배당",
+        "cls": "jeong",
+        "homeFav": true,
+        "awayFav": false
+      },
+      {
+        "home": "KT",
+        "ho": 1.49,
+        "away": "키움",
+        "ao": 2.15,
+        "winner": "KT",
+        "label": "정배당",
+        "cls": "jeong",
+        "homeFav": true,
+        "awayFav": false
+      },
+      {
+        "home": "한화",
+        "ho": 1.73,
+        "away": "NC",
+        "ao": 1.79,
+        "winner": "NC",
+        "label": "역배당",
+        "cls": "yeok",
+        "homeFav": true,
+        "awayFav": false
+      }
+    ]
+  },
+  {
+    "date": "2026-07-05",
+    "games": [
+      {
+        "home": "LG",
+        "ho": 1.72,
+        "away": "한화",
+        "ao": 1.8,
+        "winner": "취소",
+        "label": "취소",
+        "cls": "neu",
+        "homeFav": true,
+        "awayFav": false
+      },
+      {
+        "home": "SSG",
+        "ho": 2.13,
+        "away": "삼성",
+        "ao": 1.5,
+        "winner": "삼성",
+        "label": "정배당",
+        "cls": "jeong",
+        "homeFav": false,
+        "awayFav": true
+      },
+      {
+        "home": "KIA",
+        "ho": 1.85,
+        "away": "NC",
+        "ao": 1.68,
+        "winner": "취소",
+        "label": "취소",
+        "cls": "neu",
+        "homeFav": false,
+        "awayFav": true
+      },
+      {
+        "home": "KT",
+        "ho": 1.51,
+        "away": "롯데",
+        "ao": 2.11,
+        "winner": "KT",
+        "label": "정배당",
+        "cls": "jeong",
+        "homeFav": true,
+        "awayFav": false
+      }
+    ]
+  },
+  {
+    "date": "2026-07-04",
+    "games": [
+      {
+        "home": "LG",
+        "ho": 1.73,
+        "away": "한화",
+        "ao": 1.79,
+        "winner": "LG",
+        "label": "정배당",
+        "cls": "jeong",
+        "homeFav": true,
+        "awayFav": false
+      },
+      {
+        "home": "SSG",
+        "ho": 2.04,
+        "away": "삼성",
+        "ao": 1.55,
+        "winner": "삼성",
+        "label": "정배당",
+        "cls": "jeong",
+        "homeFav": false,
+        "awayFav": true
+      },
+      {
+        "home": "KIA",
+        "ho": 2.07,
+        "away": "NC",
+        "ao": 1.53,
+        "winner": "NC",
+        "label": "정배당",
+        "cls": "jeong",
+        "homeFav": false,
+        "awayFav": true
+      },
+      {
+        "home": "KT",
+        "ho": 1.63,
+        "away": "롯데",
+        "ao": 1.91,
+        "winner": "롯데",
+        "label": "역배당",
+        "cls": "yeok",
+        "homeFav": true,
+        "awayFav": false
+      },
+      {
+        "home": "키움",
+        "ho": 2.15,
+        "away": "두산",
+        "ao": 1.49,
+        "winner": "두산",
+        "label": "정배당",
+        "cls": "jeong",
+        "homeFav": false,
+        "awayFav": true
+      }
+    ]
+  },
+  {
+    "date": "2026-07-03",
+    "games": [
+      {
+        "home": "LG",
+        "ho": 1.5,
+        "away": "한화",
+        "ao": 2.13,
+        "winner": "한화",
+        "label": "역배당",
+        "cls": "yeok",
+        "homeFav": true,
+        "awayFav": false
+      },
+      {
+        "home": "SSG",
+        "ho": 2.46,
+        "away": "삼성",
+        "ao": 1.37,
+        "winner": "삼성",
+        "label": "정배당",
+        "cls": "jeong",
+        "homeFav": false,
+        "awayFav": true
+      },
+      {
+        "home": "KIA",
+        "ho": 2.04,
+        "away": "NC",
+        "ao": 1.55,
+        "winner": "NC",
+        "label": "정배당",
+        "cls": "jeong",
+        "homeFav": false,
+        "awayFav": true
+      },
+      {
+        "home": "KT",
+        "ho": 1.63,
+        "away": "롯데",
+        "ao": 1.91,
+        "winner": "롯데",
+        "label": "역배당",
+        "cls": "yeok",
+        "homeFav": true,
+        "awayFav": false
+      },
+      {
+        "home": "키움",
+        "ho": 2.6,
+        "away": "두산",
+        "ao": 1.33,
+        "winner": "키움",
+        "label": "역배당",
+        "cls": "yeok",
+        "homeFav": false,
+        "awayFav": true
+      }
+    ]
+  },
+  {
+    "date": "2026-07-02",
+    "games": [
+      {
+        "home": "두산",
+        "ho": 1.56,
+        "away": "롯데",
+        "ao": 2.02,
+        "winner": "두산",
+        "label": "정배당",
+        "cls": "jeong",
+        "homeFav": true,
+        "awayFav": false
+      },
+      {
+        "home": "KIA",
+        "ho": 1.48,
+        "away": "SSG",
+        "ao": 2.17,
+        "winner": "KIA",
+        "label": "정배당",
+        "cls": "jeong",
+        "homeFav": true,
+        "awayFav": false
+      },
+      {
+        "home": "NC",
+        "ho": 1.78,
+        "away": "삼성",
+        "ao": 1.74,
+        "winner": "삼성",
+        "label": "정배당",
+        "cls": "jeong",
+        "homeFav": false,
+        "awayFav": true
+      },
+      {
+        "home": "한화",
+        "ho": 1.72,
+        "away": "KT",
+        "ao": 1.8,
+        "winner": "한화",
+        "label": "정배당",
+        "cls": "jeong",
+        "homeFav": true,
+        "awayFav": false
+      },
+      {
+        "home": "키움",
+        "ho": 2.72,
+        "away": "LG",
+        "ao": 1.3,
+        "winner": "LG",
+        "label": "정배당",
+        "cls": "jeong",
+        "homeFav": false,
+        "awayFav": true
+      }
+    ]
+  },
+  {
+    "date": "2026-07-01",
+    "games": [
+      {
+        "home": "두산",
+        "ho": 1.56,
+        "away": "롯데",
+        "ao": 2.02,
+        "winner": "롯데",
+        "label": "역배당",
+        "cls": "yeok",
+        "homeFav": true,
+        "awayFav": false
+      },
+      {
+        "home": "KIA",
+        "ho": 1.55,
+        "away": "SSG",
+        "ao": 2.04,
+        "winner": "무승부",
+        "label": "무승부",
+        "cls": "neu",
+        "homeFav": true,
+        "awayFav": false
+      },
+      {
+        "home": "NC",
+        "ho": 2.49,
+        "away": "삼성",
+        "ao": 1.36,
+        "winner": "NC",
+        "label": "역배당",
+        "cls": "yeok",
+        "homeFav": false,
+        "awayFav": true
+      },
+      {
+        "home": "한화",
+        "ho": 2.15,
+        "away": "KT",
+        "ao": 1.49,
+        "winner": "KT",
+        "label": "정배당",
+        "cls": "jeong",
+        "homeFav": false,
+        "awayFav": true
+      },
+      {
+        "home": "키움",
+        "ho": 2.04,
+        "away": "LG",
+        "ao": 1.55,
+        "winner": "LG",
+        "label": "정배당",
+        "cls": "jeong",
+        "homeFav": false,
+        "awayFav": true
+      }
+    ]
+  },
+  {
+    "date": "2026-06-30",
+    "games": [
+      {
+        "home": "두산",
+        "ho": 1.55,
+        "away": "롯데",
+        "ao": 2.04,
+        "winner": "두산",
+        "label": "정배당",
+        "cls": "jeong",
+        "homeFav": true,
+        "awayFav": false
+      },
+      {
+        "home": "KIA",
+        "ho": 1.44,
+        "away": "SSG",
+        "ao": 2.26,
+        "winner": "KIA",
+        "label": "정배당",
+        "cls": "jeong",
+        "homeFav": true,
+        "awayFav": false
+      },
+      {
+        "home": "NC",
+        "ho": 2.05,
+        "away": "삼성",
+        "ao": 1.54,
+        "winner": "삼성",
+        "label": "정배당",
+        "cls": "jeong",
+        "homeFav": false,
+        "awayFav": true
+      },
+      {
+        "home": "한화",
+        "ho": 1.72,
+        "away": "KT",
+        "ao": 1.8,
+        "winner": "취소",
+        "label": "취소",
+        "cls": "neu",
+        "homeFav": true,
+        "awayFav": false
+      },
+      {
+        "home": "키움",
+        "ho": 2.31,
+        "away": "LG",
+        "ao": 1.42,
+        "winner": "키움",
+        "label": "역배당",
+        "cls": "yeok",
+        "homeFav": false,
+        "awayFav": true
+      }
+    ]
+  },
+  {
+    "date": "2026-06-28",
+    "games": [
+      {
+        "home": "두산",
+        "ho": 1.75,
+        "away": "KIA",
+        "ao": 1.77,
+        "winner": "KIA",
+        "label": "역배당",
+        "cls": "yeok",
+        "homeFav": true,
+        "awayFav": false
+      },
+      {
+        "home": "삼성",
+        "ho": 1.93,
+        "away": "KT",
+        "ao": 1.62,
+        "winner": "삼성",
+        "label": "역배당",
+        "cls": "yeok",
+        "homeFav": false,
+        "awayFav": true
+      },
+      {
+        "home": "롯데",
+        "ho": 1.89,
+        "away": "LG",
+        "ao": 1.65,
+        "winner": "롯데",
+        "label": "역배당",
+        "cls": "yeok",
+        "homeFav": false,
+        "awayFav": true
+      },
+      {
+        "home": "SSG",
+        "ho": 2.4,
+        "away": "한화",
+        "ao": 1.39,
+        "winner": "한화",
+        "label": "정배당",
+        "cls": "jeong",
+        "homeFav": false,
+        "awayFav": true
+      },
+      {
+        "home": "NC",
+        "ho": 1.29,
+        "away": "키움",
+        "ao": 2.77,
+        "winner": "NC",
+        "label": "정배당",
+        "cls": "jeong",
+        "homeFav": true,
+        "awayFav": false
+      }
+    ]
+  },
+  {
+    "date": "2026-06-27",
+    "games": [
+      {
+        "home": "두산",
+        "ho": 1.54,
+        "away": "KIA",
+        "ao": 2.05,
+        "winner": "두산",
+        "label": "정배당",
+        "cls": "jeong",
+        "homeFav": true,
+        "awayFav": false
+      },
+      {
+        "home": "삼성",
+        "ho": 1.6,
+        "away": "KT",
+        "ao": 1.96,
+        "winner": "삼성",
+        "label": "정배당",
+        "cls": "jeong",
+        "homeFav": true,
+        "awayFav": false
+      },
+      {
+        "home": "롯데",
+        "ho": 2.53,
+        "away": "LG",
+        "ao": 1.35,
+        "winner": "LG",
+        "label": "정배당",
+        "cls": "jeong",
+        "homeFav": false,
+        "awayFav": true
+      },
+      {
+        "home": "SSG",
+        "ho": 1.97,
+        "away": "한화",
+        "ao": 1.59,
+        "winner": "한화",
+        "label": "정배당",
+        "cls": "jeong",
+        "homeFav": false,
+        "awayFav": true
+      },
+      {
+        "home": "NC",
+        "ho": 1.26,
+        "away": "키움",
+        "ao": 2.92,
+        "winner": "키움",
+        "label": "역배당",
+        "cls": "yeok",
+        "homeFav": true,
+        "awayFav": false
+      }
+    ]
+  },
+  {
+    "date": "2026-06-26",
+    "games": [
+      {
+        "home": "두산",
+        "ho": 1.69,
+        "away": "KIA",
+        "ao": 1.84,
+        "winner": "두산",
+        "label": "정배당",
+        "cls": "jeong",
+        "homeFav": true,
+        "awayFav": false
+      },
+      {
+        "home": "삼성",
+        "ho": 1.71,
+        "away": "KT",
+        "ao": 1.81,
+        "winner": "삼성",
+        "label": "정배당",
+        "cls": "jeong",
+        "homeFav": true,
+        "awayFav": false
+      },
+      {
+        "home": "롯데",
+        "ho": 2.26,
+        "away": "LG",
+        "ao": 1.44,
+        "winner": "롯데",
+        "label": "역배당",
+        "cls": "yeok",
+        "homeFav": false,
+        "awayFav": true
+      },
+      {
+        "home": "SSG",
+        "ho": 1.86,
+        "away": "한화",
+        "ao": 1.67,
+        "winner": "한화",
+        "label": "정배당",
+        "cls": "jeong",
+        "homeFav": false,
+        "awayFav": true
+      },
+      {
+        "home": "NC",
+        "ho": 1.4,
+        "away": "키움",
+        "ao": 2.37,
+        "winner": "NC",
+        "label": "정배당",
+        "cls": "jeong",
+        "homeFav": true,
+        "awayFav": false
+      }
+    ]
+  },
+  {
+    "date": "2026-06-25",
+    "games": [
+      {
+        "home": "LG",
+        "ho": 1.97,
+        "away": "삼성",
+        "ao": 1.59,
+        "winner": "삼성",
+        "label": "정배당",
+        "cls": "jeong",
+        "homeFav": false,
+        "awayFav": true
+      },
+      {
+        "home": "롯데",
+        "ho": 2.09,
+        "away": "NC",
+        "ao": 1.52,
+        "winner": "NC",
+        "label": "정배당",
+        "cls": "jeong",
+        "homeFav": false,
+        "awayFav": true
+      },
+      {
+        "home": "KT",
+        "ho": 1.6,
+        "away": "SSG",
+        "ao": 1.96,
+        "winner": "KT",
+        "label": "정배당",
+        "cls": "jeong",
+        "homeFav": true,
+        "awayFav": false
+      },
+      {
+        "home": "한화",
+        "ho": 2.22,
+        "away": "두산",
+        "ao": 1.46,
+        "winner": "두산",
+        "label": "정배당",
+        "cls": "jeong",
+        "homeFav": false,
+        "awayFav": true
+      },
+      {
+        "home": "키움",
+        "ho": 2.24,
+        "away": "KIA",
+        "ao": 1.45,
+        "winner": "KIA",
+        "label": "정배당",
+        "cls": "jeong",
+        "homeFav": false,
+        "awayFav": true
+      }
+    ]
+  },
+  {
+    "date": "2026-06-24",
+    "games": [
+      {
+        "home": "LG",
+        "ho": 1.66,
+        "away": "삼성",
+        "ao": 1.87,
+        "winner": "LG",
+        "label": "정배당",
+        "cls": "jeong",
+        "homeFav": true,
+        "awayFav": false
+      },
+      {
+        "home": "롯데",
+        "ho": 1.78,
+        "away": "NC",
+        "ao": 1.74,
+        "winner": "롯데",
+        "label": "역배당",
+        "cls": "yeok",
+        "homeFav": false,
+        "awayFav": true
+      },
+      {
+        "home": "KT",
+        "ho": 1.51,
+        "away": "SSG",
+        "ao": 2.11,
+        "winner": "SSG",
+        "label": "역배당",
+        "cls": "yeok",
+        "homeFav": true,
+        "awayFav": false
+      },
+      {
+        "home": "한화",
+        "ho": 1.52,
+        "away": "두산",
+        "ao": 2.09,
+        "winner": "두산",
+        "label": "역배당",
+        "cls": "yeok",
+        "homeFav": true,
+        "awayFav": false
+      },
+      {
+        "home": "키움",
+        "ho": 2,
+        "away": "KIA",
+        "ao": 1.57,
+        "winner": "KIA",
+        "label": "정배당",
+        "cls": "jeong",
+        "homeFav": false,
+        "awayFav": true
+      }
+    ]
+  },
+  {
+    "date": "2026-06-23",
+    "games": [
+      {
+        "home": "LG",
+        "ho": 1.67,
+        "away": "삼성",
+        "ao": 1.86,
+        "winner": "LG",
+        "label": "정배당",
+        "cls": "jeong",
+        "homeFav": true,
+        "awayFav": false
+      },
+      {
+        "home": "롯데",
+        "ho": 2.15,
+        "away": "NC",
+        "ao": 1.49,
+        "winner": "롯데",
+        "label": "역배당",
+        "cls": "yeok",
+        "homeFav": false,
+        "awayFav": true
+      },
+      {
+        "home": "KT",
+        "ho": 1.5,
+        "away": "SSG",
+        "ao": 2.13,
+        "winner": "KT",
+        "label": "정배당",
+        "cls": "jeong",
+        "homeFav": true,
+        "awayFav": false
+      },
+      {
+        "home": "한화",
+        "ho": 1.39,
+        "away": "두산",
+        "ao": 2.4,
+        "winner": "한화",
+        "label": "정배당",
+        "cls": "jeong",
+        "homeFav": true,
+        "awayFav": false
+      },
+      {
+        "home": "키움",
+        "ho": 3.09,
+        "away": "KIA",
+        "ao": 1.23,
+        "winner": "KIA",
+        "label": "정배당",
+        "cls": "jeong",
+        "homeFav": false,
+        "awayFav": true
+      }
+    ]
+  }
+];
 
 function render(){
   const d = DAYS[cur];
