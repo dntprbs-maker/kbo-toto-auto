@@ -1,0 +1,39 @@
+{
+  "date": "2026-09-06",
+  "verified_game_date": "2026-09-06",
+  "schedule_file": "baseball_2026-09-06-08-00.json",
+  "gmTs": 260105,
+  "game_count": 5,
+  "odds": [
+    {
+      "homeTeam": "키움",
+      "awayTeam": "NC",
+      "win": 1.89,
+      "lose": 1.65
+    },
+    {
+      "homeTeam": "LG",
+      "awayTeam": "삼성",
+      "win": 1.97,
+      "lose": 1.59
+    },
+    {
+      "homeTeam": "롯데",
+      "awayTeam": "한화",
+      "win": 1.85,
+      "lose": 1.68
+    },
+    {
+      "homeTeam": "SSG",
+      "awayTeam": "두산",
+      "win": 2.07,
+      "lose": 1.53
+    },
+    {
+      "homeTeam": "KIA",
+      "awayTeam": "KT",
+      "win": 1.68,
+      "lose": 1.85
+    }
+  ]
+}
