@@ -1,0 +1,8 @@
+{
+  "date": "2026-09-09",
+  "run_at": "2026-09-10T01:30:25.672+09:00",
+  "status": "validation_failed",
+  "reasons": [
+    "index.html, statiz.html 또는 odds.html에 대상 날짜 데이터가 없음"
+  ]
+}
