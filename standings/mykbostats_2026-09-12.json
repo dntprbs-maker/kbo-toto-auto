@@ -1,0 +1,86 @@
+{
+  "source": "koreabaseball.com",
+  "date": "2026-09-12",
+  "teams": [
+    {
+      "team": "KT",
+      "wins": 73,
+      "losses": 46,
+      "win_pct": 0.613,
+      "last10": "7승0무3패",
+      "games_behind": 0
+    },
+    {
+      "team": "삼성",
+      "wins": 74,
+      "losses": 47,
+      "win_pct": 0.612,
+      "last10": "7승0무3패",
+      "games_behind": 0
+    },
+    {
+      "team": "LG",
+      "wins": 68,
+      "losses": 55,
+      "win_pct": 0.553,
+      "last10": "5승0무5패",
+      "games_behind": 7
+    },
+    {
+      "team": "KIA",
+      "wins": 67,
+      "losses": 55,
+      "win_pct": 0.549,
+      "last10": "5승0무5패",
+      "games_behind": 7.5
+    },
+    {
+      "team": "두산",
+      "wins": 63,
+      "losses": 59,
+      "win_pct": 0.516,
+      "last10": "3승0무7패",
+      "games_behind": 11.5
+    },
+    {
+      "team": "NC",
+      "wins": 58,
+      "losses": 60,
+      "win_pct": 0.492,
+      "last10": "8승0무2패",
+      "games_behind": 14.5
+    },
+    {
+      "team": "한화",
+      "wins": 54,
+      "losses": 67,
+      "win_pct": 0.446,
+      "last10": "5승0무5패",
+      "games_behind": 20
+    },
+    {
+      "team": "SSG",
+      "wins": 54,
+      "losses": 69,
+      "win_pct": 0.439,
+      "last10": "6승0무4패",
+      "games_behind": 21
+    },
+    {
+      "team": "롯데",
+      "wins": 52,
+      "losses": 68,
+      "win_pct": 0.433,
+      "last10": "2승0무8패",
+      "games_behind": 21.5
+    },
+    {
+      "team": "키움",
+      "wins": 45,
+      "losses": 82,
+      "win_pct": 0.354,
+      "last10": "3승0무7패",
+      "games_behind": 32
+    }
+  ]
+}
