@@ -2495,6 +2495,57 @@
           "winner": "무승부"
         }
       ]
+    },
+    {
+      "date": "2026-09-19",
+      "scores": [
+        {
+          "matchup": "한화 vs LG",
+          "score": "1-2"
+        },
+        {
+          "matchup": "KIA vs NC",
+          "score": "5-1"
+        },
+        {
+          "matchup": "두산 vs KT",
+          "score": "3-15"
+        },
+        {
+          "matchup": "삼성 vs 롯데",
+          "score": "3-5"
+        }
+      ],
+      "odds": [
+        {
+          "home": "LG",
+          "ho": 1.7,
+          "away": "한화",
+          "ao": 1.82,
+          "winner": "LG"
+        },
+        {
+          "home": "NC",
+          "ho": 1.8,
+          "away": "KIA",
+          "ao": 1.72,
+          "winner": "KIA"
+        },
+        {
+          "home": "KT",
+          "ho": 1.3,
+          "away": "두산",
+          "ao": 2.72,
+          "winner": "KT"
+        },
+        {
+          "home": "롯데",
+          "ho": 2.34,
+          "away": "삼성",
+          "ao": 1.41,
+          "winner": "롯데"
+        }
+      ]
     }
   ]
 }
