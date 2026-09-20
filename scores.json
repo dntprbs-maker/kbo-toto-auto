@@ -2546,6 +2546,68 @@
           "winner": "롯데"
         }
       ]
+    },
+    {
+      "date": "2026-09-20",
+      "scores": [
+        {
+          "matchup": "한화 vs LG",
+          "score": "3-4"
+        },
+        {
+          "matchup": "KIA vs NC",
+          "score": "8-6"
+        },
+        {
+          "matchup": "두산 vs KT",
+          "score": "8-9"
+        },
+        {
+          "matchup": "삼성 vs 롯데",
+          "score": "6-13"
+        },
+        {
+          "matchup": "키움 vs SSG",
+          "score": "5-10"
+        }
+      ],
+      "odds": [
+        {
+          "home": "LG",
+          "ho": 1.35,
+          "away": "한화",
+          "ao": 2.53,
+          "winner": "LG"
+        },
+        {
+          "home": "NC",
+          "ho": 1.78,
+          "away": "KIA",
+          "ao": 1.74,
+          "winner": "KIA"
+        },
+        {
+          "home": "KT",
+          "ho": 1.29,
+          "away": "두산",
+          "ao": 2.77,
+          "winner": "KT"
+        },
+        {
+          "home": "롯데",
+          "ho": 2.97,
+          "away": "삼성",
+          "ao": 1.25,
+          "winner": "롯데"
+        },
+        {
+          "home": "SSG",
+          "ho": 1.66,
+          "away": "키움",
+          "ao": 1.87,
+          "winner": "SSG"
+        }
+      ]
     }
   ]
 }
