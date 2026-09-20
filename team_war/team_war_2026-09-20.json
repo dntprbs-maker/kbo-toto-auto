@@ -1,0 +1,119 @@
+{
+  "collected_date": "2026-09-20",
+  "source": "STATIZ (statiz.co.kr)",
+  "game_count": 5,
+  "teams": [
+    {
+      "team": "삼성",
+      "starter_war": 16.77,
+      "bullpen_war": 9.53
+    },
+    {
+      "team": "KIA",
+      "starter_war": 14.82,
+      "bullpen_war": 5.35
+    },
+    {
+      "team": "kt",
+      "starter_war": 18.94,
+      "bullpen_war": 6.7
+    },
+    {
+      "team": "LG",
+      "starter_war": 11.36,
+      "bullpen_war": 3.57
+    },
+    {
+      "team": "두산",
+      "starter_war": 16.95,
+      "bullpen_war": 5.69
+    },
+    {
+      "team": "NC",
+      "starter_war": 12.71,
+      "bullpen_war": 1.02
+    },
+    {
+      "team": "한화",
+      "starter_war": 11.53,
+      "bullpen_war": -1.06
+    },
+    {
+      "team": "롯데",
+      "starter_war": 15.82,
+      "bullpen_war": 2.04
+    },
+    {
+      "team": "SSG",
+      "starter_war": 9.01,
+      "bullpen_war": 2.31
+    },
+    {
+      "team": "키움",
+      "starter_war": 8.41,
+      "bullpen_war": -5.31
+    }
+  ],
+  "games": [
+    {
+      "away": "한화",
+      "home": "LG",
+      "starter_war": {
+        "away": 11.53,
+        "home": 11.36
+      },
+      "bullpen_war": {
+        "away": -1.06,
+        "home": 3.57
+      }
+    },
+    {
+      "away": "키움",
+      "home": "SSG",
+      "starter_war": {
+        "away": 8.41,
+        "home": 9.01
+      },
+      "bullpen_war": {
+        "away": -5.31,
+        "home": 2.31
+      }
+    },
+    {
+      "away": "두산",
+      "home": "kt",
+      "starter_war": {
+        "away": 16.95,
+        "home": 18.94
+      },
+      "bullpen_war": {
+        "away": 5.69,
+        "home": 6.7
+      }
+    },
+    {
+      "away": "삼성",
+      "home": "롯데",
+      "starter_war": {
+        "away": 16.77,
+        "home": 15.82
+      },
+      "bullpen_war": {
+        "away": 9.53,
+        "home": 2.04
+      }
+    },
+    {
+      "away": "KIA",
+      "home": "NC",
+      "starter_war": {
+        "away": 14.82,
+        "home": 12.71
+      },
+      "bullpen_war": {
+        "away": 5.35,
+        "home": 1.02
+      }
+    }
+  ]
+}
