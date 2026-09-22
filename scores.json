@@ -2608,6 +2608,57 @@
           "winner": "SSG"
         }
       ]
+    },
+    {
+      "date": "2026-09-22",
+      "scores": [
+        {
+          "matchup": "KT vs SSG",
+          "score": "8-2"
+        },
+        {
+          "matchup": "롯데 vs 한화",
+          "score": "7-0"
+        },
+        {
+          "matchup": "NC vs 삼성",
+          "score": "5-8"
+        },
+        {
+          "matchup": "두산 vs 키움",
+          "score": "5-3"
+        }
+      ],
+      "odds": [
+        {
+          "home": "SSG",
+          "ho": 1.75,
+          "away": "KT",
+          "ao": 1.77,
+          "winner": "KT"
+        },
+        {
+          "home": "한화",
+          "ho": 1.64,
+          "away": "롯데",
+          "ao": 1.9,
+          "winner": "롯데"
+        },
+        {
+          "home": "삼성",
+          "ho": 1.38,
+          "away": "NC",
+          "ao": 2.43,
+          "winner": "삼성"
+        },
+        {
+          "home": "키움",
+          "ho": 2.56,
+          "away": "두산",
+          "ao": 1.34,
+          "winner": "두산"
+        }
+      ]
     }
   ]
 }
