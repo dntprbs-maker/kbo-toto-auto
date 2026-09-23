@@ -2659,6 +2659,46 @@
           "winner": "두산"
         }
       ]
+    },
+    {
+      "date": "2026-09-23",
+      "scores": [
+        {
+          "matchup": "KIA vs 두산",
+          "score": "2-3"
+        },
+        {
+          "matchup": "롯데 vs 한화",
+          "score": "9-5"
+        },
+        {
+          "matchup": "NC vs KT",
+          "score": "10-3"
+        }
+      ],
+      "odds": [
+        {
+          "home": "두산",
+          "ho": 1.99,
+          "away": "KIA",
+          "ao": 1.58,
+          "winner": "두산"
+        },
+        {
+          "home": "한화",
+          "ho": 2.05,
+          "away": "롯데",
+          "ao": 1.54,
+          "winner": "롯데"
+        },
+        {
+          "home": "KT",
+          "ho": 1.78,
+          "away": "NC",
+          "ao": 1.74,
+          "winner": "NC"
+        }
+      ]
     }
   ]
 }
