@@ -2699,6 +2699,46 @@
           "winner": "NC"
         }
       ]
+    },
+    {
+      "date": "2026-09-24",
+      "scores": [
+        {
+          "matchup": "롯데 vs LG",
+          "score": "6-4"
+        },
+        {
+          "matchup": "NC vs KT",
+          "score": "2-3"
+        },
+        {
+          "matchup": "삼성 vs SSG",
+          "score": "5-4"
+        }
+      ],
+      "odds": [
+        {
+          "home": "LG",
+          "ho": 1.51,
+          "away": "롯데",
+          "ao": 2.11,
+          "winner": "롯데"
+        },
+        {
+          "home": "KT",
+          "ho": 1.39,
+          "away": "NC",
+          "ao": 2.4,
+          "winner": "KT"
+        },
+        {
+          "home": "SSG",
+          "ho": 2.53,
+          "away": "삼성",
+          "ao": 1.35,
+          "winner": "삼성"
+        }
+      ]
     }
   ]
 }
