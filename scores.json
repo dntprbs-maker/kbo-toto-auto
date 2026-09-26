@@ -2739,6 +2739,46 @@
           "winner": "삼성"
         }
       ]
+    },
+    {
+      "date": "2026-09-26",
+      "scores": [
+        {
+          "matchup": "한화 vs NC",
+          "score": "2-3"
+        },
+        {
+          "matchup": "LG vs KIA",
+          "score": "1-5"
+        },
+        {
+          "matchup": "키움 vs KT",
+          "score": "10-1"
+        }
+      ],
+      "odds": [
+        {
+          "home": "NC",
+          "ho": 1.7,
+          "away": "한화",
+          "ao": 1.82,
+          "winner": "NC"
+        },
+        {
+          "home": "KIA",
+          "ho": 1.75,
+          "away": "LG",
+          "ao": 1.77,
+          "winner": "KIA"
+        },
+        {
+          "home": "KT",
+          "ho": 1.45,
+          "away": "키움",
+          "ao": 2.24,
+          "winner": "키움"
+        }
+      ]
     }
   ]
 }
