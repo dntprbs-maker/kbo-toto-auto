@@ -2779,6 +2779,57 @@
           "winner": "키움"
         }
       ]
+    },
+    {
+      "date": "2026-09-27",
+      "scores": [
+        {
+          "matchup": "LG vs KIA",
+          "score": "취소"
+        },
+        {
+          "matchup": "한화 vs 롯데",
+          "score": "6-2"
+        },
+        {
+          "matchup": "KT vs 두산",
+          "score": "12-6"
+        },
+        {
+          "matchup": "키움 vs NC",
+          "score": "8-4"
+        }
+      ],
+      "odds": [
+        {
+          "home": "KIA",
+          "ho": 2.29,
+          "away": "LG",
+          "ao": 1.43,
+          "winner": "취소"
+        },
+        {
+          "home": "롯데",
+          "ho": 1.58,
+          "away": "한화",
+          "ao": 1.99,
+          "winner": "한화"
+        },
+        {
+          "home": "두산",
+          "ho": 2,
+          "away": "KT",
+          "ao": 1.57,
+          "winner": "KT"
+        },
+        {
+          "home": "NC",
+          "ho": 1.43,
+          "away": "키움",
+          "ao": 2.29,
+          "winner": "키움"
+        }
+      ]
     }
   ]
 }
