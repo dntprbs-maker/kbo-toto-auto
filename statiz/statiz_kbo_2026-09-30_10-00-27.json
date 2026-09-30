@@ -1,0 +1,546 @@
+{
+  "source": "STATIZ",
+  "collected_at": "2026-09-30T01:00:27.414Z",
+  "target_date": "2026-09-30",
+  "status": "ok",
+  "prediction_games": [
+    {
+      "ok": true,
+      "source": "statiz_prediction",
+      "game_date": "2026-09-30",
+      "matchup": {
+        "away": "NC",
+        "home": "두산"
+      },
+      "win_probability": {
+        "away": 41.5,
+        "home": 58.5
+      },
+      "team_comparison": {
+        "batting_average": {
+          "away": 0.269,
+          "home": 0.265
+        },
+        "ops": {
+          "away": 0.75,
+          "home": 0.729
+        },
+        "era": {
+          "away": 4.7,
+          "home": 3.81
+        },
+        "whip": {
+          "away": 1.47,
+          "home": 1.34
+        },
+        "recent_head_to_head": {
+          "away": "3승 0무 7패",
+          "home": "7승 0무 3패"
+        },
+        "starter_war": {
+          "away": 13.62,
+          "home": 17.13
+        },
+        "bullpen_war": {
+          "away": 0.5,
+          "home": 5.96
+        }
+      },
+      "starting_pitchers": {
+        "away": "라일리",
+        "home": "잭로그",
+        "era": {
+          "away": 2.68,
+          "home": 4.11
+        },
+        "whip": {
+          "away": 1.03,
+          "home": 1.27
+        },
+        "war": {
+          "away": 5.19,
+          "home": 2.76
+        }
+      },
+      "warnings": []
+    },
+    {
+      "ok": true,
+      "source": "statiz_prediction",
+      "game_date": "2026-09-30",
+      "matchup": {
+        "away": "LG",
+        "home": "SSG"
+      },
+      "win_probability": {
+        "away": 50.3,
+        "home": 49.7
+      },
+      "team_comparison": {
+        "batting_average": {
+          "away": 0.266,
+          "home": 0.259
+        },
+        "ops": {
+          "away": 0.757,
+          "home": 0.736
+        },
+        "era": {
+          "away": 4.84,
+          "home": 5.17
+        },
+        "whip": {
+          "away": 1.47,
+          "home": 1.52
+        },
+        "recent_head_to_head": {
+          "away": "5승 0무 5패",
+          "home": "5승 0무 5패"
+        },
+        "starter_war": {
+          "away": 11.17,
+          "home": 9.94
+        },
+        "bullpen_war": {
+          "away": 4.02,
+          "home": 2.18
+        }
+      },
+      "starting_pitchers": {
+        "away": "박시원",
+        "home": "김건우",
+        "era": {
+          "away": 4.41,
+          "home": 6.13
+        },
+        "whip": {
+          "away": 1.55,
+          "home": 1.74
+        },
+        "war": {
+          "away": 0.69,
+          "home": 0.11
+        }
+      },
+      "warnings": []
+    },
+    {
+      "ok": true,
+      "source": "statiz_prediction",
+      "game_date": "2026-09-30",
+      "matchup": {
+        "away": "한화",
+        "home": "삼성"
+      },
+      "win_probability": {
+        "away": 34.3,
+        "home": 65.7
+      },
+      "team_comparison": {
+        "batting_average": {
+          "away": 0.273,
+          "home": 0.277
+        },
+        "ops": {
+          "away": 0.779,
+          "home": 0.785
+        },
+        "era": {
+          "away": 5.27,
+          "home": 4.23
+        },
+        "whip": {
+          "away": 1.57,
+          "home": 1.37
+        },
+        "recent_head_to_head": {
+          "away": "3승 1무 6패",
+          "home": "6승 1무 3패"
+        },
+        "starter_war": {
+          "away": 10.51,
+          "home": 17.14
+        },
+        "bullpen_war": {
+          "away": -0.05,
+          "home": 9.36
+        }
+      },
+      "starting_pitchers": {
+        "away": "화이트",
+        "home": "후라도",
+        "era": {
+          "away": 3.75,
+          "home": 3.12
+        },
+        "whip": {
+          "away": 1.27,
+          "home": 1.23
+        },
+        "war": {
+          "away": 3.71,
+          "home": 4.17
+        }
+      },
+      "warnings": []
+    },
+    {
+      "ok": true,
+      "source": "statiz_prediction",
+      "game_date": "2026-09-30",
+      "matchup": {
+        "away": "KT",
+        "home": "KIA"
+      },
+      "win_probability": {
+        "away": 54.1,
+        "home": 45.9
+      },
+      "team_comparison": {
+        "batting_average": {
+          "away": 0.282,
+          "home": 0.272
+        },
+        "ops": {
+          "away": 0.772,
+          "home": 0.785
+        },
+        "era": {
+          "away": 4.3,
+          "home": 4.28
+        },
+        "whip": {
+          "away": 1.41,
+          "home": 1.39
+        },
+        "recent_head_to_head": {
+          "away": "4승 0무 6패",
+          "home": "6승 0무 4패"
+        },
+        "starter_war": {
+          "away": 20.32,
+          "home": 15.79
+        },
+        "bullpen_war": {
+          "away": 5.95,
+          "home": 5.07
+        }
+      },
+      "starting_pitchers": {
+        "away": "대니엘",
+        "home": "김태형",
+        "era": {
+          "away": 2.05,
+          "home": 5.4
+        },
+        "whip": {
+          "away": 1.18,
+          "home": 1.59
+        },
+        "war": {
+          "away": 2,
+          "home": 0.52
+        }
+      },
+      "warnings": []
+    },
+    {
+      "ok": true,
+      "source": "statiz_prediction",
+      "game_date": "2026-09-30",
+      "matchup": {
+        "away": "키움",
+        "home": "롯데"
+      },
+      "win_probability": {
+        "away": 21.3,
+        "home": 78.7
+      },
+      "team_comparison": {
+        "batting_average": {
+          "away": 0.243,
+          "home": 0.272
+        },
+        "ops": {
+          "away": 0.68,
+          "home": 0.734
+        },
+        "era": {
+          "away": 5.27,
+          "home": 4.77
+        },
+        "whip": {
+          "away": 1.56,
+          "home": 1.48
+        },
+        "recent_head_to_head": {
+          "away": "0승 0무 10패",
+          "home": "10승 0무 0패"
+        },
+        "starter_war": {
+          "away": 9.07,
+          "home": 16.63
+        },
+        "bullpen_war": {
+          "away": -5.04,
+          "home": 3.09
+        }
+      },
+      "starting_pitchers": {
+        "away": "김성진",
+        "home": "로드리게스",
+        "era": {
+          "away": 5.74,
+          "home": 4.38
+        },
+        "whip": {
+          "away": 1.72,
+          "home": 1.36
+        },
+        "war": {
+          "away": -0.47,
+          "home": 3.77
+        }
+      },
+      "warnings": []
+    }
+  ],
+  "team_standings": [
+    {
+      "rank": 1,
+      "team": "KT",
+      "games": 135,
+      "wins": 82,
+      "draws": 4,
+      "losses": 49,
+      "games_behind": 0,
+      "win_pct": 0.626,
+      "runs": 764,
+      "runs_allowed": 631
+    },
+    {
+      "rank": 2,
+      "team": "삼성",
+      "games": 134,
+      "wins": 79,
+      "draws": 3,
+      "losses": 52,
+      "games_behind": 3,
+      "win_pct": 0.603,
+      "runs": 772,
+      "runs_allowed": 610
+    },
+    {
+      "rank": 3,
+      "team": "LG",
+      "games": 134,
+      "wins": 75,
+      "draws": 1,
+      "losses": 58,
+      "games_behind": 8,
+      "win_pct": 0.564,
+      "runs": 682,
+      "runs_allowed": 677
+    },
+    {
+      "rank": 4,
+      "team": "KIA",
+      "games": 133,
+      "wins": 72,
+      "draws": 2,
+      "losses": 59,
+      "games_behind": 10,
+      "win_pct": 0.55,
+      "runs": 709,
+      "runs_allowed": 619
+    },
+    {
+      "rank": 5,
+      "team": "두산",
+      "games": 136,
+      "wins": 68,
+      "draws": 5,
+      "losses": 63,
+      "games_behind": 14,
+      "win_pct": 0.519,
+      "runs": 638,
+      "runs_allowed": 592
+    },
+    {
+      "rank": 6,
+      "team": "NC",
+      "games": 135,
+      "wins": 62,
+      "draws": 2,
+      "losses": 71,
+      "games_behind": 21,
+      "win_pct": 0.466,
+      "runs": 677,
+      "runs_allowed": 714
+    },
+    {
+      "rank": 7,
+      "team": "롯데",
+      "games": 134,
+      "wins": 60,
+      "draws": 2,
+      "losses": 72,
+      "games_behind": 22.5,
+      "win_pct": 0.455,
+      "runs": 641,
+      "runs_allowed": 695
+    },
+    {
+      "rank": 8,
+      "team": "SSG",
+      "games": 135,
+      "wins": 59,
+      "draws": 5,
+      "losses": 71,
+      "games_behind": 22.5,
+      "win_pct": 0.454,
+      "runs": 664,
+      "runs_allowed": 753
+    },
+    {
+      "rank": 9,
+      "team": "한화",
+      "games": 136,
+      "wins": 55,
+      "draws": 4,
+      "losses": 77,
+      "games_behind": 27.5,
+      "win_pct": 0.417,
+      "runs": 779,
+      "runs_allowed": 788
+    },
+    {
+      "rank": 10,
+      "team": "키움",
+      "games": 138,
+      "wins": 47,
+      "draws": 4,
+      "losses": 87,
+      "games_behind": 36.5,
+      "win_pct": 0.351,
+      "runs": 531,
+      "runs_allowed": 778
+    }
+  ],
+  "yesterday_results": [
+    {
+      "index": 1,
+      "date": "09.29",
+      "away_team": "키움",
+      "away_score": 2,
+      "home_team": "롯데",
+      "home_score": 4
+    },
+    {
+      "index": 2,
+      "date": "09.29",
+      "away_team": "KT",
+      "away_score": 8,
+      "home_team": "KIA",
+      "home_score": 5
+    },
+    {
+      "index": 3,
+      "date": "09.29",
+      "away_team": "한화",
+      "away_score": 5,
+      "home_team": "삼성",
+      "home_score": 10
+    },
+    {
+      "index": 4,
+      "date": "09.29",
+      "away_team": "LG",
+      "away_score": 1,
+      "home_team": "SSG",
+      "home_score": 7
+    },
+    {
+      "index": 5,
+      "date": "09.29",
+      "away_team": "NC",
+      "away_score": 2,
+      "home_team": "두산",
+      "home_score": 5
+    }
+  ],
+  "today_schedule": [
+    {
+      "index": 6,
+      "away_team": "NC",
+      "home_team": "두산",
+      "venue": "잠실",
+      "time": "18:30"
+    },
+    {
+      "index": 7,
+      "away_team": "LG",
+      "home_team": "SSG",
+      "venue": "문학",
+      "time": "18:30"
+    },
+    {
+      "index": 8,
+      "away_team": "한화",
+      "home_team": "삼성",
+      "venue": "대구",
+      "time": "18:30"
+    },
+    {
+      "index": 9,
+      "away_team": "KT",
+      "home_team": "KIA",
+      "venue": "광주",
+      "time": "18:30"
+    },
+    {
+      "index": 10,
+      "away_team": "키움",
+      "home_team": "롯데",
+      "venue": "사직",
+      "time": "18:30"
+    }
+  ],
+  "pitcher_rankings": {
+    "ERA": [
+      {
+        "rank": 1,
+        "player": "곽빈",
+        "value": 2.26
+      },
+      {
+        "rank": 2,
+        "player": "최민석",
+        "value": 2.73
+      },
+      {
+        "rank": 3,
+        "player": "올러",
+        "value": 2.92
+      }
+    ],
+    "WHIP": [
+      {
+        "rank": 1,
+        "player": "올러",
+        "value": 1.05
+      },
+      {
+        "rank": 2,
+        "player": "곽빈",
+        "value": 1.06
+      },
+      {
+        "rank": 3,
+        "player": "알칸타라",
+        "value": 1.11
+      }
+    ]
+  },
+  "errors": []
+}
