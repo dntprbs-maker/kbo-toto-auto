@@ -1,0 +1,119 @@
+{
+  "collected_date": "2026-10-04",
+  "source": "STATIZ (statiz.co.kr)",
+  "game_count": 5,
+  "teams": [
+    {
+      "team": "삼성",
+      "starter_war": 17.49,
+      "bullpen_war": 9.96
+    },
+    {
+      "team": "KIA",
+      "starter_war": 16.04,
+      "bullpen_war": 5.03
+    },
+    {
+      "team": "kt",
+      "starter_war": 21.32,
+      "bullpen_war": 6.04
+    },
+    {
+      "team": "LG",
+      "starter_war": 11.23,
+      "bullpen_war": 4.12
+    },
+    {
+      "team": "두산",
+      "starter_war": 16.85,
+      "bullpen_war": 6.35
+    },
+    {
+      "team": "NC",
+      "starter_war": 13.94,
+      "bullpen_war": 0.06
+    },
+    {
+      "team": "한화",
+      "starter_war": 10.27,
+      "bullpen_war": 0.44
+    },
+    {
+      "team": "롯데",
+      "starter_war": 16.77,
+      "bullpen_war": 3.13
+    },
+    {
+      "team": "SSG",
+      "starter_war": 9.85,
+      "bullpen_war": 2.15
+    },
+    {
+      "team": "키움",
+      "starter_war": 9.36,
+      "bullpen_war": -4.98
+    }
+  ],
+  "games": [
+    {
+      "away": "KIA",
+      "home": "LG",
+      "starter_war": {
+        "away": 16.04,
+        "home": 11.23
+      },
+      "bullpen_war": {
+        "away": 5.03,
+        "home": 4.12
+      }
+    },
+    {
+      "away": "키움",
+      "home": "한화",
+      "starter_war": {
+        "away": 9.36,
+        "home": 10.27
+      },
+      "bullpen_war": {
+        "away": -4.98,
+        "home": 0.44
+      }
+    },
+    {
+      "away": "두산",
+      "home": "삼성",
+      "starter_war": {
+        "away": 16.85,
+        "home": 17.49
+      },
+      "bullpen_war": {
+        "away": 6.35,
+        "home": 9.96
+      }
+    },
+    {
+      "away": "SSG",
+      "home": "NC",
+      "starter_war": {
+        "away": 9.85,
+        "home": 13.94
+      },
+      "bullpen_war": {
+        "away": 2.15,
+        "home": 0.06
+      }
+    },
+    {
+      "away": "롯데",
+      "home": "kt",
+      "starter_war": {
+        "away": 16.77,
+        "home": 21.32
+      },
+      "bullpen_war": {
+        "away": 3.13,
+        "home": 6.04
+      }
+    }
+  ]
+}
