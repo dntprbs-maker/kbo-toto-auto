@@ -1,0 +1,75 @@
+{
+  "collected_date": "2026-10-09",
+  "source": "STATIZ (statiz.co.kr)",
+  "game_count": 3,
+  "teams": [
+    {
+      "team": "삼성",
+      "starter_war": 17.27,
+      "bullpen_war": 9.74
+    },
+    {
+      "team": "KIA",
+      "starter_war": 16.09,
+      "bullpen_war": 5.63
+    },
+    {
+      "team": "LG",
+      "starter_war": 11.49,
+      "bullpen_war": 4.44
+    },
+    {
+      "team": "NC",
+      "starter_war": 13.87,
+      "bullpen_war": -0.03
+    },
+    {
+      "team": "롯데",
+      "starter_war": 16.91,
+      "bullpen_war": 3.47
+    },
+    {
+      "team": "SSG",
+      "starter_war": 10.85,
+      "bullpen_war": 2.38
+    }
+  ],
+  "games": [
+    {
+      "away": "삼성",
+      "home": "SSG",
+      "starter_war": {
+        "away": 17.27,
+        "home": 10.85
+      },
+      "bullpen_war": {
+        "away": 9.74,
+        "home": 2.38
+      }
+    },
+    {
+      "away": "LG",
+      "home": "롯데",
+      "starter_war": {
+        "away": 11.49,
+        "home": 16.91
+      },
+      "bullpen_war": {
+        "away": 4.44,
+        "home": 3.47
+      }
+    },
+    {
+      "away": "KIA",
+      "home": "NC",
+      "starter_war": {
+        "away": 16.09,
+        "home": 13.87
+      },
+      "bullpen_war": {
+        "away": 5.63,
+        "home": -0.03
+      }
+    }
+  ]
+}
