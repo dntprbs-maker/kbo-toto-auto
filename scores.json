@@ -3355,6 +3355,46 @@
           "winner": "SSG"
         }
       ]
+    },
+    {
+      "date": "2026-10-10",
+      "scores": [
+        {
+          "matchup": "LG vs 롯데",
+          "score": "4-3"
+        },
+        {
+          "matchup": "NC vs 한화",
+          "score": "9-8"
+        },
+        {
+          "matchup": "SSG vs KIA",
+          "score": "5-8"
+        }
+      ],
+      "odds": [
+        {
+          "home": "롯데",
+          "ho": 2.49,
+          "away": "LG",
+          "ao": 1.36,
+          "winner": "LG"
+        },
+        {
+          "home": "한화",
+          "ho": 1.81,
+          "away": "NC",
+          "ao": 1.71,
+          "winner": "NC"
+        },
+        {
+          "home": "KIA",
+          "ho": 1.2,
+          "away": "SSG",
+          "ao": 3.3,
+          "winner": "KIA"
+        }
+      ]
     }
   ]
 }
