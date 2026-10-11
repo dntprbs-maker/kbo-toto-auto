@@ -1,0 +1,21 @@
+{
+  "date": "2026-10-11",
+  "verified_game_date": "2026-10-11",
+  "schedule_file": "baseball_2026-10-11-08-00.json",
+  "gmTs": 260120,
+  "game_count": 2,
+  "odds": [
+    {
+      "homeTeam": "삼성",
+      "awayTeam": "KT",
+      "win": 1.8,
+      "lose": 1.72
+    },
+    {
+      "homeTeam": "KIA",
+      "awayTeam": "롯데",
+      "win": 1.24,
+      "lose": 3.03
+    }
+  ]
+}
