@@ -3395,6 +3395,35 @@
           "winner": "KIA"
         }
       ]
+    },
+    {
+      "date": "2026-10-11",
+      "scores": [
+        {
+          "matchup": "KT vs 삼성",
+          "score": "12-3"
+        },
+        {
+          "matchup": "롯데 vs KIA",
+          "score": "4-1"
+        }
+      ],
+      "odds": [
+        {
+          "home": "삼성",
+          "ho": 1.8,
+          "away": "KT",
+          "ao": 1.72,
+          "winner": "KT"
+        },
+        {
+          "home": "KIA",
+          "ho": 1.24,
+          "away": "롯데",
+          "ao": 3.03,
+          "winner": "롯데"
+        }
+      ]
     }
   ]
 }
