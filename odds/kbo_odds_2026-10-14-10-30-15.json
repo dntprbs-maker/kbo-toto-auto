@@ -1,0 +1,15 @@
+{
+  "date": "2026-10-14",
+  "verified_game_date": "2026-10-14",
+  "schedule_file": "baseball_2026-10-14-08-00.json",
+  "gmTs": 260122,
+  "game_count": 1,
+  "odds": [
+    {
+      "homeTeam": "LG",
+      "awayTeam": "두산",
+      "win": 1.86,
+      "lose": 1.67
+    }
+  ]
+}
