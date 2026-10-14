@@ -1,0 +1,31 @@
+{
+  "collected_date": "2026-10-14",
+  "source": "STATIZ (statiz.co.kr)",
+  "game_count": 1,
+  "teams": [
+    {
+      "team": "LG",
+      "starter_war": 11.78,
+      "bullpen_war": 4.37
+    },
+    {
+      "team": "두산",
+      "starter_war": 17.1,
+      "bullpen_war": 7.22
+    }
+  ],
+  "games": [
+    {
+      "away": "두산",
+      "home": "LG",
+      "starter_war": {
+        "away": 17.1,
+        "home": 11.78
+      },
+      "bullpen_war": {
+        "away": 7.22,
+        "home": 4.37
+      }
+    }
+  ]
+}
