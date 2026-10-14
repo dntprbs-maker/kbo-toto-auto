@@ -3464,6 +3464,24 @@
           "winner": "롯데"
         }
       ]
+    },
+    {
+      "date": "2026-10-14",
+      "scores": [
+        {
+          "matchup": "두산 vs LG",
+          "score": "1-4"
+        }
+      ],
+      "odds": [
+        {
+          "home": "LG",
+          "ho": 1.86,
+          "away": "두산",
+          "ao": 1.67,
+          "winner": "LG"
+        }
+      ]
     }
   ]
 }
