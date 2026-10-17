@@ -3482,6 +3482,24 @@
           "winner": "LG"
         }
       ]
+    },
+    {
+      "date": "2026-10-17",
+      "scores": [
+        {
+          "matchup": "LG vs KIA",
+          "score": "1-5"
+        }
+      ],
+      "odds": [
+        {
+          "home": "KIA",
+          "ho": 1.57,
+          "away": "LG",
+          "ao": 2,
+          "winner": "KIA"
+        }
+      ]
     }
   ]
 }
