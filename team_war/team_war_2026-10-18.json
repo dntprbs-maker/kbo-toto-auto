@@ -1,0 +1,31 @@
+{
+  "collected_date": "2026-10-18",
+  "source": "STATIZ (statiz.co.kr)",
+  "game_count": 1,
+  "teams": [
+    {
+      "team": "KIA",
+      "starter_war": 16.52,
+      "bullpen_war": 6.13
+    },
+    {
+      "team": "LG",
+      "starter_war": 11.78,
+      "bullpen_war": 4.37
+    }
+  ],
+  "games": [
+    {
+      "away": "LG",
+      "home": "KIA",
+      "starter_war": {
+        "away": 11.78,
+        "home": 16.52
+      },
+      "bullpen_war": {
+        "away": 4.37,
+        "home": 6.13
+      }
+    }
+  ]
+}
