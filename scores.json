@@ -3536,6 +3536,24 @@
           "winner": "KIA"
         }
       ]
+    },
+    {
+      "date": "2026-10-25",
+      "scores": [
+        {
+          "matchup": "KIA vs 삼성",
+          "score": "취소"
+        }
+      ],
+      "odds": [
+        {
+          "home": "삼성",
+          "ho": 1.85,
+          "away": "KIA",
+          "ao": 1.64,
+          "winner": "취소"
+        }
+      ]
     }
   ]
 }
