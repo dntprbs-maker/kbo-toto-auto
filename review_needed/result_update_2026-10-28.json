@@ -1,0 +1,9 @@
+{
+  "date": "2026-10-28",
+  "run_at": "2026-10-29T01:31:03.415+09:00",
+  "status": "validation_failed",
+  "reasons": [
+    "game_results 파일을 읽지 못함",
+    "대상 날짜 odds 파일을 읽지 못함"
+  ]
+}
